@@ -1,0 +1,16 @@
+{
+  "name": "bird-species-classification-in-natural-habitat",
+  "version": "1.0.0",
+  "description": "### Web Application Summary: Indian Bird Species Detection using Deep Learning ## 1. Project Description and Requirements: The web application is designed to detect and classify Indian bird species from user-uploaded images using deep learning. Users can either upload a photo or select one from their gallery. The system needs to identify bird species accurately, validate the presence of birds in the image, and handle multiple bird detections. Key Requirements: <ul>   <li>Develop a custom dataset with images of various Indian bird species. </li>   <li>Train a deep learning model capable of accurate bird species classification. </li>   <li>Implement the model in a web application with a user-friendly interface. </li>   <li>Deploy the web application on a cloud platform for scalability and accessibility. </li> </ul>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "express": "^4.19.2"
+  }
+}
