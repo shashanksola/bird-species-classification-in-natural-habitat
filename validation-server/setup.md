@@ -6,3 +6,7 @@
     <li>Now proceed to install tensorflow and other required libraries</li>
     <li>Use "deactivate" in the terminal before closing the project</li>
 </ul>
+
+# Reference:
+
+refer this link for better understanding of virtual environments in python : https://www.linkedin.com/pulse/setting-up-python-virtual-environment-your-project-prince-odoi/
