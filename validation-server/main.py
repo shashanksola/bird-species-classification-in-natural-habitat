@@ -11,7 +11,7 @@ model = load_model('bird_detection_model.h5')
 
 
 def download_bird(url):
-    img_data = requests.get(image_url).content
+    img_data = requests.get(url).content
     with open('image_name.jpg', 'wb') as handler:
         handler.write(img_data)
     return "image_name.jpg"

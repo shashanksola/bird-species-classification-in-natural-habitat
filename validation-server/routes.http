@@ -1,0 +1,8 @@
+###
+
+POST http://localhost:3000/validate/
+Content-Type: application/json
+
+{
+    "birdLink": "http://url.com"
+}
