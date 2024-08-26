@@ -6,8 +6,9 @@ import sys
 import requests
 import os
 
+
 # Load the trained model
-model = load_model('bird_detection_model.h5')
+model = load_model(os.getcwd() + "\\bird_detection_model.h5")
 
 
 def download_bird(url):
@@ -49,8 +50,8 @@ def predict_bird(img_path):
 
 
 # Example usage
-img_path = 'car.jpg'
-predict_bird(img_path)
+# img_path = 'car.jpg'
+# predict_bird(img_path)
 
 req = str(sys.argv[1])
 

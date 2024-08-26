@@ -31,6 +31,7 @@ const detectBird = (birdLink) => {
 
 app.post("/validate/", async (req, res) => {
   // const { birdLink } = req.body;
+  // this link is just for testing puposes.
   const birdLink =
     "https://images.pexels.com/photos/349758/hummingbird-bird-birds-349758.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
   try {
