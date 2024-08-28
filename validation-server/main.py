@@ -6,6 +6,10 @@ import sys
 import requests
 import os
 
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout.reconfigure(encoding='utf-8')
 
 # Load the trained model
 model = load_model(os.getcwd() + "\\bird_detection_model.h5")
@@ -40,7 +44,7 @@ def predict_bird(img_path):
     img_array = prepare_image(img_path)
 
     # Make the prediction
-    prediction = model.predict(img_array)
+    prediction = model.predict(img_array, verbose=0)
 
     # Interpret the prediction result
     if prediction[0] > 0.5:
@@ -53,13 +57,15 @@ def predict_bird(img_path):
 # img_path = 'car.jpg'
 # predict_bird(img_path)
 
-req = str(sys.argv[1])
+if __name__ == "__main__":
+    req = str(sys.argv[1])
 
-bird_path = download_bird(req)
+    bird_path = download_bird(req)
 
-if (predict_bird(bird_path)):
-    print(True)
-else:
-    print(False)
+    result = predict_bird(bird_path)
 
-os.remove(bird_path)
+    print(result)
+
+    os.remove(bird_path)
+
+    exit(0)

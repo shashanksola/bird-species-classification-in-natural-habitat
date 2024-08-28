@@ -16,7 +16,7 @@ const detectBird = (birdLink) => {
 
     detect.stderr.on("data", (data) => {
       console.error(`stderr: ${data}`);
-      reject(data.toString());
+      //reject(data.toString());
     });
 
     detect.on("close", (code) => {
@@ -35,7 +35,8 @@ app.post("/validate/", async (req, res) => {
   const birdLink =
     "https://images.pexels.com/photos/349758/hummingbird-bird-birds-349758.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
   try {
-    const isBird = await detectBird(birdLink);
+    let isBird = await detectBird(birdLink);
+    isBird = isBird.replace(/\x1b\[.*?m/g, '').trim();
     res.send({ isBird });
   } catch (error) {
     res.status(500).send(`Error: ${error}`);
