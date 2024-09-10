@@ -5,6 +5,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 16px;
+  align-items: center;
 }
 
 * {
@@ -28,4 +29,10 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  width: 50vw;
+}
+
+.card {
+  background-color: black;
+  display: flex;
 }
