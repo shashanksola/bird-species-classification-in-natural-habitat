@@ -79,7 +79,7 @@ const Home = () => {
     return (
         <div>
             <Header />
-            <ul>
+            <ul className="bird-carousel">
                 {birds.map((bird) => {
                     return <Card key={bird.birdName} bird={bird} />
                 })}
