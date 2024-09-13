@@ -1,5 +1,3 @@
-Here's a more readable and polished version of your README:
-
 # Validation Server Setup Guide
 
 Follow these steps to get started with the validation server for your project.
@@ -85,5 +83,3 @@ taskkill /PID [task_pid] /F
 For more detailed information on setting up a Python virtual environment, refer to this [guide](https://www.linkedin.com/pulse/setting-up-python-virtual-environment-your-project-prince-odoi/).
 
 ---
-
-This README should now be clearer and more user-friendly!
