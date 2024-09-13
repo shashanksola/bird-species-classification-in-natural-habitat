@@ -1,71 +1,54 @@
+from fastapi import FastAPI
+from pydantic import BaseModel
 import tensorflow as tf
-from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 import numpy as np
-import sys
 import requests
 import os
 
-os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+app = FastAPI()
 
-if sys.stdout.encoding != 'utf-8':
-    sys.stdout.reconfigure(encoding='utf-8')
-
-# Load the trained model
-model = load_model(os.getcwd() + "\\bird_detection_model.h5")
+# Load the model once at startup
+model = tf.keras.models.load_model(os.getcwd() + "/bird_detection_model.h5")
 
 
-def download_bird(url):
+# Define a request body model for image URL
+class ImageURL(BaseModel):
+    image_url: str
+
+
+def download_bird(url: str) -> str:
+    """Download the image from the given URL."""
     img_data = requests.get(url).content
-    with open('image_name.jpg', 'wb') as handler:
+    img_path = 'image_name.jpg'
+    with open(img_path, 'wb') as handler:
         handler.write(img_data)
-    return "image_name.jpg"
+    return img_path
 
 
-def prepare_image(img_path):
-    # Load the image from the path
-    # Resize the image to 32x32 pixels
+def prepare_image(img_path: str):
+    """Prepare the image for model prediction."""
     img = image.load_img(img_path, target_size=(32, 32))
-
-    # Convert the image to a numpy array
     img_array = image.img_to_array(img)
-
-    # Normalize the image array
     img_array = img_array.astype('float32') / 255.0
-
-    # Add an extra dimension to match the input shape of the model (batch size, height, width, channels)
     img_array = np.expand_dims(img_array, axis=0)
-
     return img_array
 
 
-def predict_bird(img_path):
-    # Prepare the image
+def predict_bird(img_path: str) -> bool:
+    """Predict if the image contains a bird."""
     img_array = prepare_image(img_path)
-
-    # Make the prediction
     prediction = model.predict(img_array, verbose=0)
-
-    # Interpret the prediction result
-    if prediction[0] > 0.5:
-        return True
-    else:
-        return False
+    return bool(prediction[0] > 0.5)
 
 
-# Example usage
-# img_path = 'car.jpg'
-# predict_bird(img_path)
-
-if __name__ == "__main__":
-    req = str(sys.argv[1])
-
-    bird_path = download_bird(req)
-
-    result = predict_bird(bird_path)
-
-    print(result)
-
-    os.remove(bird_path)
-
-    exit(0)
+@app.post("/predict/")
+async def predict_bird_in_image(data: ImageURL):
+    """API endpoint to predict if a bird is in the image."""
+    try:
+        img_path = download_bird(data.image_url)
+        result = predict_bird(img_path)
+        os.remove(img_path)  # Clean up the image after prediction
+        return {"isBird": result}
+    except Exception as e:
+        return {"error": str(e)}
