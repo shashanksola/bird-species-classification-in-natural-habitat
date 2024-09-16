@@ -19,17 +19,24 @@ async function validateBird(birdUrl) {
         });
 }
 
-export default function FindBird() {
+const FindBird = async () => {
     const [bird, setBird] = useState("");
 
-    validateBird = () => {
-        // this code uploads the image to aws s3 and validates the bird later it will predict the bird as well if the bird is present.
+    const onValidateClick = async () => {
+        console.log(await validateBird(bird));
+    }
+
+    const onInputChange = (event) => {
+        setBird(event.target.value);
     }
 
     return (
         <div>
             <p>Input Here</p>;
-            <button type="button" onClick={() => this.validateBird()}>Validate & Predict</button>
+            <input placeholder="Enter url" onChange={(event) => onInputChange(event)} />
+            <button type="button" onClick={onValidateClick()}>Validate & Predict</button>
         </div>
     )
 }
+
+export default FindBird;
