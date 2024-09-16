@@ -1,29 +1,37 @@
 import { useState } from "react";
 
 async function validateBird(birdUrl) {
-    await fetch('http://localhost:3000/validate/', {
-        method: 'POST',
-        body: JSON.stringify({
-            birdLink: birdUrl
-        }),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            return data;
-        })
-        .catch((err) => {
-            return err;
+    try {
+        const response = await fetch('http://localhost:3000/validate/', {
+            method: 'POST',
+            body: JSON.stringify({
+                birdLink: birdUrl
+            }),
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
         });
+
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        console.log('Error: ' + err);
+        return null;
+    }
 }
 
-const FindBird = async () => {
+const FindBird = () => {
     const [bird, setBird] = useState("");
+    const [result, setResult] = useState(null);
+    const [error, setError] = useState(null);
 
     const onValidateClick = async () => {
-        console.log(await validateBird(bird));
+        try {
+            const response = await validateBird(bird);
+            setResult(response);
+        } catch (err) {
+            setError(err);
+        }
     }
 
     const onInputChange = (event) => {
@@ -32,11 +40,18 @@ const FindBird = async () => {
 
     return (
         <div>
-            <p>Input Here</p>;
-            <input placeholder="Enter url" onChange={(event) => onInputChange(event)} />
-            <button type="button" onClick={onValidateClick()}>Validate & Predict</button>
+            <p>Input Here</p>
+            <input
+                placeholder="Enter URL"
+                value={bird}
+                onChange={onInputChange}
+            />
+            <button type="button" onClick={onValidateClick}>Validate & Predict</button>
+
+            {error && <p>Error: {error.message}</p>}
+            {result && <p>Validation Result: {JSON.stringify(result)}</p>}
         </div>
-    )
+    );
 }
 
 export default FindBird;
