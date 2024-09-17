@@ -10,6 +10,8 @@
 
 * {
   font-family: sans-serif;
+  margin: 0px;
+  padding: 0px;
 }
 
 a {
@@ -50,4 +52,24 @@ a {
 
 .bird-img {
   width: 200px;
+}
+
+.find-a-bird {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 80vh;
+  padding: 16px;
+}
+
+.url-field {
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+}
+
+.url-input {
+  width: 50vw;
+  height: 56px;
 }

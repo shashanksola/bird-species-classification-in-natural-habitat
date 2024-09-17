@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Header from './Header';
 
 async function validateBird(birdUrl) {
     try {
@@ -39,18 +40,24 @@ const FindBird = () => {
     }
 
     return (
-        <div>
-            <p>Input Here</p>
-            <input
-                placeholder="Enter URL"
-                value={bird}
-                onChange={onInputChange}
-            />
-            <button type="button" onClick={onValidateClick}>Validate & Predict</button>
+        <>
+            <Header />
+            <div className="find-a-bird">
+                <p>Input Here</p>
+                <div className="url-field">
+                    <input
+                        placeholder="Enter URL"
+                        value={bird}
+                        onChange={onInputChange}
+                        className="url-input"
+                    />
+                    <button type="button" onClick={onValidateClick}>Validate & Predict</button>
+                </div>
 
-            {error && <p>Error: {error.message}</p>}
-            {result && <p>Validation Result: {JSON.stringify(result)}</p>}
-        </div>
+                {error && <p>Error: {error.message}</p>}
+                {result && <p>Validation Result: {JSON.stringify(result)}</p>}
+            </div>
+        </>
     );
 }
 
