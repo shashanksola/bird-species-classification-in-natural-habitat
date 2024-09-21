@@ -1,4 +1,4 @@
-import Header from "./Header";
+import Navbar from "./Navbar";
 import Card from "./Card";
 
 const birds = [
@@ -78,12 +78,12 @@ const Home = () => {
 
     return (
         <div>
-            <Header />
-            <ul className="bird-carousel">
+            <Navbar />
+            <div className="">
                 {birds.map((bird) => {
                     return <Card key={bird.birdName} bird={bird} />
                 })}
-            </ul>
+            </div>
         </div>
     )
 }
