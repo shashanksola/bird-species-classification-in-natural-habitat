@@ -1,6 +1,7 @@
 import { useState } from "react";
-import Dropzone from "./Dropzone";
-import Navbar from "./Navbar";
+import Dropzone from "../Dropzone";
+import Navbar from "../Navbar";
+import "./styles.css"
 
 async function validateBird(birdUrl) {
     try {
@@ -43,17 +44,26 @@ const FindBird = () => {
     return (
         <>
             <Navbar />
-            <div>
-                <Dropzone className="dropzone" />
-                <label htmlFor="url-input">Input Url</label>
-                <input
-                    placeholder="Enter URL"
-                    value={bird}
-                    onChange={onInputChange}
-                    id="url-input"
-                />
+            <div className="page">
+                <div>
+                    <Dropzone />
+                </div>
+                <h1 style={{ color: 'white' }}>OR</h1>
+                <div>
+                    <label htmlFor="url-input">Input Url</label>
+                    <br />
+                    <input
+                        placeholder="Enter URL"
+                        value={bird}
+                        onChange={onInputChange}
+                        id="url-input"
+                        type="url"
+                        className="url-input"
+                    />
+                </div>
+            </div>
+            <div className="generated-content">
                 <button type="button" onClick={onValidateClick} className="btn btn-primary">Validate & Predict</button>
-
                 {error && <p>Error: {error.message}</p>}
                 {result && <p>Validation Result: {JSON.stringify(result)}</p>}
             </div>
