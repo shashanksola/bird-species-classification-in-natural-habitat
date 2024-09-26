@@ -23,6 +23,7 @@ async function validateBird(birdUrl) {
     }
 }
 
+
 const FindBird = () => {
     const [bird, setBird] = useState("");
     const [result, setResult] = useState(null);
@@ -37,7 +38,9 @@ const FindBird = () => {
         }
     }
 
+
     const onInputChange = (event) => {
+        console.log(event);
         setBird(event.target.value);
     }
 
@@ -46,7 +49,7 @@ const FindBird = () => {
             <Navbar />
             <div className="page">
                 <div>
-                    <Dropzone />
+                    <Dropzone onInputChange={onInputChange} />
                 </div>
                 <h1 style={{ color: 'white' }}>OR</h1>
                 <div>

@@ -40,6 +40,7 @@ function Dropzone(props) {
             'image/*': []
         },
         onDrop: acceptedFiles => {
+            //props.onInputChange(acceptedFiles.preview);
             setFiles(acceptedFiles.map(file => Object.assign(file, {
                 preview: URL.createObjectURL(file)
             })));
@@ -66,7 +67,7 @@ function Dropzone(props) {
 
     return (
         <section className="container">
-            <div {...getRootProps({ className: 'dropzone' })}>
+            <div {...getRootProps({ className: 'dropzone disabled' })}>
                 <input {...getInputProps()} />
                 <p>Drag 'n' drop some files here, or click to select files</p>
             </div>
