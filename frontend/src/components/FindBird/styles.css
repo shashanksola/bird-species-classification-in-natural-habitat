@@ -21,8 +21,8 @@
     padding: 48px;
     justify-content: space-between;
     align-items: center;
-    height: 70vh;
     background-image: url('../../assets/find-a-bird-bg.jpg');
+    background-size: cover;
 }
 
 .url-input {
@@ -34,4 +34,15 @@
 .generated-content {
     text-align: center;
     padding: 48px;
+}
+
+@media only screen and (max-width: 1100px) {
+    .page {
+        flex-direction: column;
+        padding: 8px;
+    }
+
+    .url-input {
+        width: 80vw;
+    }
 }
