@@ -79,7 +79,7 @@ const Home = () => {
     return (
         <div>
             <Navbar />
-            <div className="">
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {birds.map((bird) => {
                     return <Card key={bird.birdName} bird={bird} />
                 })}
