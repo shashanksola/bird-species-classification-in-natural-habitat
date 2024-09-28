@@ -1,4 +1,7 @@
-const cardStyle = { width: '20rem' };
+const cardStyle = {
+    width: '20rem',
+
+};
 
 export default function Card(props) {
     const { bird } = props;
