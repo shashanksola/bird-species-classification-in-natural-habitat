@@ -1,5 +1,5 @@
 const cardStyle = {
-    width: '20rem',
+    width: '22rem',
 
 };
 
