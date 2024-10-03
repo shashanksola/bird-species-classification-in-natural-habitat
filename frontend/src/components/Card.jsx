@@ -1,19 +1,13 @@
-const cardStyle = {
-    width: '22rem',
-
-};
-
 export default function Card(props) {
     const { bird } = props;
-    console.log(bird.birdName)
 
     return (
-        <div className="card m-3" style={cardStyle}>
+        <div className="md:w-1/4 m-3 rounded-md border border-black">
             <img src="https://t4.ftcdn.net/jpg/01/77/47/67/360_F_177476718_VWfYMWCzK32bfPI308wZljGHvAUYSJcn.jpg" className="card-img-top" alt={`${bird.birdName}`} />
-            <div className="card-body">
-                <h5 className="card-title">{bird.birdName}</h5>
-                <p className="card-text">{bird.birdShortDescription}</p>
-                <a href={bird.birdWikipediaPageUrl} className="btn btn-primary">More about me</a>
+            <div className="p-4 flex flex-col justify-between items-stretch">
+                <h5 className="text-2xl">{bird.birdName}</h5>
+                <p className="text-sm">{bird.birdShortDescription}</p>
+                <button href={bird.birdWikipediaPageUrl} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">More about me</button>
             </div>
         </div>
     )

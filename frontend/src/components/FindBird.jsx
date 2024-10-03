@@ -1,7 +1,6 @@
 import { useState } from "react";
-import Dropzone from "../Dropzone";
-import Navbar from "../Navbar";
-import "./styles.css"
+import Dropzone from "./Dropzone";
+import Navbar from "./Navbar";
 
 async function validateBird(birdUrl) {
     try {
@@ -50,15 +49,15 @@ const FindBird = () => {
     }
 
     return (
-        <>
+        <div>
             <Navbar />
-            <div className="page">
+            <div className="min-h- p-8 flex flex-col items-center dark:bg-slate-700 w-full md:flex-row justify-around">
                 <div>
                     <Dropzone onInputChange={onInputChange} />
                 </div>
-                <h1 style={{ color: 'white' }}>OR</h1>
-                <div>
-                    <label htmlFor="url-input" style={{ color: 'white', fontWeight: 'bold' }}>Input Url</label>
+                <h1 className="text-slate-300">OR</h1>
+                <div className="flex flex-col justify-center items-center">
+                    <label htmlFor="url-input" className="text-slate-200 font-bold">Input Url</label>
                     <br />
                     <input
                         placeholder="Enter URL"
@@ -66,19 +65,22 @@ const FindBird = () => {
                         onChange={onInputChange}
                         id="url-input"
                         type="url"
-                        className="url-input"
+                        className="rounded-md dark:bg-slate-800 border-slate-400 border py-2 px-4"
                     />
-                    {bird && <img src={bird} alt="input-bird" style={{ width: '20vw' }} />}
+                    <div className="border size-96 mt-4 dark:bg-slate-800 p-4">
+                        <p className="text-slate-300">Image Area</p>
+                        {bird && <img src={bird} alt="input-bird" style={{ width: '20vw' }} />}
+                    </div>
                 </div>
             </div>
-            {loading ? <div>
-                Loading
-            </div> : <div className="generated-content">
-                <button type="button" onClick={onValidateClick} className="btn btn-primary">Validate & Predict</button>
-                {error && <p>Error: {error.message}</p>}
-                {result && <p>Validation Result: {result?.isBird ? "Contains Bird" : "Doesn't contain any Bird"}</p>}
-            </div>}
-        </>
+            <div className="bg-slate-700 flex justify-center items-center p-14">
+                {loading ? Loading : <div>
+                    <button type="button" onClick={onValidateClick} className="bg-slate-800 hover:bg-slate-200 hover:text-slate-800 text-white font-bold py-2 px-4 rounded">Validate & Predict</button>
+                    {error && <p>Error: {error.message}</p>}
+                    {result && <p>Validation Result: {result?.isBird ? "Contains Bird" : "Doesn't contain any Bird"}</p>}
+                </div>}
+            </div>
+        </div>
     );
 }
 

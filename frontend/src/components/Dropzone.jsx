@@ -26,6 +26,7 @@ const thumbInner = {
     overflow: 'hidden'
 };
 
+
 const img = {
     display: 'block',
     width: 'auto',
@@ -80,11 +81,11 @@ function Dropzone(props) {
 
     return (
         <section className="container">
-            <div {...getRootProps({ className: 'dropzone' })}>
+            <div {...getRootProps({ className: 'bg-slate-300 border border-slate-100 h-48 p-16 border-dashed' })}>
                 <input {...getInputProps()} />
                 <p>Drag 'n' drop some files here, or click to select files</p>
             </div>
-            <aside style={thumbsContainer}>
+            <aside className='flex min-h-28 border bg-slate-800 mt-4'>
                 {thumbs}
             </aside>
             {files.length >= 1 ? <p style={{ color: 'white' }}>*Click on the image to select a image*</p> : null}
