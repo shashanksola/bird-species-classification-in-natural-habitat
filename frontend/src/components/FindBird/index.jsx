@@ -28,14 +28,19 @@ const FindBird = () => {
     const [bird, setBird] = useState("");
     const [result, setResult] = useState(null);
     const [error, setError] = useState(null);
+    const [loading, setLodaing] = useState(false);
 
     const onValidateClick = async () => {
+        setLodaing(true);
         try {
             const response = await validateBird(bird);
             setResult(response);
+            console.log(result);
         } catch (err) {
             setError(err);
         }
+
+        setLodaing(false);
     }
 
 
@@ -53,7 +58,7 @@ const FindBird = () => {
                 </div>
                 <h1 style={{ color: 'white' }}>OR</h1>
                 <div>
-                    <label htmlFor="url-input">Input Url</label>
+                    <label htmlFor="url-input" style={{ color: 'white', fontWeight: 'bold' }}>Input Url</label>
                     <br />
                     <input
                         placeholder="Enter URL"
@@ -63,13 +68,16 @@ const FindBird = () => {
                         type="url"
                         className="url-input"
                     />
+                    {bird && <img src={bird} alt="input-bird" style={{ width: '20vw' }} />}
                 </div>
             </div>
-            <div className="generated-content">
+            {loading ? <div>
+                Loading
+            </div> : <div className="generated-content">
                 <button type="button" onClick={onValidateClick} className="btn btn-primary">Validate & Predict</button>
                 {error && <p>Error: {error.message}</p>}
-                {result && <p>Validation Result: {JSON.stringify(result)}</p>}
-            </div>
+                {result && <p>Validation Result: {result?.isBird ? "Contains Bird" : "Doesn't contain any Bird"}</p>}
+            </div>}
         </>
     );
 }

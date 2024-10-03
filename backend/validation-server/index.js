@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: 'http://localhost:3001' // Allow specific origin
+  origin: 'http://localhost:5173' // Allow specific origin
 }));
 
 const detectBird = async (birdLink) => {
