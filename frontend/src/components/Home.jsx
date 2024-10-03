@@ -1,6 +1,8 @@
 import Navbar from "./Navbar";
 import Card from "./Card";
 
+import MarqueSlider from "./MarqueSlider";
+
 const birds = [
     {
         birdName: "Indian Peafowl",
@@ -106,13 +108,15 @@ const Home = () => {
     return (
         <div className="bg-black p-8">
             <Navbar />
-            <section className="bg-[url('/src/assets/bg-1.jpg')] h-dvh bg-cover bg-center flex flex-col p-40 rounded-2xl bg-green-200" style={{ marginTop: '-10px' }}>
+            <section className="bg-[url('/src/assets/bg-1.jpg')] h-dvh bg-cover bg-center flex flex-col p-40 max-md:p-8 rounded-2xl bg-green-200" style={{ marginTop: '-10px' }}>
                 <h1 className="text-9xl font-sans font-extrabold text-green-950">Find Your <br></br> <i className="text-slate-100">Bird</i></h1>
                 <button className="mt-8 border p-4 border-black hover:bg-green-950 hover:text-slate-50 rounded-md bg-transparent text-slate-950 w-1/4 hover:shadow-2xl transition delay-200 font-bold drop-shadow-sm">Validate</button>
             </section >
 
-            <section className="py-16 px-4">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            <MarqueSlider />
+
+            <section className="py-16">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {birdImages.map((image, index) => (
                         <div key={index} className={`${image.span} rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300`}>
                             <img
@@ -120,7 +124,7 @@ const Home = () => {
                                 alt={`Bird species ${index + 1}`}
                                 width={800}
                                 height={600}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover hover:opacity-70 hover:blur-md"
                             />
                         </div>
                     ))}
