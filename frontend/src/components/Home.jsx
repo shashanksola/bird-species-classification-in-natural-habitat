@@ -74,17 +74,59 @@ const birds = [
     }
 ];
 
+const birdImages = [
+    {
+        src: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
+        span: 'col-span-2',
+    },
+    {
+        src: 'https://images.unsplash.com/photo-1452570053594-1b985d6ea890?w=800&auto=format&fit=crop&q=60',
+        span: 'col-span-1',
+    },
+    {
+        src: 'https://images.unsplash.com/photo-1480044965905-02098d419e96?w=800&auto=format&fit=crop&q=60',
+        span: 'col-span-1',
+    },
+    {
+        src: 'https://images.unsplash.com/photo-1522926193341-e9ffd686c60f?w=800&auto=format&fit=crop&q=60',
+        span: 'col-span-2',
+    },
+    {
+        src: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=800&auto=format&fit=crop&q=60',
+        span: 'col-span-1',
+    },
+    {
+        src: 'https://images.unsplash.com/photo-1591608971362-f08b2a75731a?w=800&auto=format&fit=crop&q=60',
+        span: 'col-span-1',
+    },
+]
+
 const Home = () => {
 
     return (
-        <div>
+        <div className="bg-black p-8">
             <Navbar />
-            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                {birds.map((bird) => {
-                    return <Card key={bird.birdName} bird={bird} />
-                })}
-            </div>
-        </div>
+            <section className="bg-[url('/src/assets/bg-1.jpg')] h-dvh bg-cover bg-center flex flex-col p-40 rounded-2xl bg-green-200" style={{ marginTop: '-10px' }}>
+                <h1 className="text-9xl font-sans font-extrabold text-green-950">Find Your <br></br> <i className="text-slate-100">Bird</i></h1>
+                <button className="mt-8 border p-4 border-black hover:bg-green-950 hover:text-slate-50 rounded-md bg-transparent text-slate-950 w-1/4 hover:shadow-2xl transition delay-200 font-bold drop-shadow-sm">Validate</button>
+            </section >
+
+            <section className="py-16 px-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
+                    {birdImages.map((image, index) => (
+                        <div key={index} className={`${image.span} rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300`}>
+                            <img
+                                src={image.src}
+                                alt={`Bird species ${index + 1}`}
+                                width={800}
+                                height={600}
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                    ))}
+                </div>
+            </section>
+        </div >
     )
 }
 
