@@ -37,6 +37,10 @@
     animation-iteration-count: infinite;
 }
 
+.itemSlow {
+    animation-duration: 35s;
+}
+
 .itemLeft {
     left: max(calc(300px * 3), 100%);
     animation-name: scrollLeft;

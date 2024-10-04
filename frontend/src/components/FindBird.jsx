@@ -44,38 +44,36 @@ const FindBird = () => {
 
 
     const onInputChange = (event) => {
-        console.log(event);
         setBird(event.target.value);
     }
 
     return (
-        <div>
+        <div className="bg-black md:p-8 pt-8 min-h-screen">
             <Navbar />
-            <div className="min-h- p-8 flex flex-col items-center dark:bg-slate-700 w-full md:flex-row justify-around">
+            <div className="rounded-md p-8 pt-16 flex flex-col items-center w-full md:flex-row justify-around bg-[url('/src/assets/bg-2.jpg')] bg-center bg-cover">
                 <div>
                     <Dropzone onInputChange={onInputChange} />
                 </div>
-                <h1 className="text-slate-300">OR</h1>
-                <div className="flex flex-col justify-center items-center">
-                    <label htmlFor="url-input" className="text-slate-200 font-bold">Input Url</label>
-                    <br />
+                <h1 className="text-slate-300 m-4">OR</h1>
+                <div className="flex flex-col w-full">
+                    <label htmlFor="url-input" className="text-slate-900 font-bold self-start mb-1 max-md:text-slate-50">Input Url</label>
                     <input
                         placeholder="Enter URL"
                         value={bird}
                         onChange={onInputChange}
                         id="url-input"
                         type="url"
-                        className="rounded-md dark:bg-slate-800 border-slate-400 border py-2 px-4"
+                        className="rounded-md bg-slate-950 border-slate-400 border py-2 px-4 md:self-stretch"
                     />
-                    <div className="border size-96 mt-4 dark:bg-slate-800 p-4">
+                    <div className="border md:size-96 mt-4 bg-black bg-opacity-30 border-slate-100 p-16 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100 text-center">
                         <p className="text-slate-300">Image Area</p>
                         {bird && <img src={bird} alt="input-bird" style={{ width: '20vw' }} />}
                     </div>
                 </div>
             </div>
-            <div className="bg-slate-700 flex justify-center items-center p-14">
+            <div className="flex justify-center items-center p-12">
                 {loading ? Loading : <div>
-                    <button type="button" onClick={onValidateClick} className="bg-slate-800 hover:bg-slate-200 hover:text-slate-800 text-white font-bold py-2 px-4 rounded">Validate & Predict</button>
+                    <button type="button" onClick={onValidateClick} className="hover:bg-slate-200 hover:text-slate-900 text-white font-bold py-2 px-4 rounded border transition delay-100">Validate & Predict</button>
                     {error && <p>Error: {error.message}</p>}
                     {result && <p>Validation Result: {result?.isBird ? "Contains Bird" : "Doesn't contain any Bird"}</p>}
                 </div>}

@@ -56,12 +56,11 @@ function Dropzone(props) {
     });
 
     const updateSelectedFile = (localURL) => {
-        console.log(localURL);
         setSelectedFile(localURL);
     }
 
-    const thumbs = files.map(file => (
-        <div style={thumb} key={file.name}>
+    const thumbs = files.map(file => {
+        return <div style={thumb} key={file.name}>
             <div style={thumbInner}>
                 <img
                     src={file.preview}
@@ -72,20 +71,22 @@ function Dropzone(props) {
                 />
             </div>
         </div>
-    ));
+    });
 
     useEffect(() => {
         // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-        return () => files.forEach(file => URL.revokeObjectURL(file.preview));
+        return () => files.forEach(file => {
+            URL.revokeObjectURL(file.preview);
+        });
     }, []);
 
     return (
-        <section className="container">
-            <div {...getRootProps({ className: 'bg-slate-300 border border-slate-100 h-48 p-16 border-dashed' })}>
+        <section>
+            <div {...getRootProps({ className: 'rounded-md bg-black bg-opacity-30 border border-slate-100 h-48 p-16 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100' })}>
                 <input {...getInputProps()} />
                 <p>Drag 'n' drop some files here, or click to select files</p>
             </div>
-            <aside className='flex min-h-28 border bg-slate-800 mt-4'>
+            <aside className='rounded-md mt-4 flex min-h-28 border bg-black bg-opacity-30 border-slate-100 p-2 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100'>
                 {thumbs}
             </aside>
             {files.length >= 1 ? <p style={{ color: 'white' }}>*Click on the image to select a image*</p> : null}
