@@ -55,15 +55,15 @@ const FindBird = () => {
                     <Dropzone onInputChange={onInputChange} />
                 </div>
                 <h1 className="text-slate-300 m-4">OR</h1>
-                <div className="flex flex-col w-full">
-                    <label htmlFor="url-input" className="text-slate-900 font-bold self-start mb-1 max-md:text-slate-50">Input Url</label>
+                <div className="flex flex-col max-md:w-full">
+                    <label htmlFor="url-input" className="text-slate-900 font-bold self-start mb-1 md:text-slate-50">Input Url</label>
                     <input
                         placeholder="Enter URL"
                         value={bird}
                         onChange={onInputChange}
                         id="url-input"
                         type="url"
-                        className="rounded-md bg-slate-950 border-slate-400 border py-2 px-4 md:self-stretch"
+                        className="rounded-md bg-slate-950 border-slate-400 border py-2 px-4"
                     />
                     <div className="border md:size-96 mt-4 bg-black bg-opacity-30 border-slate-100 p-16 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100 text-center">
                         <p className="text-slate-300">Image Area</p>
