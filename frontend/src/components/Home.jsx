@@ -109,7 +109,7 @@ const Home = () => {
     return (
         <div className="bg-black md:p-8">
             <Navbar />
-            <section className="bg-[url('/src/assets/bg-1.jpg')] h-dvh bg-cover bg-center flex flex-col p-40 max-md:p-8 rounded-2xl bg-green-200" style={{ marginTop: '-10px' }}>
+            <section className="bg-[url('https://d9gp6f6sved89.cloudfront.net/_website_images/bg-1.jpg')] h-dvh bg-cover bg-center flex flex-col p-40 max-md:p-8 rounded-2xl bg-green-200" style={{ marginTop: '-10px' }}>
                 <h1 className="max-md:mt-20 text-6xl md:text-9xl font-sans font-extrabold text-green-950">Find Your <br></br> <i className="text-slate-100">Bird</i></h1>
                 <Link to={'Find-a-Bird'}><button className="max-md:w-1/2 mt-8 border p-4 border-black hover:bg-green-950 hover:text-slate-50 rounded-md bg-transparent text-slate-950 w-1/4 hover:shadow-2xl transition delay-200 font-bold drop-shadow-sm">Validate</button></Link>
             </section >

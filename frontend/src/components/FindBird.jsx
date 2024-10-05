@@ -50,7 +50,7 @@ const FindBird = () => {
     return (
         <div className="bg-black md:p-8 pt-8 min-h-screen">
             <Navbar />
-            <div className="rounded-md p-8 pt-16 flex flex-col items-center w-full md:flex-row justify-around bg-[url('/src/assets/bg-2.jpg')] bg-center bg-cover">
+            <div className="rounded-md p-8 pt-16 flex flex-col items-center w-full md:flex-row justify-around bg-[url('https://d9gp6f6sved89.cloudfront.net/_website_images/bg-2.jpg')] bg-center bg-cover">
                 <div>
                     <Dropzone onInputChange={onInputChange} />
                 </div>

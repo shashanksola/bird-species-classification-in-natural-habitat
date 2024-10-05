@@ -17,7 +17,7 @@ const Navbar = () => {
             <div className="flex flex-row justify-around w-4/6 items-center">
                 <Link to="/" className="text-slate-200 text-4xl flex items-center" style={{ fontFamily: "sans-serif", fontWeight: '700' }}>
                     <i className="max-md:hidden">Birdz</i>
-                    <img src="/src/assets/logo.png" alt="Birdz" width={'100px'} />
+                    <img src="https://d9gp6f6sved89.cloudfront.net/_website_images/logo.png" alt="Birdz" width={'100px'} />
 
                 </Link>
                 {pages.map((page) => {
