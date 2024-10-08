@@ -64,6 +64,7 @@ const FindBird = () => {
                         id="url-input"
                         type="url"
                         className="rounded-md bg-slate-950 border-slate-400 border py-2 px-4"
+                        style={{ color: 'while' }}
                     />
                     <div className="border md:size-96 mt-4 bg-black bg-opacity-30 border-slate-100 p-16 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100 text-center">
                         <p className="text-slate-300">Image Area</p>
@@ -72,11 +73,13 @@ const FindBird = () => {
                 </div>
             </div>
             <div className="flex justify-center items-center p-12">
-                {loading ? Loading : <div>
-                    <button type="button" onClick={onValidateClick} className="hover:bg-slate-200 hover:text-slate-900 text-white font-bold py-2 px-4 rounded border transition delay-100">Validate & Predict</button>
-                    {error && <p>Error: {error.message}</p>}
-                    {result && <p>Validation Result: {result?.isBird ? "Contains Bird" : "Doesn't contain any Bird"}</p>}
-                </div>}
+                {loading ?
+                    <div>Loading</div> :
+                    <div>
+                        <button type="button" onClick={onValidateClick} className="hover:bg-slate-200 hover:text-slate-900 text-white font-bold py-2 px-4 rounded border transition delay-100">Validate & Predict</button>
+                        {error && <p>Error: {error.message}</p>}
+                        {result && <p style={{ color: 'white' }}>Validation Result: {result.isBird ? "Contains Bird" : "Doesn't contain any Bird"}</p>}
+                    </div>}
             </div>
         </div>
     );
