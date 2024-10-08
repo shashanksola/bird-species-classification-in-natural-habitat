@@ -28,4 +28,10 @@ The application will allow users to upload images, which are then processed by t
 
 
 ### Architecture (Progressive):
+Iteration 1
 ![image](https://github.com/user-attachments/assets/0ffd68aa-cbb9-4e5a-b072-3c74f4594481)
+Iteration 2
+<br/>
+<img alt="Screenshot 2024-10-07 232150" src="https://github.com/user-attachments/assets/aeccdd91-e33f-4499-ac7c-bf8e04dd744f">
+
+
