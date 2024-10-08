@@ -43,6 +43,7 @@ app.post("/validate/", async (req, res) => {
 
   try {
     const isBird = await detectBird(birdLink);
+    console.log(isBird);
     res.status(200).send({ isBird });
   } catch (error) {
     res.status(500).send(`Error: ${error.message}`);
