@@ -3,6 +3,7 @@ import Dropzone from "./Dropzone";
 import Navbar from "./Navbar";
 
 async function validateBird(birdUrl) {
+    console.log(birdUrl);
     try {
         const response = await fetch('http://localhost:3000/validate/', {
             method: 'POST',
@@ -14,14 +15,18 @@ async function validateBird(birdUrl) {
             },
         });
 
+        if (!response.ok) {
+            const errorResponse = await response.json();  // Parse the error response as JSON
+            throw new Error(errorResponse.error || 'Unknown error occurred');
+        }
+
         const data = await response.json();
         return data;
     } catch (err) {
-        console.log('Error: ' + err);
+        console.log('Error: ' + err.message);
         return null;
     }
 }
-
 
 const FindBird = () => {
     const [bird, setBird] = useState("");
@@ -34,7 +39,6 @@ const FindBird = () => {
         try {
             const response = await validateBird(bird);
             setResult(response);
-            console.log(result);
         } catch (err) {
             setError(err);
         }
@@ -47,12 +51,16 @@ const FindBird = () => {
         setBird(event.target.value);
     }
 
+    const onDropZoneInputChaange = (imageURL) => {
+        setBird(imageURL);
+    }
+
     return (
         <div className="bg-black md:p-8 pt-8 min-h-screen">
             <Navbar />
             <div className="rounded-md p-8 pt-16 flex flex-col items-center w-full md:flex-row justify-around bg-[url('https://d9gp6f6sved89.cloudfront.net/_website_images/bg-2.jpg')] bg-center bg-cover">
                 <div>
-                    <Dropzone onInputChange={onInputChange} />
+                    <Dropzone onDropZoneInputChaange={onDropZoneInputChaange} />
                 </div>
                 <h1 className="text-slate-300 m-4">OR</h1>
                 <div className="flex flex-col max-md:w-full">

@@ -26,6 +26,7 @@ const detectBird = async (birdLink) => {
 };
 
 const getEnvironmentTags = async (birdLink) => { // needs updation
+  console.log(birdLink);
   try {
     const response = await axios.post("http://127.0.0.1:8000/envTags/", {
       image_url: birdLink,
@@ -40,13 +41,15 @@ const getEnvironmentTags = async (birdLink) => { // needs updation
 
 app.post("/validate/", async (req, res) => {
   const birdLink = req.body.birdLink || "https://images.pexels.com/photos/349758/hummingbird-bird-birds-349758.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+  console.log(birdLink);
 
   try {
     const isBird = await detectBird(birdLink);
     console.log(isBird);
-    res.status(200).send({ isBird });
+    res.status(200).json({ isBird });
   } catch (error) {
-    res.status(500).send(`Error: ${error.message}`);
+    console.error(error);
+    res.status(500).json({ error: error.message });  // Return JSON error response
   }
 });
 

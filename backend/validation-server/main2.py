@@ -37,6 +37,7 @@ async def fetch_image_from_url(image_url: str):
 @app.post("/predict/")
 async def predict_bird_in_image(data: ImageURL):
     # Fetch the image from the provided URL
+    print(data.image_url)
     try:
         img = await fetch_image_from_url(data.image_url)
     except Exception as e:

@@ -41,7 +41,7 @@ const selectedImg = {
 };
 
 
-function Dropzone(props) {
+function Dropzone({ onDropZoneInputChaange }) {
     const [files, setFiles] = useState([]);
     const [selectedFile, setSelectedFile] = useState("");
     const { getRootProps, getInputProps } = useDropzone({
@@ -56,7 +56,10 @@ function Dropzone(props) {
     });
 
     const updateSelectedFile = (localURL) => {
+        localURL = localURL.substring(5);
+        console.log(localURL);
         setSelectedFile(localURL);
+        onDropZoneInputChaange(localURL);
     }
 
     const thumbs = files.map(file => {
