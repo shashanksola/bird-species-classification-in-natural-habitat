@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import axios from 'axios'; // For making API requests to backend
 
 const thumbsContainer = {
     display: 'flex',
@@ -26,8 +27,7 @@ const thumbInner = {
     overflow: 'hidden'
 };
 
-
-const img = {
+const imgStyle = {
     display: 'block',
     width: 'auto',
     height: '100%',
@@ -40,59 +40,87 @@ const selectedImg = {
     border: '2px solid lightblue'
 };
 
+function Dropzone({ onDropZoneInputChange }) {
+    const [file, setFile] = useState(null); // Single file state
+    const [filePreview, setFilePreview] = useState(""); // Preview of the file
+    const [uploading, setUploading] = useState(false); // Upload state
 
-function Dropzone({ onDropZoneInputChaange }) {
-    const [files, setFiles] = useState([]);
-    const [selectedFile, setSelectedFile] = useState("");
     const { getRootProps, getInputProps } = useDropzone({
-        accept: {
-            'image/*': []
-        },
+        accept: { 'image/*': [] },
+        maxFiles: 1, // Limit to 1 file at a time
         onDrop: acceptedFiles => {
-            setFiles(acceptedFiles.map(file => Object.assign(file, {
-                preview: URL.createObjectURL(file)
-            })));
+            const selectedFile = acceptedFiles[0];
+            setFile(selectedFile); // Set the file
+            setFilePreview(URL.createObjectURL(selectedFile)); // Create a preview
         }
     });
 
-    const updateSelectedFile = (localURL) => {
-        localURL = localURL.substring(5);
-        console.log(localURL);
-        setSelectedFile(localURL);
-        onDropZoneInputChaange(localURL);
-    }
-
-    const thumbs = files.map(file => {
-        return <div style={thumb} key={file.name}>
-            <div style={thumbInner}>
-                <img
-                    src={file.preview}
-                    style={file.preview === selectedFile ? selectedImg : img}
-                    // Revoke data uri after image is loaded
-                    // onLoad={() => { URL.revokeObjectURL(file.preview) }}
-                    onClick={() => updateSelectedFile(file.preview)}
-                />
-            </div>
-        </div>
-    });
-
     useEffect(() => {
-        // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-        return () => files.forEach(file => {
-            URL.revokeObjectURL(file.preview);
-        });
-    }, []);
+        // Revoke the object URL to free memory when the component unmounts or the file changes
+        return () => {
+            if (filePreview) {
+                URL.revokeObjectURL(filePreview);
+            }
+        };
+    }, [filePreview]);
+
+    const handleFileUpload = async () => {
+        if (!file) return;
+
+        setUploading(true);
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            // Call the backend API to upload the file to S3
+            const response = await axios.post('/api/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            const s3ImageUrl = response.data.url; // Assume backend returns the S3 URL of the uploaded image
+            onDropZoneInputChange(s3ImageUrl); // Pass the S3 URL back to the parent component
+            alert('Image uploaded successfully!');
+        } catch (error) {
+            console.error('Error uploading file:', error);
+            alert('Failed to upload image.');
+        } finally {
+            setUploading(false);
+        }
+    };
 
     return (
         <section>
-            <div {...getRootProps({ className: 'rounded-md bg-black bg-opacity-30 border border-slate-100 h-48 p-16 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100' })}>
+            <div
+                {...getRootProps({
+                    className: 'rounded-md bg-black bg-opacity-30 border border-slate-100 h-48 p-16 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100',
+                })}
+            >
                 <input {...getInputProps()} />
-                <p>Drag 'n' drop some files here, or click to select files</p>
+                <p>Drag 'n' drop an image here, or click to select an image</p>
             </div>
-            <aside className='rounded-md mt-4 flex min-h-28 border bg-black bg-opacity-30 border-slate-100 p-2 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100'>
-                {thumbs}
+
+            <aside className="rounded-md mt-4 flex min-h-28 border bg-black bg-opacity-30 border-slate-100 p-2 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100">
+                {filePreview && (
+                    <div style={thumb}>
+                        <div style={thumbInner}>
+                            <img src={filePreview} alt="Preview" style={imgStyle} />
+                        </div>
+                    </div>
+                )}
             </aside>
-            {files.length >= 1 ? <p style={{ color: 'white' }}>*Click on the image to select a image*</p> : null}
+
+            {file && (
+                <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+                    onClick={handleFileUpload}
+                    disabled={uploading}
+                >
+                    {uploading ? 'Uploading...' : 'Upload Image'}
+                </button>
+            )}
         </section>
     );
 }
