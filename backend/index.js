@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: 'http://localhost:5173' // Allow specific origin
+  origin: ['http://localhost:5173', 'https://indian-bird-species.netlify.app'] // Allow specific origin
 }));
 
 // Set up AWS S3 credentials
@@ -34,7 +34,6 @@ const uploadToS3 = async (file) => {
     Key: `${prefix}${generateSlug()}_${file.originalname}`, // Upload to the desired folder
     Body: file.buffer, // File buffer for uploading
     ContentType: file.mimetype, // The file type
-    ACL: 'public-read' // File will be accessible publicly (adjust as needed)
   };
 
   return s3.upload(uploadParams).promise();

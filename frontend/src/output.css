@@ -822,6 +822,11 @@ video {
   background-color: rgb(187 247 208 / var(--tw-bg-opacity));
 }
 
+.bg-slate-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 250 252 / var(--tw-bg-opacity));
+}
+
 .bg-slate-950 {
   --tw-bg-opacity: 1;
   background-color: rgb(2 6 23 / var(--tw-bg-opacity));
@@ -837,38 +842,6 @@ video {
 
 .bg-opacity-80 {
   --tw-bg-opacity: 0.8;
-}
-
-.bg-\[url\(\'\/src\/assets\/b1\.jpg\'\)\] {
-  background-image: url('/src/assets/b1.jpg');
-}
-
-.bg-\[url\(\'\/src\/assets\/b2\.jpg\'\)\] {
-  background-image: url('/src/assets/b2.jpg');
-}
-
-.bg-\[url\(\'\/src\/assets\/b3\.jpg\'\)\] {
-  background-image: url('/src/assets/b3.jpg');
-}
-
-.bg-\[url\(\'\/src\/assets\/b4\.jpg\'\)\] {
-  background-image: url('/src/assets/b4.jpg');
-}
-
-.bg-\[url\(\'\/src\/assets\/b5\.jpg\'\)\] {
-  background-image: url('/src/assets/b5.jpg');
-}
-
-.bg-\[url\(\'\/src\/assets\/b6\.jpg\'\)\] {
-  background-image: url('/src/assets/b6.jpg');
-}
-
-.bg-\[url\(\'\/src\/assets\/bg-1\.jpg\'\)\] {
-  background-image: url('/src/assets/bg-1.jpg');
-}
-
-.bg-\[url\(\'https\:\/\/d9gp6f6sved89\.cloudfront\.net\/_website_images\/bg-2\.jpg\'\)\] {
-  background-image: url('https://d9gp6f6sved89.cloudfront.net/_website_images/bg-2.jpg');
 }
 
 .bg-\[url\(\'https\:\/\/d9gp6f6sved89\.cloudfront\.net\/_website_images\/b1\.jpg\'\)\] {
@@ -897,6 +870,10 @@ video {
 
 .bg-\[url\(\'https\:\/\/d9gp6f6sved89\.cloudfront\.net\/_website_images\/bg-1\.jpg\'\)\] {
   background-image: url('https://d9gp6f6sved89.cloudfront.net/_website_images/bg-1.jpg');
+}
+
+.bg-\[url\(\'https\:\/\/d9gp6f6sved89\.cloudfront\.net\/_website_images\/bg-2\.jpg\'\)\] {
+  background-image: url('https://d9gp6f6sved89.cloudfront.net/_website_images/bg-2.jpg');
 }
 
 .bg-cover {

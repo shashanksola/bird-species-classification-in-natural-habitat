@@ -74,18 +74,19 @@ function Dropzone({ onDropZoneInputChange }) {
 
         try {
             // Call the backend API to upload the file to S3
-            const response = await axios.post('/api/upload', formData, {
+            const response = await axios.post('http://localhost:3000/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
 
-            const s3ImageUrl = response.data.url; // Assume backend returns the S3 URL of the uploaded image
-            onDropZoneInputChange(s3ImageUrl); // Pass the S3 URL back to the parent component
-            alert('Image uploaded successfully!');
+            const s3ImageUrl = response.data.url;
+            console.log(s3ImageUrl);
+            onDropZoneInputChange(s3ImageUrl);
+            console.log('Image uploaded successfully!');
         } catch (error) {
             console.error('Error uploading file:', error);
-            alert('Failed to upload image.');
+            console.log('Failed to upload image.');
         } finally {
             setUploading(false);
         }
@@ -114,7 +115,7 @@ function Dropzone({ onDropZoneInputChange }) {
 
             {file && (
                 <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+                    className="mt-8 border p-4 border-black hover:bg-green-950 hover:text-slate-50 rounded-md bg-slate-50 text-slate-950 w-1/4 hover:shadow-2xl transition delay-200 font-bold drop-shadow-sm"
                     onClick={handleFileUpload}
                     disabled={uploading}
                 >
