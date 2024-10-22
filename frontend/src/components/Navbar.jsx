@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import SideBarModal from "./SidebarModal";
 
-const pages = ["Find-a-Bird", "Know More", "About"];
+const pages = ["Find-a-Bird", "Classify-Bird", "About"];
 
 // <div className='header'>
 //     <input placeholder="Find your favourite birdie here!" className="search-bar" />

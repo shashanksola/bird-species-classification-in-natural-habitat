@@ -1,54 +1,60 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
-import tensorflow as tf
-from tensorflow.keras.preprocessing import image
+import torch
+from PIL import Image
+import io
 import numpy as np
-import requests
-import os
+import aiohttp
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 
 app = FastAPI()
 
-# Load the model once at startup
-model = tf.keras.models.load_model(os.getcwd() + "/bird_detection_model.h5")
-
+# Load YOLOv5 model
+model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
 
 # Define a request body model for image URL
+
+
 class ImageURL(BaseModel):
     image_url: str
 
-
-def download_bird(url: str) -> str:
-    """Download the image from the given URL."""
-    img_data = requests.get(url).content
-    img_path = 'image_name.jpg'
-    with open(img_path, 'wb') as handler:
-        handler.write(img_data)
-    return img_path
+# Helper function to fetch image from a URL
 
 
-def prepare_image(img_path: str):
-    """Prepare the image for model prediction."""
-    img = image.load_img(img_path, target_size=(32, 32))
-    img_array = image.img_to_array(img)
-    img_array = img_array.astype('float32') / 255.0
-    img_array = np.expand_dims(img_array, axis=0)
-    return img_array
+async def fetch_image_from_url(image_url: str):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(image_url) as response:
+            if response.status != 200:
+                raise HTTPException(status_code=404, detail="Image not found")
 
+            image_data = await response.read()
+            image = Image.open(io.BytesIO(image_data)).convert(
+                'RGB')  # Open the image as RGB
+            return np.array(image)  # Convert it to a NumPy array
 
-def predict_bird(img_path: str) -> bool:
-    """Predict if the image contains a bird."""
-    img_array = prepare_image(img_path)
-    prediction = model.predict(img_array, verbose=0)
-    return bool(prediction[0] > 0.5)
+# Route to accept an image URL and predict bird presence
 
 
 @app.post("/predict/")
 async def predict_bird_in_image(data: ImageURL):
-    """API endpoint to predict if a bird is in the image."""
+    # Fetch the image from the provided URL
+    print(data.image_url)
     try:
-        img_path = download_bird(data.image_url)
-        result = predict_bird(img_path)
-        os.remove(img_path)  # Clean up the image after prediction
-        return {"isBird": result}
+        img = await fetch_image_from_url(data.image_url)
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=400, detail="Invalid image URL")
+
+    # Perform inference using YOLOv5 model
+    results = model(img)
+    print(results)
+
+    # Extract detected classes
+    detected_classes = results.pred[0][:, -1].cpu().numpy()
+    print(detected_classes)
+
+    # Check if class 14 ("bird") is detected in the image
+    if 14 in detected_classes:
+        result = True
+    else:
+        result = False
+
+    return {"isBird": result}
