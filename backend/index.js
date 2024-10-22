@@ -90,7 +90,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 // Existing bird detection function
 const detectBird = async (birdLink) => {
   try {
-    const response = await axios.post("http://127.0.0.1:8000/predict/", {
+    const response = await axios.post(`${process.env.PYTHON_API}predict/`, {
       image_url: birdLink,
     });
 
@@ -125,13 +125,15 @@ app.post("/classify", async (req, res) => {
 
   try {
     // Step 1: Send request to FastAPI /classify endpoint
-    const response = await axios.post("http://127.0.0.1:8000/classify/", {
+    const response = await axios.post(`${process.env.PYTHON_API}classify/`, {
       image_url: birdLink,
     });
 
     // Step 2: Get classification result
     const classifiedBirds = response.data.classified_birds;
     const message = response.data.message;
+
+    if (message === "No birds detected") res.status(200).json({ classifiedBirds: "No birds detected" })
 
 
     // Step 4: Upload image to S3
