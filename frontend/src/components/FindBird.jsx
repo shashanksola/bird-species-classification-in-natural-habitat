@@ -76,7 +76,7 @@ const FindBird = () => {
                     />
                     <div className="border md:size-96 mt-4 bg-black bg-opacity-30 border-slate-100 p-16 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100 text-center">
                         <p className="text-slate-300">Image Area</p>
-                        {bird && <img src={bird} alt="input-bird" style={{ width: '20vw' }} />}
+                        {bird && <img src={bird} alt="input-bird" style={{ width: '20vw', maxHeight: '100%', maxWidth: '100%' }} />}
                     </div>
                 </div>
             </div>
