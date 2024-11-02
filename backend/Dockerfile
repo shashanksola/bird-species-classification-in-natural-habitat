@@ -13,4 +13,4 @@ RUN pip install tensorflow
 RUN apt-get update && apt-get install -y libgl1
 RUN mv main,py main.py
 
-CMD ["uvicorn", "main:app", "--reload", "--port", "80"]
+CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "80"]
