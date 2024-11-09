@@ -6,14 +6,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([{
   path: '/',
   element: <Home />
-},
-{
-  path: 'Find-a-Bird',
-  element: <FindBird />
-},
-{
-  path: 'Classify-Bird',
-  element: <ClassifyBird />
 }
 ]);
 

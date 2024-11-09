@@ -54,11 +54,10 @@ const ClassifyBird = () => {
     }
 
     return (
-        <div className="bg-black md:p-8 pt-8 min-h-screen">
-            <Navbar />
-            <div className="rounded-md p-8 pt-16 flex flex-col items-center w-full md:flex-row justify-around bg-[url('https://d9gp6f6sved89.cloudfront.net/_website_images/bg-2.jpg')] bg-center bg-cover">
+        <div className="bg-orange-100 md:p-8 pt-8 min-h-screen" id="classify">
+            <div className="rounded-md p-8 pt-16 flex flex-col items-center w-full md:flex-row justify-around bg-orange-100 bg-center bg-cover">
                 <Dropzone onDropZoneInputChange={onDropZoneInputChange} />
-                <h1 className="text-slate-300 m-4">OR</h1>
+                <h1 className="text-slate-800 m-4">OR</h1>
                 <div className="flex flex-col max-md:w-full">
                     <label htmlFor="url-input" className="text-slate-900 font-bold self-start mb-1 md:text-slate-50">Input Url</label>
                     <input
@@ -69,7 +68,7 @@ const ClassifyBird = () => {
                         type="url"
                         className="rounded-md bg-slate-950 border-slate-400 border py-2 px-4"
                     />
-                    <div className="border md:size-96 mt-4 bg-black bg-opacity-30 border-slate-100 p-16 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100 text-center">
+                    <div className="border md:size-96 mt-4 bg-orange-100 bg-opacity-30 border-slate-100 p-16 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100 text-center">
                         <p className="text-slate-300">Image Area</p>
                         {bird && <img src={bird} alt="input-bird" style={{ width: '20vw', maxHeight: '100%', maxWidth: '100%' }} />}
                     </div>
