@@ -679,10 +679,6 @@ video {
   width: 75%;
 }
 
-.w-4\/6 {
-  width: 66.666667%;
-}
-
 .w-full {
   width: 100%;
 }
@@ -833,6 +829,10 @@ video {
   --tw-bg-opacity: 0.8;
 }
 
+.bg-\[url\(\'https\:\/\/bird-species\.s3\.ap-south-1\.amazonaws\.com\/_website_images\/bg-b1\.jpg\'\)\] {
+  background-image: url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/bg-b1.jpg');
+}
+
 .bg-\[url\(\'https\:\/\/d9gp6f6sved89\.cloudfront\.net\/_website_images\/b1\.jpg\'\)\] {
   background-image: url('https://d9gp6f6sved89.cloudfront.net/_website_images/b1.jpg');
 }
@@ -855,10 +855,6 @@ video {
 
 .bg-\[url\(\'https\:\/\/d9gp6f6sved89\.cloudfront\.net\/_website_images\/b6\.jpg\'\)\] {
   background-image: url('https://d9gp6f6sved89.cloudfront.net/_website_images/b6.jpg');
-}
-
-.bg-\[url\(\'https\:\/\/d9gp6f6sved89\.cloudfront\.net\/_website_images\/bg-2\.jpg\'\)\] {
-  background-image: url('https://d9gp6f6sved89.cloudfront.net/_website_images/bg-2.jpg');
 }
 
 .bg-cover {

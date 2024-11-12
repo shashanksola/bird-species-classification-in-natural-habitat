@@ -112,9 +112,9 @@ const Home = () => {
         <>
             <div className="bg-orange-100 md:p-8">
                 <Navbar />
-                <section className="h-dvh bg-cover bg-center flex flex-col p-40 max-md:p-8 rounded-2xl" style={{ marginTop: '-10px' }}>
+                <section className="h-dvh bg-cover bg-center flex flex-col p-40 max-md:p-8 rounded-2xl bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/bg-b1.jpg')] " style={{ marginTop: '-10px' }}>
                     <h1 className="max-md:mt-20 text-6xl md:text-9xl font-sans font-extrabold text-green-950">Find Your <br></br> <i className="text-orange-800">Bird</i></h1>
-                    <Link to={'Find-a-Bird'}><button className="max-md:w-1/2 mt-8 border p-4 border-orange-800 hover:bg-orange-800 hover:text-slate-50 rounded-md bg-transparent text-slate-950 w-1/4 hover:shadow-2xl transition delay-200 font-bold drop-shadow-sm">Validate</button></Link>
+                    <button className="max-md:w-1/2 mt-8 border p-4 border-orange-800 hover:bg-orange-800 hover:text-slate-50 rounded-md bg-transparent text-slate-950 w-1/4 hover:shadow-2xl transition delay-200 font-bold drop-shadow-sm">Validate</button>
                 </section >
 
                 <MarqueSlider />
