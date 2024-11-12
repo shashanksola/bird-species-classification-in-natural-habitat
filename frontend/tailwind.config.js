@@ -2,7 +2,12 @@
 export default {
   content: ["./src/**/*.{html,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'maroon': '#800000',
+        'beige': '#f4f4ed'
+      }
+    },
   },
   plugins: [],
 }

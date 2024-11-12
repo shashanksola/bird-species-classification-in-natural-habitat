@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="text-orange-900 py-8 px-4 md:px-8" id="footer">
+        <footer className="bg-black text-white py-12 px-4 md:px-8 bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/layered-steps-haikei-invert.svg')] bg-cover min-h-[45vh]" id="footer">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                     <div className="col-span-1 md:col-span-2">
@@ -28,7 +28,7 @@ export default function Footer() {
                         </ul>
                     </div>
                 </div>
-                <div className="border-t border-gray-700 pt-4 flex flex-col md:flex-row justify-between items-center text-sm">
+                <div className="border-t border-white pt-4 flex flex-col md:flex-row justify-between items-center text-sm">
                     <p>&copy; 2024 <a href="https://github.com/shashanksola/bird-species-classification-in-natural-habitat?tab=MIT-1-ov-file#readme" target="_blank">Shashank Sola</a></p>
                     <div className="space-x-4 mt-4 md:mt-0">
                         <a href="/creator-terms">Creator Terms</a>
