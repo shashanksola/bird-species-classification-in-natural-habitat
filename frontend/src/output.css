@@ -554,20 +554,12 @@ video {
   display: none;
 }
 
-.\!visible {
-  visibility: visible !important;
-}
-
 .visible {
   visibility: visible;
 }
 
 .fixed {
   position: fixed;
-}
-
-.inset-0 {
-  inset: 0px;
 }
 
 .left-0 {
@@ -580,10 +572,6 @@ video {
 
 .z-30 {
   z-index: 30;
-}
-
-.z-40 {
-  z-index: 40;
 }
 
 .col-span-1 {
@@ -672,10 +660,6 @@ video {
   height: 100dvh;
 }
 
-.h-full {
-  height: 100%;
-}
-
 .min-h-28 {
   min-height: 7rem;
 }
@@ -690,10 +674,6 @@ video {
 
 .w-1\/4 {
   width: 25%;
-}
-
-.w-3\/4 {
-  width: 75%;
 }
 
 .w-\[30vw\] {
@@ -714,6 +694,54 @@ video {
 
 .max-w-7xl {
   max-width: 80rem;
+}
+
+@keyframes slidein {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slidein300 {
+  animation: slidein 1s ease 300ms;
+}
+
+@keyframes slidein {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slidein600 {
+  animation: slidein 1s ease 600ms;
+}
+
+@keyframes slidein {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slidein900 {
+  animation: slidein 1s ease 900ms;
 }
 
 .grid-cols-1 {
@@ -760,12 +788,16 @@ video {
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
-.overscroll-none {
-  overscroll-behavior: none;
+.self-center {
+  align-self: center;
 }
 
 .rounded {
   border-radius: 0.25rem;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
 }
 
 .rounded-md {
@@ -812,32 +844,12 @@ video {
   --tw-bg-opacity: 0.3;
 }
 
-.bg-opacity-80 {
-  --tw-bg-opacity: 0.8;
-}
-
 .bg-\[url\(\'\$\{url\}\'\)\] {
   background-image: url('${url}');
 }
 
 .bg-\[url\(\'https\:\/\/bird-species\.s3\.ap-south-1\.amazonaws\.com\/_website_images\/b1\.jpg\'\)\] {
   background-image: url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/b1.jpg');
-}
-
-.bg-\[url\(\'https\:\/\/bird-species\.s3\.ap-south-1\.amazonaws\.com\/_website_images\/classift-invert-bg\.svg\'\)\] {
-  background-image: url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/classift-invert-bg.svg');
-}
-
-.bg-\[url\(\'https\:\/\/bird-species\.s3\.ap-south-1\.amazonaws\.com\/_website_images\/classify-bg\.svg\'\)\] {
-  background-image: url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/classify-bg.svg');
-}
-
-.bg-\[url\(\'https\:\/\/bird-species\.s3\.ap-south-1\.amazonaws\.com\/_website_images\/layered-steps-haikei-invert\.svg\'\)\] {
-  background-image: url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/layered-steps-haikei-invert.svg');
-}
-
-.bg-\[url\(\'https\:\/\/bird-species\.s3\.ap-south-1\.amazonaws\.com\/_website_images\/layered-steps-haikei\.svg\'\)\] {
-  background-image: url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/layered-steps-haikei.svg');
 }
 
 .bg-\[url\(\'https\:\/\/bird-species\.s3\.ap-south-1\.amazonaws\.com\/_website_images\/b2\.jpg\'\)\] {
@@ -860,16 +872,28 @@ video {
   background-image: url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/b6.jpg');
 }
 
+.bg-\[url\(\'https\:\/\/bird-species\.s3\.ap-south-1\.amazonaws\.com\/_website_images\/classift-invert-bg\.svg\'\)\] {
+  background-image: url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/classift-invert-bg.svg');
+}
+
+.bg-\[url\(\'https\:\/\/bird-species\.s3\.ap-south-1\.amazonaws\.com\/_website_images\/classify-bg\.svg\'\)\] {
+  background-image: url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/classify-bg.svg');
+}
+
+.bg-\[url\(\'https\:\/\/bird-species\.s3\.ap-south-1\.amazonaws\.com\/_website_images\/layered-steps-haikei-invert\.svg\'\)\] {
+  background-image: url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/layered-steps-haikei-invert.svg');
+}
+
+.bg-\[url\(\'https\:\/\/bird-species\.s3\.ap-south-1\.amazonaws\.com\/_website_images\/layered-steps-haikei\.svg\'\)\] {
+  background-image: url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/layered-steps-haikei.svg');
+}
+
 .bg-cover {
   background-size: cover;
 }
 
 .bg-center {
   background-position: center;
-}
-
-.fill-slate-100 {
-  fill: #f1f5f9;
 }
 
 .p-12 {
@@ -968,11 +992,6 @@ video {
   text-transform: uppercase;
 }
 
-.text-slate-300 {
-  --tw-text-opacity: 1;
-  color: rgb(203 213 225 / var(--tw-text-opacity));
-}
-
 .text-slate-50 {
   --tw-text-opacity: 1;
   color: rgb(248 250 252 / var(--tw-text-opacity));
@@ -994,12 +1013,6 @@ video {
 
 .backdrop-blur-3xl {
   --tw-backdrop-blur: blur(64px);
-  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-}
-
-.backdrop-blur-sm {
-  --tw-backdrop-blur: blur(4px);
   -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
   backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
@@ -1068,10 +1081,6 @@ video {
     margin-top: 5rem;
   }
 
-  .max-md\:block {
-    display: block;
-  }
-
   .max-md\:hidden {
     display: none;
   }
@@ -1082,6 +1091,12 @@ video {
 
   .max-md\:p-8 {
     padding: 2rem;
+  }
+}
+
+@media not all and (min-width: 640px) {
+  .max-sm\:hidden {
+    display: none;
   }
 }
 

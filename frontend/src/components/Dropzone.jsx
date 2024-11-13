@@ -1,7 +1,7 @@
-// === Dropzone.jsx ===
 import React, { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
+import { DNA } from 'react-loader-spinner';
 
 const Dropzone = ({ onDropZoneInputChange }) => {
     const [filePreview, setFilePreview] = useState(""); // Preview of the file
@@ -36,7 +36,7 @@ const Dropzone = ({ onDropZoneInputChange }) => {
 
         try {
             // Call the backend API to upload the file to S3
-            const response = await axios.post('http://43.205.90.65/upload', formData, {
+            const response = await axios.post('http://13.200.12.3/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -46,6 +46,7 @@ const Dropzone = ({ onDropZoneInputChange }) => {
             console.log(s3ImageUrl);
             onDropZoneInputChange(s3ImageUrl); // Pass the uploaded image URL back to parent component
         } catch (error) {
+            alert('Upload Failed');
             console.error('Error uploading file:', error);
             console.log('Failed to upload image.');
         } finally {
@@ -54,7 +55,7 @@ const Dropzone = ({ onDropZoneInputChange }) => {
     };
 
     return (
-        <section>
+        <section className='flex justify-center flex-col'>
             <div
                 {...getRootProps({
                     className: 'rounded-md bg-black bg-opacity-30 border border-slate-100 h-48 p-16 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100',
@@ -83,7 +84,15 @@ const Dropzone = ({ onDropZoneInputChange }) => {
                     </div>
                 )}
             </aside>
-            {uploading && <p className="text-slate-300">Uploading...</p>}
+            {uploading && <div className="self-center">
+                <DNA
+                    visible={true}
+                    height="80"
+                    width="80"
+                    ariaLabel="dna-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="dna-wrapper"
+                /></div>}
         </section>
     );
 };
