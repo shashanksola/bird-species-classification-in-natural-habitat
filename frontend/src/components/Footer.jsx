@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="bg-black text-white py-12 px-4 md:px-8 bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/layered-steps-haikei-invert.svg')] bg-cover min-h-[45vh]" id="footer">
+        <footer className="bg-black text-white pt-12 px-4 md:px-8 bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/layered-steps-haikei-invert.svg')] bg-cover min-h-[35vh]" id="footer">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                     <div className="col-span-1 md:col-span-2">

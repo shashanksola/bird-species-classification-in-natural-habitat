@@ -664,8 +664,8 @@ video {
   min-height: 7rem;
 }
 
-.min-h-\[45vh\] {
-  min-height: 45vh;
+.min-h-\[35vh\] {
+  min-height: 35vh;
 }
 
 .min-h-screen {
@@ -794,10 +794,6 @@ video {
 
 .rounded {
   border-radius: 0.25rem;
-}
-
-.rounded-lg {
-  border-radius: 0.5rem;
 }
 
 .rounded-md {
@@ -935,6 +931,10 @@ video {
   padding-bottom: 0.5rem;
 }
 
+.pt-12 {
+  padding-top: 3rem;
+}
+
 .pt-16 {
   padding-top: 4rem;
 }
@@ -1031,6 +1031,10 @@ video {
 
 .delay-200 {
   transition-delay: 200ms;
+}
+
+.hover\:cursor-pointer:hover {
+  cursor: pointer;
 }
 
 .hover\:bg-slate-200:hover {
