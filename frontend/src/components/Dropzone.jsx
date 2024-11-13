@@ -36,7 +36,7 @@ const Dropzone = ({ onDropZoneInputChange }) => {
 
         try {
             // Call the backend API to upload the file to S3
-            const response = await axios.post('http://13.200.12.3/upload', formData, {
+            const response = await axios.post('https://13.201.54.54/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

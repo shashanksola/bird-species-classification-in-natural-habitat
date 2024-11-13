@@ -4,7 +4,7 @@ import { DNA } from "react-loader-spinner";
 
 async function validateBird(birdUrl) {
     try {
-        const response = await fetch('http://13.200.12.3/validate/', {
+        const response = await fetch('https://13.201.54.54/validate/', {
             method: 'POST',
             body: JSON.stringify({ birdLink: birdUrl }),
             headers: { 'Content-Type': 'application/json; charset=UTF-8' },
@@ -25,7 +25,7 @@ async function validateBird(birdUrl) {
 
 async function classifyBird(birdUrl) {
     try {
-        const response = await fetch(`http://13.200.12.3/classify/`, {
+        const response = await fetch(`https://13.201.54.54/classify/`, {
             method: 'POST',
             body: JSON.stringify({ birdLink: birdUrl }),
             headers: { 'Content-Type': 'application/json; charset=UTF-8' },

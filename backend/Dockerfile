@@ -39,5 +39,9 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | b
     npm install -g pm2 && \
     npm install
 
+COPY ssl/ ssl/
 # Start Node.js and Python apps
+
+EXPOSE 443
+
 CMD . "$NVM_DIR/nvm.sh" && pm2-runtime start index.js & uvicorn main:app --reload --host 0.0.0.0 --port 8000
