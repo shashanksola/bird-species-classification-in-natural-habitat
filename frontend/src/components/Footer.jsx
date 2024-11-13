@@ -27,7 +27,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className="border-t border-white pt-4 flex flex-col md:flex-row justify-between items-center text-sm">
-                    <p>&copy; 2024 <a href="https://github.com/shashanksola/bird-species-classification-in-natural-habitat?tab=MIT-1-ov-file#readme" target="_blank">Shashank Sola</a></p>
+                    <p>&copy; 2024 <a href="https://github.com/shashanksola/bird-species-classification-in-natural-habitat?tab=MIT-1-ov-file#readme" target="_blank">Birdz</a></p>
                     <div className="space-x-4 mt-4 md:mt-0">
                         <a href="https://github.com/shashanksola/bird-species-classification-in-natural-habitat/blob/main/CODE_OF_CONDUCT.md" target="_blank">Creator Terms</a>
                         <a href="https://github.com/shashanksola/bird-species-classification-in-natural-habitat/blob/main/CODE_OF_CONDUCT.md" target="_blank">Privacy Policy</a>
