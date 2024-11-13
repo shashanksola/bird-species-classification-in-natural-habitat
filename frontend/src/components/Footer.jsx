@@ -5,8 +5,9 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                     <div className="col-span-1 md:col-span-2">
                         <h2 className="text-2xl font-bold mb-4">Birdz</h2>
-                        <div className="flex items-center mb-4">
-                            <span className="uppercase text-sm">Bird species classification</span>
+                        <div className="flex flex-col items-start mb-4">
+                            <span className="uppercase text-sm mb-2">Bird species classification</span>
+                            <p>Welcome to Birdz – a platform dedicated to identifying and classifying India's diverse bird species. Using advanced AI and machine learning, we provide accurate bird identification from uploaded images. Our easy-to-use platform features a growing database of Indian birds, offering enthusiasts and researchers an efficient way to discover and learn about the avian world. Join us in exploring and preserving India's rich birdlife with Birdz!</p>
                         </div>
                     </div>
                     <div>
