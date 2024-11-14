@@ -29,7 +29,6 @@ const Dropzone = ({ onDropZoneInputChange }) => {
     }, [filePreview]);
 
     const handleFileUpload = async (file) => {
-        console.log(process.env.BACKEND_URL);
         if (!file) return;
 
         setUploading(true);
