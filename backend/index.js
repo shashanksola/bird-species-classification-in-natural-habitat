@@ -18,9 +18,7 @@ const credentials = { key: privateKey, cert: certificate };
 const app = express();
 app.use(express.json());
 
-app.use(cors({
-  origin: ['http://localhost:5173', 'https://indian-bird-species.netlify.app'] // Allow specific origin
-}));
+app.use(cors());
 
 // Set up AWS S3 credentials
 const s3 = new AWS.S3({

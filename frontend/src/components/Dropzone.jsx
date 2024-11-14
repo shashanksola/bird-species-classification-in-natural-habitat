@@ -3,6 +3,8 @@ import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 import { DNA } from 'react-loader-spinner';
 
+const BACKEND_URL = "43.205.140.97";
+
 const Dropzone = ({ onDropZoneInputChange }) => {
     const [filePreview, setFilePreview] = useState(""); // Preview of the file
     const [uploading, setUploading] = useState(false); // Upload state
@@ -27,6 +29,7 @@ const Dropzone = ({ onDropZoneInputChange }) => {
     }, [filePreview]);
 
     const handleFileUpload = async (file) => {
+        console.log(process.env.BACKEND_URL);
         if (!file) return;
 
         setUploading(true);
@@ -36,7 +39,8 @@ const Dropzone = ({ onDropZoneInputChange }) => {
 
         try {
             // Call the backend API to upload the file to S3
-            const response = await axios.post('https://13.201.54.54/upload', formData, {
+
+            const response = await axios.post(`https://${BACKEND_URL}/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

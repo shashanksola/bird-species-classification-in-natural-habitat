@@ -2,9 +2,11 @@ import { useState } from "react";
 import Dropzone from "./Dropzone";
 import { DNA } from "react-loader-spinner";
 
+const BACKEND_URL = "43.205.140.97";
+
 async function validateBird(birdUrl) {
     try {
-        const response = await fetch('https://13.201.54.54/validate/', {
+        const response = await fetch(`https://${BACKEND_URL}/validate/`, {
             method: 'POST',
             body: JSON.stringify({ birdLink: birdUrl }),
             headers: { 'Content-Type': 'application/json; charset=UTF-8' },
@@ -25,7 +27,7 @@ async function validateBird(birdUrl) {
 
 async function classifyBird(birdUrl) {
     try {
-        const response = await fetch(`https://13.201.54.54/classify/`, {
+        const response = await fetch(`https://${BACKEND_URL}/classify/`, {
             method: 'POST',
             body: JSON.stringify({ birdLink: birdUrl }),
             headers: { 'Content-Type': 'application/json; charset=UTF-8' },
