@@ -2,11 +2,12 @@ import { useState } from "react";
 import Dropzone from "./Dropzone";
 import { DNA } from "react-loader-spinner";
 
-const BACKEND_URL = "localhost";
+const BACKEND_URL = "http://13.233.48.140";
+
 
 async function validateBird(birdUrl) {
     try {
-        const response = await fetch(`https://${BACKEND_URL}/validate/`, {
+        const response = await fetch(`${BACKEND_URL}/validate/`, {
             method: 'POST',
             body: JSON.stringify({ birdLink: birdUrl }),
             headers: { 'Content-Type': 'application/json; charset=UTF-8' },
