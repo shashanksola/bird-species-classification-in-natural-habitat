@@ -2,7 +2,7 @@ import { useState } from "react";
 import Dropzone from "./Dropzone";
 import { DNA } from "react-loader-spinner";
 
-const BACKEND_URL = "43.205.140.97";
+const BACKEND_URL = "localhost";
 
 async function validateBird(birdUrl) {
     try {
@@ -87,8 +87,25 @@ const BirdAction = () => {
 
     return (
         <div className="animate-slidein md:p-8 pt-8 min-h-screen bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/classify-bg.svg')] bg-cover" id="process">
-            <div className="rounded-md p-8 pt-16 flex flex-col items-center w-full md:flex-row justify-around bg-center bg-cover">
+            <div className="rounded-md p-8 pt-16 md:flex items-center w-full md:flex-row justify-around">
                 <Dropzone onDropZoneInputChange={onDropZoneInputChange} />
+                <div className="max-md:w-full max-md:mt-4 md:ml-8 w-[60%] rounded-md flex justify-center items-center h-[55vh] border bg-black bg-opacity-30 border-slate-100 p-2 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100">
+                    {error === null && result === null ? <p>Result displays here</p> : null}
+                    {error && <p className="mt-4 self-center text-red-600">Error: {error}</p>}
+                    {result && (
+                        <div className="text-white flex flex-col justify-center">
+                            {result.isBird !== undefined ? (
+                                <p className="mt-10 self-center">Validation Result: {result.isBird ? "Contains Bird" : "Doesn't contain any Bird"}</p>
+                            ) : (
+                                <div className="self-center mt-10 flex flex-col items-center w-full">
+                                    <p className="text-xl font-bold">Classification Result: {result.class}</p>
+                                    {result.s3ImageUrl ? <img src={result.s3ImageUrl} alt="classified-bird" className="mt-10" /> : null}
+                                    <p className="mt-10">Classes In Image: {result.classifiedBirds}</p>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
             </div>
             <div className="flex justify-center items-center p-12">
                 {loading ? (
@@ -106,32 +123,18 @@ const BirdAction = () => {
                             <button
                                 type="button"
                                 onClick={() => handleActionClick("validate")}
-                                className="hover:bg-slate-200 hover:text-slate-900 text-white font-bold py-2 px-4 mx-2 rounded border transition delay-100 w-[30vw]"
+                                className="hover:bg-slate-200 hover:text-slate-900 text-white font-bold py-2 px-4 mx-2 rounded border transition delay-100 max-md:w-[30vw] w-[20vw]"
                             >
                                 Validate
                             </button>
                             <button
                                 type="button"
                                 onClick={() => handleActionClick("classify")}
-                                className="hover:bg-slate-200 hover:text-slate-900 text-white font-bold py-2 px-4 mx-2 rounded border transition delay-100 w-[30vw]"
+                                className="hover:bg-slate-200 hover:text-slate-900 text-white font-bold py-2 px-4 mx-2 rounded border transition delay-100 mas-md:w-[30vw] w-[20vw]"
                             >
                                 Classify
                             </button>
                         </div>
-                        {error && <p className="mt-4 self-center" style={{ color: 'red' }}>Error: {error}</p>}
-                        {result && (
-                            <div className="text-white flex flex-col w-full justify-center">
-                                {result.isBird !== undefined ? (
-                                    <p className="mt-10 self-center">Validation Result: {result.isBird ? "Contains Bird" : "Doesn't contain any Bird"}</p>
-                                ) : (
-                                    <div className="self-center mt-10 flex flex-col items-center w-full">
-                                        <p className="text-xl font-bold">Classification Result: {result.class}</p>
-                                        {result.s3ImageUrl ? <img src={result.s3ImageUrl} alt="classified-bird" className="mt-10" /> : null}
-                                        <p className="mt-10">Classes In Image: {result.classifiedBirds}</p>
-                                    </div>
-                                )}
-                            </div>
-                        )}
                     </div>
                 )}
             </div>

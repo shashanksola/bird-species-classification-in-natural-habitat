@@ -4,9 +4,9 @@ import Marquee from 'react-fast-marquee'
 
 const MarqueSlider = () => {
     const scrollSpeed = 40;
-    return (<div className="max-sm:hidden py-12 bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/classift-invert-bg.svg')] bg-cover">
+    return (<div className="max-md:hidden -mt-60 py-12 bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/classift-invert-bg.svg')] bg-cover">
         <h1 className="text-xl font-bold mb-2">Explore Our Dataset</h1>
-        <Marquee speed={scrollSpeed} pauseOnClick={true}>
+        <Marquee speed={scrollSpeed} pauseOnHover={true}>
             <div className='flex justify-around w-screen'>
                 <div className="group bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/b1.jpg')] bg-cover text-white rounded-xl h-[40vh] w-[30vw] ml-2 max-lg:w-[250px]" >
                     <div className='group-hover:backdrop-blur-md p-4 rounded-xl opacity-0 group-hover:opacity-100' >
@@ -28,7 +28,7 @@ const MarqueSlider = () => {
                 </div >
             </div >
         </Marquee >
-        <Marquee direction='right' speed={scrollSpeed} className='mt-10' pauseOnClick={true}>
+        <Marquee direction='right' speed={scrollSpeed} className='mt-10' pauseOnHover={true}>
             <div className='flex justify-around w-screen'>
                 <div className="group bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/b4.jpg')] bg-cover text-white rounded-xl h-[40vh] w-[30vw] ml-2 max-lg:w-[250px]" >
                     < div className='group-hover:backdrop-blur-md p-4 rounded-xl opacity-0 group-hover:opacity-100' >

@@ -114,8 +114,8 @@ const Home = () => {
         <>
             <div className="bg-beige">
                 <Navbar />
-                <section className="h-dvh bg-cover bg-center flex flex-col p-40 max-md:p-8 bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/layered-steps-haikei.svg')]" style={{ marginTop: '-10px' }}>
-                    <h1 className="max-md:mt-20 text-6xl md:text-9xl font-sans font-extrabold text-white animate-slidein600">Find Your <br></br> <i className="text-white">Bird</i></h1>
+                <section className="max-md:h-[60vh] h-dvh bg-cover bg-center flex flex-col p-40 max-md:p-8 bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/layered-steps-haikei.svg')]" style={{ marginTop: '-10px' }}>
+                    <h1 className="text-nowrap max-md:mt-20 text-6xl md:text-9xl font-sans font-extrabold text-white animate-slidein600">Find Your <br></br> <i className="text-white">Bird</i></h1>
                     <button onClick={scrollToFindABird} className="animate-slidein900 max-md:w-1/2 mt-8 border p-4 border-white hover:bg-white hover:text-slate-900 rounded-md bg-transparent text-slate-50 w-1/4 hover:shadow-2xl transition delay-200 font-bold drop-shadow-sm">Validate & Classify</button>
                 </section >
 
