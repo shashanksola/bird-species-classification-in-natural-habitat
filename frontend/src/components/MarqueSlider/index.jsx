@@ -4,7 +4,7 @@ import Marquee from 'react-fast-marquee'
 
 const MarqueSlider = () => {
     const scrollSpeed = 40;
-    return (<div className="max-md:hidden -mt-60 py-12 bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/classift-invert-bg.svg')] bg-cover">
+    return (<div className="max-md:hidden -mt-52 py-12 bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/classift-invert-bg.svg')] bg-cover">
         <h1 className="text-xl font-bold mb-2">Explore Our Dataset</h1>
         <Marquee speed={scrollSpeed} pauseOnHover={true}>
             <div className='flex justify-around w-screen'>

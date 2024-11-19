@@ -87,7 +87,7 @@ const BirdAction = () => {
     };
 
     return (
-        <div className="animate-slidein md:p-8 pt-8 min-h-screen bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/classify-bg.svg')] bg-cover" id="process">
+        <div className="max-md:-mt-50 animate-slidein md:p-8 pt-8 min-h-screen bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/classify-bg.svg')] bg-cover" id="process">
             <div className="rounded-md p-8 pt-16 md:flex items-center w-full md:flex-row justify-around">
                 <Dropzone onDropZoneInputChange={onDropZoneInputChange} />
                 <div className="max-md:w-full max-md:mt-4 md:ml-8 w-[60%] rounded-md flex justify-center items-center h-[55vh] border bg-black bg-opacity-30 border-slate-100 p-2 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100 overflow-auto">
