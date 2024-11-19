@@ -114,7 +114,7 @@ const Home = () => {
         <>
             <div className="overflow-x-hidden">
 
-                <video autoPlay={true} loop={true} muted={true} src="https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/vid.mp4" className=" bg-black absolute -z-10 max-md:scale-y-[3] max-md:-mt-[250px] scale-y-150 w-auto min-w-full min-h-full lg:-mt-60"></video>
+                <video autoPlay={true} loop={true} muted={true} src="https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/vid.mp4" className=" bg-black absolute -z-10 max-md:scale-y-[3] max-md:-mt-[250px] scale-y-125 max-lg:scale-y-150 w-auto min-w-full min-h-full lg:-mt-96"></video>
 
                 <Navbar />
                 <section className="h-[100vh] bg-cover bg-center flex flex-col p-40 max-lg:p-8 max-lg:pt-36 bg-transparent" style={{ marginTop: '-10px' }}>
