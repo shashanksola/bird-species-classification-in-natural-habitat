@@ -28,7 +28,7 @@ async function validateBird(birdUrl) {
 
 async function classifyBird(birdUrl) {
     try {
-        const response = await fetch(`https://${BACKEND_URL}/classify/`, {
+        const response = await fetch(`${BACKEND_URL}/classify/`, {
             method: 'POST',
             body: JSON.stringify({ birdLink: birdUrl }),
             headers: { 'Content-Type': 'application/json; charset=UTF-8' },
