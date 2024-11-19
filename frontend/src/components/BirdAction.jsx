@@ -90,18 +90,18 @@ const BirdAction = () => {
         <div className="animate-slidein md:p-8 pt-8 min-h-screen bg-[url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/classify-bg.svg')] bg-cover" id="process">
             <div className="rounded-md p-8 pt-16 md:flex items-center w-full md:flex-row justify-around">
                 <Dropzone onDropZoneInputChange={onDropZoneInputChange} />
-                <div className="max-md:w-full max-md:mt-4 md:ml-8 w-[60%] rounded-md flex justify-center items-center h-[55vh] border bg-black bg-opacity-30 border-slate-100 p-2 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100">
+                <div className="max-md:w-full max-md:mt-4 md:ml-8 w-[60%] rounded-md flex justify-center items-center h-[55vh] border bg-black bg-opacity-30 border-slate-100 p-2 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100 overflow-auto">
                     {error === null && result === null ? <p>Result displays here</p> : null}
                     {error && <p className="mt-4 self-center text-red-600">Error: {error}</p>}
                     {result && (
                         <div className="text-white flex flex-col justify-center">
                             {result.isBird !== undefined ? (
-                                <p className="mt-10 self-center">Validation Result: {result.isBird ? "Contains Bird" : "Doesn't contain any Bird"}</p>
+                                <p className=" self-center">Validation Result: {result.isBird ? "Contains Bird" : "Doesn't contain any Bird"}</p>
                             ) : (
-                                <div className="self-center mt-10 flex flex-col items-center w-full">
+                                <div className="self-center flex flex-col items-center w-full">
                                     <p className="text-xl font-bold">Classification Result: {result.class}</p>
-                                    {result.s3ImageUrl ? <img src={result.s3ImageUrl} alt="classified-bird" className="mt-10" /> : null}
-                                    <p className="mt-10">Classes In Image: {result.classifiedBirds}</p>
+                                    {result.s3ImageUrl ? <img src={result.s3ImageUrl} alt="classified-bird" className="mt-2  w-[100%] h-[40vh]" /> : null}
+                                    <p className="mt-2">Classes In Image: {result.classifiedBirds}</p>
                                 </div>
                             )}
                         </div>

@@ -592,6 +592,10 @@ video {
   margin-right: auto;
 }
 
+.-mt-60 {
+  margin-top: -15rem;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -620,16 +624,8 @@ video {
   margin-top: 2rem;
 }
 
-.-mt-20 {
-  margin-top: -5rem;
-}
-
-.-mt-96 {
-  margin-top: -24rem;
-}
-
-.-mt-60 {
-  margin-top: -15rem;
+.mt-2 {
+  margin-top: 0.5rem;
 }
 
 .block {
@@ -650,6 +646,16 @@ video {
 
 .hidden {
   display: none;
+}
+
+.size-60 {
+  width: 15rem;
+  height: 15rem;
+}
+
+.size-72 {
+  width: 18rem;
+  height: 18rem;
 }
 
 .h-48 {
@@ -674,6 +680,27 @@ video {
 
 .h-dvh {
   height: 100dvh;
+}
+
+.h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.h-\[100\%\] {
+  height: 100%;
+}
+
+.h-\[70\%\] {
+  height: 70%;
+}
+
+.h-\[30\%\] {
+  height: 30%;
 }
 
 .min-h-28 {
@@ -714,6 +741,15 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.w-\[100\%\] {
+  width: 100%;
 }
 
 .max-w-7xl {
@@ -818,6 +854,10 @@ video {
 
 .self-center {
   align-self: center;
+}
+
+.overflow-auto {
+  overflow: auto;
 }
 
 .text-nowrap {
@@ -1130,10 +1170,6 @@ video {
     display: none;
   }
 
-  .max-md\:h-\[50vh\] {
-    height: 50vh;
-  }
-
   .max-md\:h-\[60vh\] {
     height: 60vh;
   }
@@ -1152,12 +1188,6 @@ video {
 
   .max-md\:p-8 {
     padding: 2rem;
-  }
-}
-
-@media not all and (min-width: 640px) {
-  .max-sm\:hidden {
-    display: none;
   }
 }
 
