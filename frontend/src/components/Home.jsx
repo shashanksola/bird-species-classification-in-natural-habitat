@@ -114,11 +114,11 @@ const Home = () => {
         <>
             <div className="overflow-x-hidden">
 
-                <video autoPlay={true} loop={true} muted={true} src="https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/vid.mp4" className=" bg-black absolute -z-10 max-md:scale-y-[3] max-md:-mt-[250px] scale-y-125 max-lg:scale-y-150 w-auto min-w-full min-h-full lg:-mt-96"></video>
+                <video autoPlay={true} loop={true} muted={true} src="https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/vid.mp4" className=" bg-black absolute -z-10 max-md:scale-y-[3] max-md:-mt-[250px] scale-y-125 max-lg:scale-y-150 w-auto min-w-full min-h-full lg:-mt-80"></video>
 
                 <Navbar />
                 <section className="h-[100vh] bg-cover bg-center flex flex-col p-40 max-lg:p-8 max-lg:pt-36 bg-transparent" style={{ marginTop: '-10px' }}>
-                    <h1 className="text-nowrap max-md:mt-20 text-6xl md:text-9xl font-sans font-extrabold text-white animate-slidein600">Find Your <br></br> <i className="text-white">Bird</i></h1>
+                    <h1 className="text-nowrap max-md:mt-20 text-6xl md:text-9xl font-sans font-extrabold text-sky-300 animate-slidein600">Find Your <br></br> <i className="text-white">Bird</i></h1>
                     <button onClick={scrollToFindABird} className="animate-slidein900 max-md:w-1/2 mt-8 border p-4 border-white hover:bg-white hover:text-slate-900 rounded-md bg-transparent text-slate-50 w-1/4 shadow-2xl transition delay-200 font-bold drop-shadow-sm">Validate & Classify</button>
                 </section >
 
