@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 import { DNA } from 'react-loader-spinner';
 
-const BACKEND_URL = "https://13.233.48.140";
+const BACKEND_URL = "https://abraz.online";
 
 const Dropzone = ({ onDropZoneInputChange }) => {
     const [filePreview, setFilePreview] = useState(""); // Preview of the file

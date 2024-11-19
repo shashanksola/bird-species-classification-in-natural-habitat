@@ -18,18 +18,6 @@ COPY package-lock.json package-lock.json
 COPY package.json package.json
 COPY .env .env
 
-# RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-# RUN export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-# RUN nvm install 20.18.0
-# RUN node -v && npm -v
-# RUN npm install
-# RUN npm i pm2
-# RUN pm2 start index.js
-
-# CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
-
-# Install NVM, Node.js, npm, and pm2 in a single RUN command
 ENV NVM_DIR=/root/.nvm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash && \
     . "$NVM_DIR/nvm.sh" && \
@@ -40,7 +28,7 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | b
     npm install
 
 COPY ssl/ ssl/
-# Start Node.js and Python apps
+RUN chmod 600 ssl/*
 
 EXPOSE 443
 

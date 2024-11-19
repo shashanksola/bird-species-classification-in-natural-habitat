@@ -2,7 +2,7 @@ import { useState } from "react";
 import Dropzone from "./Dropzone";
 import { DNA } from "react-loader-spinner";
 
-const BACKEND_URL = "https://13.233.48.140";
+const BACKEND_URL = "https://abraz.online";
 
 
 async function validateBird(birdUrl) {
