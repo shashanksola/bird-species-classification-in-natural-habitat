@@ -7,6 +7,7 @@ import cv2
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from tensorflow.keras.preprocessing import image
+from ultralytics import YOLO
 import matplotlib.pyplot as plt
 import io
 import aiohttp
@@ -14,11 +15,11 @@ import aiohttp
 # FastAPI app initialization
 app = FastAPI()
 
-# Load YOLOv5 for bird detection
-yolo_model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
+# Load YOLO model
+yolo_model = YOLO('yolov8x.pt')
 
 # Load your custom bird species classification model
-classification_model = tf.keras.models.load_model("New_bird_species_model.h5")
+classification_model = tf.keras.models.load_model("Model_V3_7525.h5")
 
 # Define the class names corresponding to your classification model
 class_names = ['Ashy crowned sparrow lark', 'Asian Openbill', 'Black-headed ibis', 'Crow', 'Eurasian Coot',
@@ -48,16 +49,15 @@ async def fetch_image_from_url(image_url: str):
 
 
 def preprocess_image_for_classification(cropped_img):
-    cropped_img = cropped_img.resize((300, 300))  # Resize to model input size
+    cropped_img = cropped_img.resize((224, 224))  # Resize to model input size
     img_array = image.img_to_array(cropped_img)
     img_array = np.expand_dims(img_array, axis=0)  # Expand dimensions
-    img_array /= 255.0  # Normalize pixel values
     return img_array
 
 # Draw text with a background
 
 
-def draw_text_with_background(draw, text, position, font_size=24):
+def draw_text_with_background(draw, text, position, font_size=48):
     try:
         font = ImageFont.truetype("arial.ttf", font_size)
     except:
@@ -86,19 +86,17 @@ async def predict_bird_in_image(data: ImageURL):
     # Fetch the image from the provided URL
     img = await fetch_image_from_url(data.image_url)
 
-    # Perform inference using YOLOv5 model
+    # Perform inference using YOLO model
     results = yolo_model(img)
 
     # Extract detected classes
-    detected_classes = results.pred[0][:, -1].cpu().numpy()
+    detected_classes = [det.boxes.cls.numpy()
+                        for det in results if det.boxes is not None]
 
     # Check if class 14 ("bird") is detected
-    if 14 in detected_classes:
-        result = True
-    else:
-        result = False
+    is_bird_detected = any(14 in cls for cls in detected_classes)
 
-    return {"isBird": result}
+    return {"isBird": is_bird_detected}
 
 # Route to accept an image URL and classify birds
 
@@ -111,43 +109,46 @@ async def classify_bird_in_image(data: ImageURL):
     # Convert to PIL image for further processing
     img_pil = Image.fromarray(img)
 
-    # Detect bird presence using YOLOv5
+    # Detect bird presence using YOLO
     results = yolo_model(img_pil)
-    detected_classes = results.pred[0][:, -1].cpu().numpy()
-
-    bird_count = sum(1 for c in detected_classes if c == 14)
-    if bird_count == 0:
-        return {"message": "No birds detected"}
-
-    # Create an image drawing object
-    draw = ImageDraw.Draw(img_pil)
-    boxes = results.xyxy[0].cpu().numpy()
-    classes = results.pred[0][:, -1].cpu().numpy()
+    classified_birds = []
     bird_class_index = 14
 
-    classified_birds = []
-    for i, (box, cls) in enumerate(zip(boxes, classes), 1):
-        if cls == bird_class_index:
-            # Draw bounding box
-            draw.rectangle([box[0], box[1], box[2], box[3]],
-                           outline=(255, 0, 0), width=5)
+    if results:
+        for det in results:
+            if det.boxes is not None:
+                boxes = det.boxes.xyxy.numpy()
+                classes = det.boxes.cls.numpy()
 
-            # Crop the bird region for classification
-            cropped_img = img_pil.crop((box[0], box[1], box[2], box[3]))
+                for box, cls in zip(boxes, classes):
+                    if cls == bird_class_index:
+                        # Draw bounding box
+                        draw = ImageDraw.Draw(img_pil)
+                        draw.rectangle([box[0], box[1], box[2], box[3]],
+                                       outline=(255, 0, 0), width=5)
 
-            # Classify the bird species
-            img_array = preprocess_image_for_classification(cropped_img)
-            predictions = classification_model.predict(img_array, verbose=0)
-            predicted_class_index = np.argmax(predictions, axis=1)
-            predicted_class_name = class_names[predicted_class_index[0]]
+                        # Crop the bird region for classification
+                        cropped_img = img_pil.crop(
+                            (box[0], box[1], box[2], box[3]))
 
-            # Add the predicted class name to the list
-            classified_birds.append(predicted_class_name)
+                        # Classify the bird species
+                        img_array = preprocess_image_for_classification(
+                            cropped_img)
+                        predictions = classification_model.predict(
+                            img_array, verbose=0)
+                        predicted_class_index = np.argmax(predictions, axis=1)
+                        predicted_class_name = class_names[predicted_class_index[0]]
 
-            # Add label above the bounding box
-            text_position = (int(box[0]), max(0, int(box[1] - 35)))
-            draw_text_with_background(
-                draw, predicted_class_name, text_position)
+                        # Add the predicted class name to the list
+                        classified_birds.append(predicted_class_name)
+
+                        # Add label above the bounding box
+                        text_position = (int(box[0]), max(0, int(box[1] - 35)))
+                        draw_text_with_background(
+                            draw, predicted_class_name, text_position)
+
+    if not classified_birds:
+        return {"message": "No birds detected"}
 
     # Save the processed image temporarily
     img_pil.save('classified_image.jpg')
