@@ -1,9 +1,17 @@
 import Home from './components/Home';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import Location from "./components/Location/App"
 const router = createBrowserRouter([{
   path: '/',
-  element: <Home />
+  element:
+ <Home />
+ 
+  
+ 
+},{
+  path:"/location",
+  element:<Location/>
 }
 ]);
 
