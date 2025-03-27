@@ -11,15 +11,15 @@ const BirdObservationsDisplay = ({ hotspots, observations }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 w-full">
+    <div className="w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-lg mb-8 bg-navy-800 border border-navy-700">
       {/* Tab Navigation */}
-      <div className="flex border-b border-green-200">
+      <div className="flex bg-navy-900 border-b border-navy-700">
         <button
           onClick={() => setSelectedTab("observations")}
-          className={`px-6 py-3 font-medium flex items-center gap-2 transition-colors ${
+          className={`px-6 py-3 font-medium flex items-center gap-2 transition-all duration-300 ${
             selectedTab === "observations"
-              ? "text-green-600 border-b-2 border-green-600"
-              : "text-gray-500 hover:text-green-600"
+              ? "bg-blue-600 text-white"
+              : "text-gray-400 hover:bg-navy-700"
           }`}
         >
           <Bird className="w-5 h-5" />
@@ -27,10 +27,10 @@ const BirdObservationsDisplay = ({ hotspots, observations }) => {
         </button>
         <button
           onClick={() => setSelectedTab("hotspots")}
-          className={`px-6 py-3 font-medium flex items-center gap-2 transition-colors ${
+          className={`px-6 py-3 font-medium flex items-center gap-2 transition-all duration-300 ${
             selectedTab === "hotspots"
-              ? "text-blue-600 border-b-2 border-blue-600"
-              : "text-gray-500 hover:text-blue-600"
+              ? "bg-blue-600 text-white"
+              : "text-gray-400 hover:bg-navy-700"
           }`}
         >
           <MapPin className="w-5 h-5" />
@@ -38,120 +38,123 @@ const BirdObservationsDisplay = ({ hotspots, observations }) => {
         </button>
       </div>
 
-      {/* Bird Observations Section */}
-      {selectedTab === "observations" && (
-        <section>
-          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-green-700">
-            <Bird className="text-green-600" />
-            Recent Bird Sightings
-          </h2>
-          {observations.length > 0 ? (
-            <div className="grid md:grid-cols-2 gap-4">
-              {observations.map((obs) => (
-                <div
-                  key={createUniqueKey(obs)}
-                  className="bg-gradient-to-br from-white to-green-50 rounded-lg shadow-md p-6 border border-green-100 hover:shadow-lg transition-shadow relative overflow-hidden group"
-                >
-                  {/* Decorative bird silhouette */}
-                  <div className="absolute top-2 right-2 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <Bird className="w-16 h-16 text-green-700" />
-                  </div>
-
-                  <div className="space-y-2 relative">
-                    <h3 className="text-lg font-semibold text-green-700">
-                      {obs.comName}
-                    </h3>
-                    <p className="text-sm text-gray-600 italic">
-                      {obs.sciName}
-                    </p>
-                    <div className="text-sm text-gray-600 space-y-1">
-                      <p className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-green-600" />
-                        {new Date(obs.obsDt).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
-                      </p>
-                      <p className="flex items-center gap-2">
-                        <Eye className="w-4 h-4 text-green-600" />
-                        Count: {obs.howMany || "Not specified"}
-                      </p>
-                      <p className="flex items-center gap-2 text-xs mt-1">
-                        <MapPin className="w-4 h-4 text-green-600" />
-                        {obs.locName}
-                      </p>
+      {/* Content Container */}
+      <div className="p-6 text-gray-100">
+        {/* Bird Observations Section */}
+        {selectedTab === "observations" && (
+          <section>
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 border-b pb-2 border-navy-700">
+              <Bird className="w-6 h-6 text-blue-400" />
+              Recent Bird Sightings
+            </h2>
+            {observations.length > 0 ? (
+              <div className="grid md:grid-cols-2 gap-6">
+                {observations.map((obs) => (
+                  <div
+                    key={createUniqueKey(obs)}
+                    className="bg-navy-900 rounded-xl border border-navy-700 overflow-hidden"
+                  >
+                    <div className="p-6 space-y-3">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h3 className="text-lg font-bold text-gray-100">
+                            {obs.comName}
+                          </h3>
+                          <p className="text-sm text-gray-400 italic">
+                            {obs.sciName}
+                          </p>
+                        </div>
+                        <Bird className="w-10 h-10 text-blue-400 opacity-50" />
+                      </div>
+                      <div className="text-sm text-gray-400 space-y-2">
+                        <p className="flex items-center gap-2">
+                          <Calendar className="w-4 h-4 text-blue-400" />
+                          {new Date(obs.obsDt).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </p>
+                        <p className="flex items-center gap-2">
+                          <Eye className="w-4 h-4 text-blue-400" />
+                          Count: {obs.howMany || "Not specified"}
+                        </p>
+                        <p className="flex items-center gap-2">
+                          <MapPin className="w-4 h-4 text-blue-400" />
+                          {obs.locName}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="bg-green-50 p-6 rounded-lg border border-green-100 text-center">
-              <p className="text-green-700">
-                No bird sightings found in this area. Try adjusting your search
-                radius or location.
-              </p>
-            </div>
-          )}
-        </section>
-      )}
+                ))}
+              </div>
+            ) : (
+              <div className="bg-navy-900 p-8 rounded-xl border border-navy-700 text-center">
+                <p className="text-gray-400 text-lg">
+                  No bird sightings found in this area. Try adjusting your search
+                  radius or location.
+                </p>
+              </div>
+            )}
+          </section>
+        )}
 
-      {/* Hotspots Section */}
-      {selectedTab === "hotspots" && (
-        <section>
-          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-blue-700">
-            <MapPin className="text-blue-600" />
-            Birding Hotspots
-          </h2>
-          {hotspots.length > 0 ? (
-            <div className="grid md:grid-cols-2 gap-4">
-              {hotspots.map((hotspot, index) => (
-                <div
-                  key={`${hotspot.locId}-${index}`}
-                  className="bg-gradient-to-br from-white to-blue-50 rounded-lg shadow-md p-6 border border-blue-100 hover:shadow-lg transition-shadow relative overflow-hidden group"
-                >
-                  {/* Decorative map pin silhouette */}
-                  <div className="absolute top-2 right-2 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <MapPin className="w-16 h-16 text-blue-700" />
-                  </div>
-
-                  <div className="space-y-2 relative">
-                    <h3 className="text-lg font-semibold text-blue-700">
-                      {hotspot.locName}
-                    </h3>
-                    <div className="text-sm text-gray-600 space-y-1">
-                      <p className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-blue-600" />
-                        {new Date(hotspot.date).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
-                      </p>
-                      <p className="flex items-center gap-2">
-                        <Info className="w-4 h-4 text-blue-600" />
-                        {hotspot.count} species observed
-                      </p>
-                      <p className="flex items-center gap-2 text-xs mt-1">
-                        <MapPin className="w-4 h-4 text-blue-600" />
-                        {hotspot.lat.toFixed(4)}, {hotspot.lng.toFixed(4)}
-                      </p>
+        {/* Hotspots Section */}
+        {selectedTab === "hotspots" && (
+          <section>
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 border-b pb-2 border-navy-700">
+              <MapPin className="w-6 h-6 text-blue-400" />
+              Birding Hotspots
+            </h2>
+            {hotspots.length > 0 ? (
+              <div className="grid md:grid-cols-2 gap-6">
+                {hotspots.map((hotspot, index) => (
+                  <div
+                    key={`${hotspot.locId}-${index}`}
+                    className="bg-navy-900 rounded-xl border border-navy-700 overflow-hidden"
+                  >
+                    <div className="p-6 space-y-3">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h3 className="text-lg font-bold text-gray-100">
+                            {hotspot.locName}
+                          </h3>
+                        </div>
+                        <MapPin className="w-10 h-10 text-blue-400 opacity-50" />
+                      </div>
+                      <div className="text-sm text-gray-400 space-y-2">
+                        <p className="flex items-center gap-2">
+                          <Calendar className="w-4 h-4 text-blue-400" />
+                          {new Date(hotspot.date).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </p>
+                        <p className="flex items-center gap-2">
+                          <Info className="w-4 h-4 text-blue-400" />
+                          {hotspot.count} species observed
+                        </p>
+                        <p className="flex items-center gap-2">
+                          <MapPin className="w-4 h-4 text-blue-400" />
+                          {hotspot.lat.toFixed(4)}, {hotspot.lng.toFixed(4)}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="bg-blue-50 p-6 rounded-lg border border-blue-100 text-center">
-              <p className="text-blue-700">
-                No birding hotspots found in this area. Try adjusting your search
-                radius or location.
-              </p>
-            </div>
-          )}
-        </section>
-      )}
+                ))}
+              </div>
+            ) : (
+              <div className="bg-navy-900 p-8 rounded-xl border border-navy-700 text-center">
+                <p className="text-gray-400 text-lg">
+                  No birding hotspots found in this area. Try adjusting your
+                  search radius or location.
+                </p>
+              </div>
+            )}
+          </section>
+        )}
+      </div>
     </div>
   );
 };

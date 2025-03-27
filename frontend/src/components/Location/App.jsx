@@ -223,149 +223,147 @@ const Location = () => {
   };
   
   return (
-    <div>
-<Navbar/>
-<div className="min-h-screen bg-gradient-to-b from-blue-50 via-green-50 to-blue-50">
-      <div className="container mx-auto py-8 px-4">
-        <header className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-green-800 mb-4 flex items-center justify-center gap-3">
-            <Bird className="text-green-600 w-10 h-10" />
-            BirdWatch Explorer
-          </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Discover bird species in your area, find popular birding hotspots,
-            and track your sightings with our interactive map.
-          </p>
-        </header>
-  
-        {/* Location Search */}
-        <div className="max-w-4xl mx-auto mb-6 p-4 bg-white rounded-lg shadow-md border border-green-100">
-          <form onSubmit={handleSearchSubmit} className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Search for a Location
-            </label>
-            <div className="flex items-center gap-2">
-              <div className="relative flex-grow">
-                <input
-                  type="text"
-                  placeholder="City, State, Country or Address"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:border-green-400 outline-none"
-                />
-                {searchLoading && (
-                  <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-600 animate-spin" />
-                )}
-                
-                {/* Search Results Dropdown */}
-                {searchResults.length > 0 && (
-                  <div className="absolute z-50 mt-1 w-full bg-white rounded-md shadow-lg border border-gray-200 max-h-60 overflow-y-auto">
-                    {searchResults.map((result, index) => (
-                      <button
-                        key={`${result.place_id}-${index}`}
-                        type="button"
-                        onClick={() => handleLocationSelect(result)}
-                        className="w-full text-left px-4 py-2 text-sm hover:bg-green-50 border-b border-gray-100 last:border-0"
-                      >
-                        {result.display_name}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow transition-colors duration-200 flex items-center justify-center"
-              >
-                <Search className="w-5 h-5" />
-              </button>
+    <div className="bg-black text-slate-50 min-h-screen">
+    <Navbar />
+    <div className="container mx-auto py-8 px-4">
+      <header className="text-center mb-10">
+        <h1 className="text-4xl font-bold text-slate-50 mb-4 flex items-center justify-center gap-3">
+          <Bird className="w-10 h-10" />
+          BirdWatch Explorer
+        </h1>
+        <p className="text-slate-300 max-w-2xl mx-auto">
+          Discover bird species in your area, find popular birding hotspots,
+          and track your sightings with our interactive map.
+        </p>
+      </header>
+
+      {/* Location Search */}
+      <div className="max-w-4xl mx-auto mb-6 p-4 bg-black bg-opacity-30 rounded-lg border border-slate-100 hover:backdrop-blur-md transition delay-100">
+        <form onSubmit={handleSearchSubmit} className="mb-4">
+          <label className="block text-sm font-medium text-slate-300 mb-1">
+            Search for a Location
+          </label>
+          <div className="flex items-center gap-2">
+            <div className="relative flex-grow">
+              <input
+                type="text"
+                placeholder="City, State, Country or Address"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-4 py-2 bg-black bg-opacity-30 border border-slate-100 rounded-lg focus:ring-2 focus:ring-slate-400 text-slate-50 placeholder-slate-400 outline-none"
+              />
+              {searchLoading && (
+                <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-300 animate-spin" />
+              )}
+              
+              {/* Search Results Dropdown */}
+              {searchResults.length > 0 && (
+                <div className="absolute z-50 mt-1 w-full bg-black bg-opacity-50 rounded-md shadow-lg border border-slate-100 max-h-60 overflow-y-auto">
+                  {searchResults.map((result, index) => (
+                    <button
+                      key={`${result.place_id}-${index}`}
+                      type="button"
+                      onClick={() => handleLocationSelect(result)}
+                      className="w-full text-left px-4 py-2 text-sm hover:bg-slate-700 border-b border-slate-100 last:border-0 text-slate-50"
+                    >
+                      {result.display_name}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
-          </form>
-          
-          {/* Currently selected location */}
-          {selectedSearchResult && (
-            <div className="text-sm text-gray-600 bg-green-50 p-2 rounded-lg flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-green-600 flex-shrink-0" />
-              <span className="truncate">Current location: {selectedSearchResult}</span>
-            </div>
-          )}
-  
-          <div className="flex flex-col md:flex-row gap-4 items-center mt-4">
-            <div className="w-full md:w-1/2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Search Radius (km)
-              </label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="range"
-                  min="5"
-                  max="50"
-                  value={searchRadius}
-                  onChange={(e) => setSearchRadius(Number(e.target.value))}
-                  className="w-full h-2 bg-green-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <span className="text-green-800 font-medium">
-                  {searchRadius}
-                </span>
-              </div>
-            </div>
-  
             <button
-              className="w-full md:w-auto px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow transition-colors duration-200 flex items-center justify-center gap-2"
-              onClick={handleLocateMe}
-              type="button"
+              type="submit"
+              className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-50 font-medium rounded-lg shadow transition-colors duration-200 flex items-center justify-center"
             >
-              <MapPin className="w-5 h-5" />
-              Find Birds Near Me
+              <Search className="w-5 h-5" />
             </button>
           </div>
+        </form>
+        
+        {/* Currently selected location */}
+        {selectedSearchResult && (
+          <div className="text-sm text-slate-300 bg-black bg-opacity-30 p-2 rounded-lg flex items-center gap-2 border border-slate-100">
+            <MapPin className="w-4 h-4 text-slate-300 flex-shrink-0" />
+            <span className="truncate">Current location: {selectedSearchResult}</span>
+          </div>
+        )}
+
+        <div className="flex flex-col md:flex-row gap-4 items-center mt-4">
+          <div className="w-full md:w-1/2">
+            <label className="block text-sm font-medium text-slate-300 mb-1">
+              Search Radius (km)
+            </label>
+            <div className="flex items-center gap-2">
+              <input
+                type="range"
+                min="5"
+                max="50"
+                value={searchRadius}
+                onChange={(e) => setSearchRadius(Number(e.target.value))}
+                className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer"
+              />
+              <span className="text-slate-50 font-medium">
+                {searchRadius}
+              </span>
+            </div>
+          </div>
+
+          <button
+            className="w-full md:w-auto px-6 py-2.5 bg-slate-700 hover:bg-slate-600 text-slate-50 font-medium rounded-lg shadow transition-colors duration-200 flex items-center justify-center gap-2"
+            onClick={handleLocateMe}
+            type="button"
+          >
+            <MapPin className="w-5 h-5" />
+            Find Birds Near Me
+          </button>
         </div>
-  
-        {/* Map Component */}
-        <MapComponent 
-          center={center} 
-          zoom={zoom} 
-          searchRadius={searchRadius}
-        />
-  
-        {/* Search Radius Visualization */}
-        <div className="max-w-4xl mx-auto mb-8 flex items-center justify-center">
-          <div className="bg-white px-4 py-2 rounded-full shadow-sm border border-green-100 text-sm text-gray-600 flex items-center gap-2">
-            <Search className="w-4 h-4 text-green-600" />
-            Searching within {searchRadius}km radius of selected location
-          </div>
-        </div>
-  
-        {/* Loading and Error States */}
-        {loading && (
-          <div className="flex items-center justify-center gap-2 text-green-600 mb-8">
-            <Loader2 className="w-6 h-6 animate-spin" />
-            <span>Searching for birds in your area...</span>
-          </div>
-        )}
-        {error && (
-          <div className="max-w-4xl mx-auto text-red-500 mb-8 p-4 bg-red-50 rounded-lg border border-red-200">
-            {error}
-          </div>
-        )}
-  
-        {/* Results Section */}
-        {!loading && !error && (
-          <div className="rounded-xl bg-white shadow-lg p-6 border border-green-100">
-            <BirdObservationsDisplay
-              hotspots={hotspots}
-              observations={birdData}
-            />
-          </div>
-        )}
-  
-        {/* Footer */}
-        <footer className="mt-16 text-center text-gray-500 text-sm">
-          <p>© {new Date().getFullYear()} BirdWatch Explorer. Explore, discover, and enjoy nature!</p>
-        </footer>
       </div>
+
+      {/* Map Component */}
+      <MapComponent 
+        center={center} 
+        zoom={zoom} 
+        searchRadius={searchRadius}
+      />
+
+      {/* Search Radius Visualization */}
+      <div className="max-w-4xl mx-auto mb-8 flex items-center justify-center">
+        <div className="bg-black bg-opacity-30 px-4 py-2 rounded-full border border-slate-100 text-sm text-slate-300 flex items-center gap-2">
+          <Search className="w-4 h-4 text-slate-300" />
+          Searching within {searchRadius}km radius of selected location
+        </div>
+      </div>
+
+      {/* Loading and Error States */}
+      {loading && (
+        <div className="flex items-center justify-center gap-2 text-slate-300 mb-8">
+          <Loader2 className="w-6 h-6 animate-spin" />
+          <span>Searching for birds in your area...</span>
+        </div>
+      )}
+      {error && (
+        <div className="max-w-4xl mx-auto text-red-400 mb-8 p-4 bg-black bg-opacity-30 rounded-lg border border-red-600">
+          {error}
+        </div>
+      )}
+
+      {/* Results Section */}
+      {!loading && !error && (
+        <div className="rounded-xl bg-black bg-opacity-30 border border-slate-100 hover:backdrop-blur-md transition delay-100 p-6">
+          <BirdObservationsDisplay
+            hotspots={hotspots}
+            observations={birdData}
+          />
+        </div>
+      )}
+
+      {/* Footer */}
+      <footer className="mt-16 text-center text-slate-500 text-sm">
+        <p>© {new Date().getFullYear()} BirdWatch Explorer. Explore, discover, and enjoy nature!</p>
+      </footer>
     </div>
-    </div>
+  </div>
   
   );
 };
