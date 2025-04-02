@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Dropzone from "./Dropzone";
 import { DNA } from "react-loader-spinner";
+import { useTranslation } from "react-i18next";
 
 const BACKEND_URL = "https://abraz.online";
 
@@ -48,6 +49,7 @@ async function classifyBird(birdUrl) {
 }
 
 const BirdAction = () => {
+    const{t}=useTranslation()
     const [birdUrl, setBirdUrl] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -91,17 +93,17 @@ const BirdAction = () => {
             <div className="rounded-md p-8 pt-16 md:flex items-center w-full md:flex-row justify-around">
                 <Dropzone onDropZoneInputChange={onDropZoneInputChange} />
                 <div className="max-md:w-full max-md:mt-4 md:ml-8 w-[60%] rounded-md flex justify-center items-center h-[55vh] border bg-black bg-opacity-30 border-slate-100 p-2 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100 overflow-auto">
-                    {error === null && result === null ? <p>Result displays here</p> : null}
-                    {error && <p className="mt-4 self-center text-red-600">Error: {error}</p>}
+                    {error === null && result === null ? <p>{t('birdAction.resultPlaceholder')}</p> : null}
+                    {error && <p className="mt-4 self-center text-red-600">{t('birdAction.errorPrefix')} {error}</p>}
                     {result && (
                         <div className="text-white flex flex-col justify-center">
                             {result.isBird !== undefined ? (
-                                <p className=" self-center">Validation Result: {result.isBird ? "Contains Bird" : "Doesn't contain any Bird"}</p>
+                                <p className=" self-center">{t('birdAction.ValidationResult')} {result.isBird ? "Contains Bird" : "Doesn't contain any Bird"}</p>
                             ) : (
                                 <div className="self-center flex flex-col items-center w-full">
-                                    <p className="text-xl font-bold">Classification Result: {result.class}</p>
+                                    <p className="text-xl font-bold">{t('birdAction.classificationResult')} {result.class}</p>
                                     {result.s3ImageUrl ? <img src={result.s3ImageUrl} alt="classified-bird" className="mt-2  w-[100%] h-[40vh]" /> : null}
-                                    <p className="mt-2">Classes In Image: {result.classifiedBirds}</p>
+                                    <p className="mt-2">{t('birdAction.classesInImage')} {result.classifiedBirds}</p>
                                 </div>
                             )}
                         </div>
@@ -126,14 +128,14 @@ const BirdAction = () => {
                                 onClick={() => handleActionClick("validate")}
                                 className="hover:bg-slate-200 hover:text-slate-900 text-white font-bold py-2 px-4 mx-2 rounded border transition delay-100 max-md:w-[30vw] w-[20vw]"
                             >
-                                Validate
+                             {t('birdAction.validateButton')}
                             </button>
                             <button
                                 type="button"
                                 onClick={() => handleActionClick("classify")}
                                 className="hover:bg-slate-200 hover:text-slate-900 text-white font-bold py-2 px-4 mx-2 rounded border transition delay-100 mas-md:w-[30vw] w-[20vw]"
                             >
-                                Classify
+                               {t('birdAction.classifyButton')}
                             </button>
                         </div>
                     </div>

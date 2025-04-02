@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 import { DNA } from 'react-loader-spinner';
+import { useTranslation } from 'react-i18next';
 
 const BACKEND_URL = "https://abraz.online";
 
@@ -56,7 +57,7 @@ const Dropzone = ({ onDropZoneInputChange }) => {
             setUploading(false);
         }
     };
-
+const {t }=useTranslation()
     return (
         <section className='flex justify-center flex-col'>
             <div
@@ -65,7 +66,7 @@ const Dropzone = ({ onDropZoneInputChange }) => {
                 })}
             >
                 <input {...getInputProps()} />
-                <p>Drag 'n' drop an image here, or click to select an image</p>
+                <p>{t('drop.input')}</p>
             </div>
 
             <aside className="h-[30vh] rounded-md mt-4 flex justify-center min-h-28 border bg-black bg-opacity-30 border-slate-100 p-2 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100">

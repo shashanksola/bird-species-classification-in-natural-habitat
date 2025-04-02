@@ -322,14 +322,16 @@ const Location = () => {
             </div>
 
             <button
-              className="w-full md:w-auto px-6 py-2.5 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
-              onClick={handleLocateMe}
+              className="w-full md:w-auto px-6 py-2.5 bg-gray-800 hover:bg-gray-700 font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+             
               type="button"
             >
               <MapPin className="w-5 h-5" />
-              Find Birds Near Me
+            <span className="text-blue-950"> Find Birds Near Me</span> 
             </button>
+           
           </div>
+          
         </div>
 
         <MapComponent 
