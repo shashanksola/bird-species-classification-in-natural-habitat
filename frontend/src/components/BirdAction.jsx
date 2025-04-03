@@ -3,7 +3,8 @@ import Dropzone from "./Dropzone";
 import { DNA } from "react-loader-spinner";
 import { useTranslation } from "react-i18next";
 
-const BACKEND_URL = "https://abraz.online";
+const BACKEND_URL = "https://mytownly.in";
+//const BACKEND_URL = "https://localhost:443";
 
 
 async function validateBird(birdUrl) {

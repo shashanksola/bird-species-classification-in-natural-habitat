@@ -4,7 +4,8 @@ import axios from 'axios';
 import { DNA } from 'react-loader-spinner';
 import { useTranslation } from 'react-i18next';
 
-const BACKEND_URL = "https://abraz.online";
+const BACKEND_URL = "https://mytownly.in";
+//const BACKEND_URL = "https://localhost:443";
 
 const Dropzone = ({ onDropZoneInputChange }) => {
     const [filePreview, setFilePreview] = useState(""); // Preview of the file
