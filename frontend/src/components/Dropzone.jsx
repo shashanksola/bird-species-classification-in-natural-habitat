@@ -4,7 +4,9 @@ import axios from 'axios';
 import { DNA } from 'react-loader-spinner';
 import { useTranslation } from 'react-i18next';
 
-const BACKEND_URL = "https://abraz.online";
+const BACKEND_URL = window.location.hostname === "localhost"
+  ? "http://localhost:3000"
+  : "https://abraz.online";
 
 const Dropzone = ({ onDropZoneInputChange }) => {
     const [filePreview, setFilePreview] = useState(""); // Preview of the file
