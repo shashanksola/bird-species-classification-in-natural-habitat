@@ -2,12 +2,8 @@ import { useState } from "react";
 import Dropzone from "./Dropzone";
 import { DNA } from "react-loader-spinner";
 import { useTranslation } from "react-i18next";
-const BACKEND_URL = window.location.hostname === "localhost"
-  ? "http://localhost:3000"
-  : "https://abraz.online";
 
-
-
+const BACKEND_URL = "https://abraz.online";
 
 
 async function validateBird(birdUrl) {
