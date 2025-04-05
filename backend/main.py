@@ -136,13 +136,25 @@ async def bayesian_classify_image(data: ImageURL):
     for pred in top_2_predictions:
         print(f"{pred['class']}: {pred['probability']:.4f}")
 
+    idx_1 = class_names.index(top_2_predictions[0]["class"])
+    idx_2 = class_names.index(top_2_predictions[1]["class"])
+
+    images = []
+
+    for i in range(1, 4):
+        images.append(
+            "https://bird-species.s3.ap-south-1.amazonaws.com/output_folder/{index}_{sub}.JPG".format(index=idx_1, sub=i))
+        images.append(
+            "https://bird-species.s3.ap-south-1.amazonaws.com/output_folder/{index}_{sub}.JPG".format(index=idx_2, sub=i))
+
     return {
         "classIndex": int(predicted_class_index),
         "className": predicted_class_name,
         "topPrediction1_class": top_2_predictions[0]["class"],
         "topPrediction1_probability": float(top_2_predictions[0]["probability"]),
         "topPrediction2_class": top_2_predictions[1]["class"],
-        "topPrediction2_probability": float(top_2_predictions[1]["probability"])
+        "topPrediction2_probability": float(top_2_predictions[1]["probability"]),
+        "images": images
     }
 
 
