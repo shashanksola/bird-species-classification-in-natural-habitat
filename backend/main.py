@@ -26,11 +26,22 @@ class_names = ['Ashy crowned sparrow lark', 'Asian Openbill', 'Black-headed ibis
                'Indian Roller', 'Large-billed Crow', 'Little Cormorant', 'Paddyfield pipit', 'Painted Stork',
                'Red-wattled lapwing', 'Spot-billed Pelican', 'White-breasted Waterhen', 'Yellow wattled lapwing']
 
+class_names_extended = class_names + ['None']
+
 # Define a request body model for image URL
 
 
 class ImageURL(BaseModel):
     image_url: str
+
+
+class PredictionRequest(BaseModel):
+    image_url: str
+    selected_class1_name: str
+    selected_class2_name: str
+    selected_class1_value: int
+    selected_class2_value: int
+
 
 # Helper function to fetch image from a URL
 
@@ -52,6 +63,14 @@ def preprocess_image_for_classification(cropped_img):
     cropped_img = cropped_img.resize((224, 224))  # Resize to model input size
     img_array = image.img_to_array(cropped_img)
     img_array = np.expand_dims(img_array, axis=0)  # Expand dimensions
+    return img_array
+
+
+def preprocess_image(img_np):
+    img = Image.fromarray(img_np).convert('RGB')
+    img = img.resize((224, 224))
+    img_array = image.img_to_array(img)
+    img_array = np.expand_dims(img_array, axis=0)
     return img_array
 
 # Draw text with a background
@@ -79,6 +98,122 @@ def draw_text_with_background(draw, text, position, font_size=48):
     draw.text(position, text, fill='white', font=font)
 
 # Route to accept an image URL and predict bird presence
+
+
+def bayesian_update(prior_probs, likelihoods):
+    numerators = likelihoods * prior_probs
+    denominator = np.sum(numerators)
+    if denominator == 0:
+        return np.zeros_like(numerators)
+    return numerators / denominator
+
+
+@app.post("/get-probabilities/")
+async def bayesian_classify_image(data: ImageURL):
+    img = await fetch_image_from_url(data.image_url)
+
+    img_array = preprocess_image(img)
+
+    predictions = classification_model.predict(img_array)
+
+    predicted_class_index = np.argmax(predictions, axis=1)[0]
+    predicted_class_name = class_names[predicted_class_index]
+
+    print(f"Predicted class index: {predicted_class_index}")
+    print(f"Predicted class name: {predicted_class_name}\n")
+
+    print("Initial Prediction Probabilities:")
+    for i, prob in enumerate(predictions[0]):
+        print(f"{class_names[i]}: {prob:.4f}")
+
+    top_2_indices = np.argsort(predictions[0])[-2:][::-1]
+    top_2_predictions = [
+        {"class": class_names[i], "probability": predictions[0][i]}
+        for i in top_2_indices
+    ]
+
+    print("\nTop 2 Predictions:")
+    for pred in top_2_predictions:
+        print(f"{pred['class']}: {pred['probability']:.4f}")
+
+    idx_1 = class_names.index(top_2_predictions[0]["class"])
+    idx_2 = class_names.index(top_2_predictions[1]["class"])
+
+    images = []
+
+    for i in range(1, 4):
+        images.append(
+            "https://bird-species.s3.ap-south-1.amazonaws.com/output_folder/{index}_{sub}.JPG".format(index=idx_1, sub=i))
+        images.append(
+            "https://bird-species.s3.ap-south-1.amazonaws.com/output_folder/{index}_{sub}.JPG".format(index=idx_2, sub=i))
+
+    return {
+        "classIndex": int(predicted_class_index),
+        "className": predicted_class_name,
+        "topPrediction1_class": top_2_predictions[0]["class"],
+        "topPrediction1_probability": float(top_2_predictions[0]["probability"]),
+        "topPrediction2_class": top_2_predictions[1]["class"],
+        "topPrediction2_probability": float(top_2_predictions[1]["probability"]),
+        "images": images
+    }
+
+
+@app.post("/get-adjusted-predictions/")
+async def get_adjusted_predictions(data: PredictionRequest):
+    user_selected_classes = {
+        data.selected_class1_name: data.selected_class1_value,
+        data.selected_class2_name: data.selected_class2_value
+    }
+
+    img = await fetch_image_from_url(data.image_url)
+    img_array = preprocess_image(img)
+
+    predictions = classification_model.predict(img_array)
+    prior_probs = predictions[0]
+
+    prior_probs = np.append(prior_probs, 0.0)
+
+    initial_class_index = int(np.argmax(prior_probs))
+    initial_class_name = class_names_extended[initial_class_index]
+
+    likelihoods = np.ones_like(prior_probs)
+    if 'None' in user_selected_classes:
+        final_class_name = 'None'
+        posterior_probs = prior_probs
+
+        return {"message": "Not in dataset"}
+    else:
+        likelihoods = np.zeros_like(prior_probs)
+        total_selected = sum(user_selected_classes.values())
+
+        for class_name, count in user_selected_classes.items():
+            if class_name in class_names_extended:
+                index = class_names_extended.index(class_name)
+                likelihoods[index] = count / total_selected
+
+        posterior_probs = bayesian_update(prior_probs, likelihoods)
+        final_class_index = int(np.argmax(posterior_probs))
+        final_class_name = class_names_extended[final_class_index]
+
+    return {
+        "initial_prediction": {
+            "class": initial_class_name,
+            "probability": float(prior_probs[initial_class_index])
+        },
+        "final_prediction": {
+            "class": final_class_name,
+            "probability": float(posterior_probs[final_class_index])
+        },
+        "prior_probabilities": {
+            class_names_extended[i]: float(prior_probs[i])
+            for i in range(len(class_names_extended))
+        },
+        "posterior_probabilities": {
+            class_names_extended[i]: float(posterior_probs[i])
+            for i in range(len(class_names_extended))
+        },
+        "user_selected_classes": user_selected_classes
+    }
 
 
 @app.post("/predict/")
