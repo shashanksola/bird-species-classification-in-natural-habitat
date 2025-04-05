@@ -148,6 +148,58 @@ app.post("/classify", async (req, res) => {
   }
 });
 
+app.post('/get-probabilities', async (req, res) => {
+
+  const { birdLink } = req.body;
+  if (!birdLink) {
+    return res.status(400).json({ error: "No image URL provided" });
+  }
+
+  try {
+    const response = await axios.post(`${process.env.PYTHON_API}get-probabilities/`, {
+      image_url: birdLink,
+    });
+
+    console.log(response);
+    res.status(200).json({ data: response.data });
+  } catch (e) {
+    console.error("Error during calculating probabilities: ");
+    res.status(500).json({ error: "Calculating Probabilitis failed" });
+  }
+})
+
+app.post('/get-adjusted-predictions', async (req, res) => {
+
+  console.log(req.body);
+  const {
+    birdLink,
+    selected_class1_name,
+    selected_class2_name,
+    selected_class1_value,
+    selected_class2_value
+  } = req.body;
+  if (!birdLink) {
+    return res.status(400).json({ error: "No image URL provided" });
+  }
+
+  try {
+    const response = await axios.post(`${process.env.PYTHON_API}get-adjusted-predictions/`, {
+      image_url: birdLink,
+      selected_class1_name,
+      selected_class2_name,
+      selected_class1_value,
+      selected_class2_value
+    });
+
+    console.log(response.data);
+    res.status(200).json({ data: response.data });
+  } catch (e) {
+    console.error("Error during calculating probabilities: ");
+    res.status(500).json({ error: "Calculating Probabilitis failed" });
+  }
+})
+
+
 // Default route
 app.get("/", (req, res) => {
   res.send("The server is running securely over HTTPS");
