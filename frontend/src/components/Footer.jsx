@@ -12,6 +12,7 @@ export default function Footer() {
                         <h2 className="text-2xl font-bold mb-4">{t('footer.title')}</h2>
                         <div className="flex flex-col items-start mb-4">
                             <span className="uppercase text-sm mb-2">{t('footer.description')}</span>
+                            <span href="" className="uppercase text-sm mb-2">Try Our Bot</span>
                         </div>
                     </div>
                     <div>

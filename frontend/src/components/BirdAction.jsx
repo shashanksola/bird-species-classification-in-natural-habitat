@@ -113,7 +113,7 @@ const ImageGrid = ({ probabilities, selectedImages, onImageSelect, onSubmitSelec
 
             {/* 2-column grid with larger images */}
             <div className="mb-4 flex justify-center">
-                <div className="grid grid-cols-2 gap-4 place-items-center">
+                <div className="grid grid-cols-2 gap-4 place-items-center w-80 h-50">
                     {visibleImages.slice(0, 6).map((img, idx) => {
                         const correctedUrl = img.replace(/\.JPG$/i, '.jpg');
                         const isSelected = selectedImages.includes(img);
@@ -175,13 +175,13 @@ const ImageGrid = ({ probabilities, selectedImages, onImageSelect, onSubmitSelec
             </div>
 
             {/* Progress indicator */}
-            <div className="w-full bg-gray-700 h-2 rounded-full mb-4 overflow-hidden">
-                <div
-                    className="bg-yellow-400 h-full transition-all duration-300 ease-out"
-                    style={{ width: `${(selectedImages.length / 3) * 100}%` }}
-                />
-            </div>
-
+           {/* Progress indicator */}
+<div className="w-full bg-gray-700 h-2 rounded-full mb-4 overflow-hidden">
+    <div
+        className="bg-yellow-400 h-full transition-all duration-300 ease-out"
+        style={{ width: `${(selectedImages.length / 3) * 100}%` }}
+    />
+</div>
             {/* Action buttons */}
             <div className="flex items-center justify-center gap-4">
                 <button
@@ -265,12 +265,17 @@ const BirdAction = () => {
                 classCounts[probabilities.topPrediction2_class] || 0
             );
             console.log("after adjusted")
-    console.log(adjusted)
+            console.log(adjusted)
+            console.log("before conversion")
+            console.log(birdUrl)
+            const cbirdUrl=correctImageUrl(birdUrl);
             setResult({
-                class: adjusted.final_prediction.class,
+                ...adjusted,
                 s3ImageUrl: birdUrl,
                 classifiedBirds: adjusted.final_prediction.class
             });
+            console.log("after conversion")
+            console.log(cbirdUrl)
             setProbabilities(null);
         } catch (err) {
             setError(err.message);
@@ -352,7 +357,6 @@ const BirdAction = () => {
                                 </p>
                             ) : (
                                 <div className="self-center flex flex-col items-center w-full">
-                                   
                                     {result.s3ImageUrl && (
                                         <div className="w-64 h-64 mt-2">
                                             <img
@@ -366,9 +370,31 @@ const BirdAction = () => {
                                             />
                                         </div>
                                     )}
-                                    <p className="mt-2 text-center">
-                                        {t('birdAction.classesInImage')} {result.classifiedBirds}
-                                    </p>
+                                    {result.initial_prediction && result.final_prediction ? (
+                                       <div className="mt-6 text-center flex  justify-center items-stretch gap-4 w-full">
+                                       <div className="bg-gray-800 rounded-lg p-4 flex-1 border-l-4 border-yellow-400 shadow-md hover:shadow-yellow-400/20 transition-all duration-300">
+                                           <p className="font-bold text-lg mb-2 text-white">Model Prediction: {result.initial_prediction.class}</p>
+                                          
+                                           {/* Uncomment if you want to show probability
+                                           <p className="text-white text-sm mt-1 opacity-80">
+                                               ({(result.initial_prediction.probability * 100).toFixed(2)}% confidence)
+                                           </p> */}
+                                       </div>
+                                       
+                                       <div className="bg-gray-800 rounded-lg p-4 flex-1 border-l-4 border-green-400 shadow-md hover:shadow-green-400/20 transition-all duration-300">
+                                           <p className="font-bold text-lg mb-2 text-white">User Prediction: {result.final_prediction.class}</p>
+                                           
+                                           {/* Uncomment if you want to show probability
+                                           <p className="text-white text-sm mt-1 opacity-80">
+                                               ({(result.final_prediction.probability * 100).toFixed(2)}% confidence)
+                                           </p> */}
+                                       </div>
+                                   </div>
+                                    ) : (
+                                        <p className="mt-2 text-center">
+                                            {result.classifiedBirds}
+                                        </p>
+                                    )}
                                 </div>
                             )}
                         </div>
@@ -397,7 +423,7 @@ const BirdAction = () => {
                         wrapperClass="dna-wrapper"
                     />
                 ) : (
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-center space-y-6 mb-10">
                         <div>
                             <button
                                 type="button"
@@ -414,6 +440,53 @@ const BirdAction = () => {
                                 {t('birdAction.classifyButton')}
                             </button>
                         </div>
+                        <div className="mt-6 mb-8 flex justify-center">
+  <a 
+    href="https://t.me/BirdzClassification_Bot" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="
+      relative
+      inline-flex
+      items-center
+      justify-center
+      px-6 py-3
+      text-lg font-bold
+      text-white
+      bg-gradient-to-r from-cyan-500 to-blue-600
+      rounded-xl
+      shadow-lg
+      hover:shadow-cyan-400/40
+      transition-all
+      duration-300
+      hover:scale-105
+      border-2 border-cyan-300/30
+      overflow-hidden
+      group
+    "
+  >
+    {/* Animated background */}
+    <span className="absolute inset-0 bg-cyan-500 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></span>
+    
+    {/* Telegram icon with animation */}
+    <svg 
+      className="w-6 h-6 mr-3 transition-transform duration-300 group-hover:scale-110" 
+      fill="currentColor" 
+      viewBox="0 0 24 24" 
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.57-1.38-.93-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.03-.09.06-.42-.08-.59-.14-.17-.42-.12-.6-.07-.26.08-4.39 2.79-6.21 3.92-.59.37-1.13.56-1.62.54-.52-.01-1.52-.3-2.26-.54-.92-.3-1.66-.46-1.59-.97.03-.28.4-.56 1.1-.85 4.43-1.98 7.37-3.39 11.2-5.18.53-.25 1.01-.37 1.44-.38.45-.01 1.38.09 1.99.35.76.33.76.98.72 1.38z"/>
+    </svg>
+    
+    <span className="relative">
+      <span className="block text-xl opacity-80 font-bold">Upload via Telegram Bot</span>
+      <span className="block text-base font-bold">Classify dozens of bird photos in seconds!</span>
+    </span>
+    
+    {/* Glow effect */}
+    <span className="absolute -inset-1 bg-cyan-400/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+  </a>
+</div>
                     </div>
                 )}
             </div>
