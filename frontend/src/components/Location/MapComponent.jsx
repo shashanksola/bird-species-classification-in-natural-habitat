@@ -35,7 +35,7 @@ const MapComponent = ({ center, zoom, searchRadius }) => {
     height: "500px",
     borderRadius: "0.75rem",
     boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
-    border: "4px solid #43368A"
+    border: "4px solid #34D399"
   };
 
   // Convert search radius to meters
