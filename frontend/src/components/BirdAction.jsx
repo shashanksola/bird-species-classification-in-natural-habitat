@@ -360,9 +360,9 @@ const BirdAction = () => {
                                     {result.s3ImageUrl && (
                                         <div className="w-64 h-64 mt-2">
                                             <img
-                                                src={correctImageUrl(result.s3ImageUrl)}
+                                                src={result.s3ImageUrl}
                                                 alt="classified-bird"
-                                                className="w-full h-full object-contain"
+                                                className="w-300 h-300 object-contain"
                                                 onError={(e) => {
                                                     e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Found';
                                                     e.target.className = 'w-full h-full object-contain bg-gray-200';

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Papa from "papaparse";
 import { MapPin, Bird, Loader2, Search } from "lucide-react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+
 import MapComponent from "./MapComponent";
 import BirdObservationsDisplay from "./BirdObservationsDisplay";
-import Navbar from "../Navbar";
+
 import Footer from "../Footer";
 
 const DEFAULT_LOCATION = { lat: 16.4971, lng: 80.4992 };
