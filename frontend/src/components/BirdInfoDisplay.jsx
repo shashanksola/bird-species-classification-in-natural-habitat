@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 
 export default function BirdInfoDisplay({ name }) {
@@ -145,7 +146,7 @@ export default function BirdInfoDisplay({ name }) {
         <div className="text-center p-8 bg-white rounded-xl shadow-lg max-w-md w-full">
           <div className="text-red-500 text-5xl mb-4">🦅</div>
           <h3 className="text-xl font-semibold text-gray-800 mb-2">Bird Not Found</h3>
-          <p className="text-gray-600">We couldn't find information about "{name}". Please check the name and try again.</p>
+          <p className="text-gray-600">{`We couldn't find information about ${name}. Please check the name and try again.`}</p>
         </div>
       </div>
     );
@@ -263,7 +264,7 @@ export default function BirdInfoDisplay({ name }) {
 </svg>
                 Fun Fact
               </h2>
-              <p className="text-gray-700 pl-7 italic">"{birdData.fun_fact}"</p>
+              <p className="text-gray-700 pl-7 italic">{birdData.fun_fact}</p>
             </div>
           </div>
         </div>
