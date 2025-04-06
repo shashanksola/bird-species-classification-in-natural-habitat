@@ -3,6 +3,7 @@ import { useState } from "react";
 import Dropzone from "./Dropzone";
 import { DNA } from "react-loader-spinner";
 import { useTranslation } from "react-i18next";
+import BirdInfoDisplay from "./BirdInfoDisplay";
 
 const BACKEND_URL = "https://mytownly.in";
 
@@ -560,19 +561,22 @@ const BirdAction = () => {
                                 ) : (
                                     <div className="self-center flex flex-col items-center w-full">
                                         {result.s3ImageUrl && (
-                                            <div className="w-64 h-64 mt-2 rounded-xl overflow-hidden shadow-lg border border-gray-700 mb-6">
-                                                <img
-                                                    src={result.s3ImageUrl}
-                                                    alt="classified-bird"
-                                                    className="w-full h-full object-contain bg-gray-900"
-                                                    onError={(e) => {
-                                                        e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Found';
-                                                        e.target.className = 'w-full h-full object-contain bg-gray-800';
-                                                    }}
-                                                />
-                                            </div>
+                                            <div style={{ width: '400px', height: '250px', marginTop: '8px', overflow: 'hidden', marginBottom: '24px', display:"flex" , flexDirection:"row", justifyContent:"center"}}>
+                                            <img
+                                              src={result.s3ImageUrl}
+                                              alt="classified-bird"
+                                              style={{ width: 'full', height: '250px', objectFit: 'contain', backgroundColor: '#1a202c' }}
+                                              onError={(e) => {
+                                                e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Found';
+                                                e.target.style.width = '400px';
+                                                e.target.style.height = '250px';
+                                                e.target.style.objectFit = 'contain';
+                                                e.target.style.backgroundColor = '#2d3748';
+                                              }}
+                                            />
+                                          </div>
                                         )}
-                                        {result.initial_prediction && result.final_prediction ? (
+                                        {result.initial_prediction && result.final_prediction ? (<>
                                             <div className="mt-6 text-center flex flex-col md:flex-row justify-center items-stretch gap-6 w-full">
                                                 <div className="bg-gray-800 rounded-xl p-5 flex-1 border-l-4 border-yellow-400 shadow-lg hover:shadow-yellow-400/20 transition-all duration-300">
                                                     <p className="font-bold text-xl mb-2 text-white">Pre-User Prediction: <span className="text-slate-200">{result.initial_prediction.class}</span></p>
@@ -584,6 +588,9 @@ const BirdAction = () => {
                                                    
                                                 </div>
                                             </div>
+                                            {result.final_prediction && <BirdInfoDisplay name={result.final_prediction.class}/>}
+                                            </>
+
                                         ) : (
                                             <div className="mt-6 text-center p-6 bg-blue-500 bg-opacity-20 border border-blue-700 rounded-xl w-full">
                                                 <p className="text-xl font-bold mb-2">Classification Result:</p>
