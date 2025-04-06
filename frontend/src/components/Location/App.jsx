@@ -7,6 +7,7 @@ import MapComponent from "./MapComponent";
 import BirdObservationsDisplay from "./BirdObservationsDisplay";
 
 import Footer from "../Footer";
+import EnhancedBirdLink from "../SubmitBird";
 
 const DEFAULT_LOCATION = { lat: 16.4971, lng: 80.4992 };
 
@@ -337,24 +338,7 @@ const Location = () => {
             </button>
           </div>
           
-          <div className="mt-6">
-  <a 
-    href="https://ebird.org/submit" 
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <span style={{
-      color: '#3b82f6', // equivalent to text-blue-500
-      cursor: 'pointer',
-      textDecoration: 'none',
-      ':hover': {
-        textDecoration: 'underline'
-      }
-    }}>
-      Help us track the skies — send your bird sightings
-    </span>
-  </a>
-</div>
+<EnhancedBirdLink/>
 
           
         </div>

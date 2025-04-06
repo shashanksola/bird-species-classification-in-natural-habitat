@@ -12,15 +12,15 @@ export default function Footer() {
                         <h2 className="text-2xl font-bold mb-4">{t('footer.title')}</h2>
                         <div className="flex flex-col items-start mb-4">
                             <span className="uppercase text-sm mb-2">{t('footer.description')}</span>
-                            <span href="" className="uppercase text-sm mb-2">Try Our Bot</span>
+                         
                         </div>
                     </div>
                     <div>
                         <h3 className="font-semibold mb-2">{t('footer.social')}</h3>
                         <ul className="space-y-2 text-sm">
-                            <li><a href="https://www.instagram.com/shashank_sola/">Instagram</a></li>
-                            <li><a href="https://github.com/shashanksola">Github</a></li>
-                            <li><a href="https://www.linkedin.com/in/shashank-sola/">LinkedIn</a></li>
+                            <li><a href="https://www.instagram.com/shashank_sola/">{t('footer.instagram')}</a></li>
+                            <li><a href="https://github.com/shashanksola">{t('footer.github')}</a></li>
+                            <li><a href="https://www.linkedin.com/in/shashank-sola/">{t('footer.linkedin')}</a></li>
                         </ul>
                     </div>
                     <div>
