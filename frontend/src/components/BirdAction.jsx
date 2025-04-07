@@ -713,7 +713,7 @@ const BirdAction = () => {
                                     
                                     <span className="relative flex flex-col">
                                         <span className="block text-base sm:text-xl font-bold">{t('birdAction.BotHeader')}</span>
-                                        <span className="block text-xs sm:text-base font-medium text-cyan-200">{t('birdAction.BotHeader')}</span>
+                                        <span className="block text-xs sm:text-base font-medium text-cyan-200">{t('birdAction.BotPara')}</span>
                                     </span>
                                     
                                     <span className="absolute -inset-1 bg-cyan-400/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
