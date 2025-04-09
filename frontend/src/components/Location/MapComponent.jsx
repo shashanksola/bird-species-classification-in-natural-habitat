@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup, Circle, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import PropTypes from "prop-types";
 
 // Custom marker icon
 const userMarkerIcon = new L.Icon({
@@ -81,17 +80,6 @@ const MapComponent = ({ center, zoom, searchRadius }) => {
   );
 };
 
-MapComponent.propTypes = {
-  center: PropTypes.shape({
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired
-  }).isRequired,
-  zoom: PropTypes.number, // Make zoom optional
-  searchRadius: PropTypes.number.isRequired
-};
 
-MapComponent.defaultProps = {
-  zoom: 10 // Reduced default zoom level
-};
 
 export default MapComponent;
