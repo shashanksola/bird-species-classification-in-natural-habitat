@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 import MapComponent from "./MapComponent";
 import BirdObservationsDisplay from "./BirdObservationsDisplay";
-
 import Footer from "../Footer";
 import EnhancedBirdLink from "../SubmitBird";
 
@@ -26,7 +25,6 @@ const Location = () => {
   const [selectedSearchResult, setSelectedSearchResult] = useState(null);
   const [locationName, setLocationName] = useState("");
 
-  // Function to fetch location data from OpenStreetMap
   const searchLocation = async (query) => {
     if (!query.trim()) {
       setSearchResults([]);
@@ -330,17 +328,15 @@ const Location = () => {
 
             <button
               onClick={handleLocateMe}
-              className="w-full md:w-auto px-6 py-2.5 bg-gray-800 hover:bg-gray-700 font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+              className="w-full md:w-auto px-6 py-2.5 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
               type="button"
             >
               <MapPin className="w-5 h-5" />
-              <span className="text-blue-950"> Find Birds Near Me</span> 
+              <span className="text-white">Find Birds Near Me</span> 
             </button>
           </div>
           
-<EnhancedBirdLink/>
-
-          
+          <EnhancedBirdLink/>
         </div>
 
         <MapComponent 
@@ -371,9 +367,6 @@ const Location = () => {
             />
           </div>
         )}
-
-        {/* Footer */}
-        
       </div>
       <Footer/>
     </div>
