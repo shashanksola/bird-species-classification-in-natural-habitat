@@ -264,29 +264,37 @@ const Location = () => {
                   <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400 animate-spin" />
                 )}
                 
-                {/* Search Results Dropdown - Improved Styling */}
-                {searchResults.length > 0 && (
-                  <div className="absolute z-50 mt-1 w-full bg-white/95 backdrop-blur-md rounded-md shadow-lg border border-slate-200 max-h-60 overflow-y-auto">
-                    {searchResults.map((result, index) => (
-                      <button
-                        key={`${result.place_id}-${index}`}
-                        type="button"
-                        onClick={() => handleLocationSelect(result)}
-                        className="w-full text-left px-4 py-2 text-sm hover:bg-blue-50 border-b border-slate-100 last:border-0 flex items-center gap-2"
-                      >
-                        <MapPin className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                        <span className="truncate">{result.display_name}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-                
-                {/* No Results Message */}
-                {searchResults.length === 0 && searchQuery.length > 2 && !searchLoading && (
-                  <div className="absolute z-50 mt-1 w-full bg-white/95 backdrop-blur-md rounded-md shadow-lg border border-slate-200 p-3 text-sm text-slate-500 text-center">
-                    No locations found
-                  </div>
-                )}
+               {/* Search Results Dropdown - Improved Styling */}
+{searchResults.length > 0 && (
+  <div className="absolute z-50 mt-1 w-full bg-white rounded-md shadow-lg border border-slate-200 max-h-60 overflow-y-auto">
+    <div className="p-2 bg-blue-50 border-b border-slate-200 text-xs font-medium text-slate-500">
+      Search results
+    </div>
+    {searchResults.map((result, index) => (
+      <button
+        key={`${result.place_id}-${index}`}
+        type="button"
+        onClick={() => handleLocationSelect(result)}
+        className="w-full text-left px-4 py-2.5 text-sm hover:bg-blue-50 border-b border-slate-100 last:border-0 flex items-center gap-2 transition-colors duration-150"
+      >
+        <MapPin className="w-4 h-4 text-blue-600 flex-shrink-0" />
+        <span className="truncate">{result.display_name}</span>
+      </button>
+    ))}
+  </div>
+)}
+
+{/* No Results Message */}
+{searchResults.length === 0 && searchQuery.length > 2 && !searchLoading && (
+  <div className="absolute z-50 mt-1 w-full bg-white rounded-md shadow-lg border border-slate-200">
+    <div className="p-2 bg-blue-50 border-b border-slate-200 text-xs font-medium text-slate-500">
+      Search results
+    </div>
+    <p className="p-3 text-sm text-slate-500 text-center">
+      No locations found
+    </p>
+  </div>
+)}
               </div>
               <button
                 type="submit"
