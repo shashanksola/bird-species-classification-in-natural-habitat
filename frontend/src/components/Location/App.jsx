@@ -361,7 +361,7 @@ const Location = () => {
 
         {/* Results Section */}
         {!loading && !error && (
-          <div className="max-w-4xl mx-auto mt-8 rounded-xl bg-white/80 backdrop-blur-sm shadow-md border border-slate-200 p-6">
+          <div className="max-w-4xl mx-auto mt-8 rounded-xl bg-white/80 backdrop-blur-sm shadow-md border mb-4 border-slate-200 p-6">
             <h2 className="text-2xl font-semibold text-blue-700 mb-6">Bird Observations</h2>
             <BirdObservationsDisplay
               hotspots={hotspots}

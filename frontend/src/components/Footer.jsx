@@ -50,11 +50,7 @@ export default function Footer() {
                                     {t('footer.dataset')}
                                 </a>
                             </li>
-                            <li>
-                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfgGsN4-3qfel3qVOFbP4H1myzr84XCKrcSMd84bG2SLWVxOA/viewform?usp=sf_link" target="_blank" className="hover:text-blue-600 transition duration-300">
-                                    {t('footer.contribute')}
-                                </a>
-                            </li>
+                            
                         </ul>
                     </div>
                 </div>
