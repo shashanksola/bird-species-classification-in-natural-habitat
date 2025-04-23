@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react/prop-types */
+import  { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 import { DNA } from 'react-loader-spinner';
@@ -7,7 +8,6 @@ import { useTranslation } from 'react-i18next';
 const BACKEND_URL = "https://mytownly.in";
 //const BACKEND_URL = "https://localhost:443";
 
-// eslint-disable-next-line react/prop-types
 const Dropzone = ({ onDropZoneInputChange }) => {
     const [filePreview, setFilePreview] = useState(""); // Preview of the file
     const [uploading, setUploading] = useState(false); // Upload state
@@ -59,53 +59,47 @@ const Dropzone = ({ onDropZoneInputChange }) => {
         }
     };
     
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     
     return (
-        <section className="flex justify-center flex-col">
+        <section className='flex justify-center flex-col'>
             <div
                 {...getRootProps({
-                    className: 'rounded-md bg-white/80 border border-slate-200 h-48 p-16 text-blue-600 font-medium hover:bg-blue-50 transition duration-300 shadow-sm cursor-pointer',
+                    className: 'rounded-md bg-indigo-900 bg-opacity-40 border border-indigo-300 h-48 p-16 text-indigo-50 font-bold hover:backdrop-blur-md transition delay-100 shadow-md hover:shadow-indigo-300/30',
                 })}
             >
                 <input {...getInputProps()} />
-                <p className="text-center flex items-center justify-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                    </svg>
-                    {t('drop.input')}
-                </p>
+                <p>{t('drop.input')}</p>
             </div>
 
-            <aside className="h-[30vh] rounded-md mt-4 flex justify-center min-h-28 border bg-slate-50 border-slate-200 p-2 text-slate-800 shadow-sm transition duration-300">
-                {filePreview ? (
-                    <div className="rounded-md p-1 overflow-hidden h-full">
-                        <img 
-                            src={filePreview} 
-                            alt="Preview" 
-                            className="h-full w-auto object-contain rounded-md" 
-                        />
-                    </div>
-                ) : (
-                    <div className="flex items-center justify-center text-slate-400">
-                        <p>Image preview will appear here</p>
+            <aside className="h-[30vh] rounded-md mt-4 flex justify-center min-h-28 border bg-indigo-900 bg-opacity-40 border-indigo-300 p-2 text-indigo-50 font-bold hover:backdrop-blur-md transition delay-100 shadow-lg">
+                {filePreview && (
+                    <div style={{
+                        display: 'inline-flex',
+                        borderRadius: 2,
+                        border: '1px solid #c7d2fe',
+                        marginBottom: 8,
+                        marginRight: 8,
+                        width: 'auto',
+                        height: '100%',
+                        padding: 4,
+                        boxSizing: 'border-box'
+                    }}>
+                        <div style={{ display: 'flex', minWidth: 0, overflow: 'hidden' }}>
+                            <img src={filePreview} alt="Preview" style={{ display: 'block', width: 'auto', height: '100%' }} />
+                        </div>
                     </div>
                 )}
             </aside>
-            
-            {uploading && (
-                <div className="self-center mt-4">
-                    <DNA
-                        visible={true}
-                        height="80"
-                        width="80"
-                        ariaLabel="dna-loading"
-                        wrapperStyle={{}}
-                        wrapperClass="dna-wrapper"
-                    />
-                    <p className="text-blue-600 text-center mt-2">Uploading image...</p>
-                </div>
-            )}
+            {uploading && <div className="self-center">
+                <DNA
+                    visible={true}
+                    height="80"
+                    width="80"
+                    ariaLabel="dna-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="dna-wrapper"
+                /></div>}
         </section>
     );
 };
