@@ -4,48 +4,57 @@ import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from "./LanguageSwitcher";
 
 const scrollToTop = () => {
-    document.getElementById("nav").scrollIntoView({ behavior: 'smooth' })
-}
+  document.getElementById("nav").scrollIntoView({ behavior: 'smooth' });
+};
 
 const scrollToFindABird = () => {
-    document.getElementById("process").scrollIntoView({ behavior: 'smooth' })
-}
+  document.getElementById("process").scrollIntoView({ behavior: 'smooth' });
+};
 
 const scrollToBottom = () => {
-    document.getElementById("footer").scrollIntoView({ behavior: 'smooth' });
-}
+  document.getElementById("footer").scrollIntoView({ behavior: 'smooth' });
+};
 
 const Navbar = () => {
-    const { t } = useTranslation();
-    
-    return (
-        <nav className="fixed top-0 left-0 flex justify-around items-center p-4 bg-transparent backdrop-blur-3xl w-screen z-30 animate-slidein300" id="nav">
-            <div className="flex flex-row justify-around w-screen items-center text-white font-semibold text-xl">
-                <Link to="/" className="text-4xl flex items-center hover:cursor-pointer" style={{ fontFamily: "sans-serif", fontWeight: '700' }}>
-                    <i className="max-md:hidden">Birdz</i>
-                  {/* //<img src="https://d9gp6f6sved89.cloudfront.net/_website_images/logo.png" alt="" width={'100px'} /> */}
-                </Link>
-                
-                <a onClick={() => scrollToFindABird()} className="hover:cursor-pointer">
-                    {t('navbar.findABird')}
-                </a>
-                
-                <a onClick={() => scrollToFindABird()} className="hover:cursor-pointer">
-                    {t('navbar.classifyABird')}
-                </a>
-                
-                <Link to="/location" className="hover:cursor-pointer">
-                    {t('navbar.birdzNearYou')}
-                </Link>
-                
-                <LanguageSwitcher />
-                
-                <a onClick={() => scrollToBottom()} className="hover:cursor-pointer">
-                    {t('navbar.aboutUs')}
-                </a>
-            </div>
-        </nav>
-    )
-}
+  const { t } = useTranslation();
+
+  return (
+    <nav
+      id="nav"
+      className="fixed top-0 left-0 w-screen z-30 p-4 bg-white/80 backdrop-blur-3xl shadow-sm transition-all"
+    >
+      <div className="flex flex-row justify-around items-center w-full px-6 py-4 text-slate-800 font-medium text-lg">
+        
+        {/* Logo */}
+        <Link
+          to="/"
+          className="text-blue-700 text-3xl font-bold flex items-center hover:cursor-pointer"
+          style={{ fontFamily: "sans-serif" }}
+        >
+          <i className="max-md:hidden">Birdz</i>
+          {/* You can also uncomment and use logo image */}
+          {/* <img src="https://d9gp6f6sved89.cloudfront.net/_website_images/logo.png" alt="Birdz logo" width={'100px'} /> */}
+        </Link>
+
+        {/* Nav Links */}
+        <a onClick={scrollToFindABird} className="hover:cursor-pointer hover:text-blue-600 transition-colors duration-200">
+          {t('navbar.findABird')}
+        </a>
+
+        <a onClick={scrollToFindABird} className="hover:cursor-pointer hover:text-blue-600 transition-colors duration-200">
+          {t('navbar.classifyABird')}
+        </a>
+
+        <Link to="/location" className="hover:cursor-pointer hover:text-blue-600 transition-colors duration-200">
+          {t('navbar.birdzNearYou')}
+        </Link>
+
+        <LanguageSwitcher />
+
+      
+      </div>
+    </nav>
+  );
+};
 
 export default Navbar;
