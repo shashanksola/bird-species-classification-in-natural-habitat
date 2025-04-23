@@ -12,6 +12,7 @@ import PropTypes from "prop-types";
 import MapComponent from "./MapComponent";
 import BirdObservationsDisplay from "./BirdObservationsDisplay";
 import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 const DEFAULT_LOCATION = { lat: 16.4971, lng: 80.4992 };
 
@@ -226,32 +227,26 @@ const Location = () => {
   
   return (
    <div 
-      className="min-h-screen text-gray-900 relative bg-cover bg-center bg-no-repeat" 
-      style={{ 
-        backgroundImage: "url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/classify-bg.svg')",
-        backgroundSize: 'cover',
-        backgroundColor: 'rgba(255,255,255,0.8)',
-        backgroundBlendMode: 'lighten'
-      }}
+      className="min-h-screen text-slate-800 relative bg-gradient-to-b from-blue-50 to-slate-100" 
     >
       <div className="container mx-auto py-8 px-4 relative z-10">
         <header className="text-center mb-10">
           <Link to="/">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4 flex items-center justify-center gap-3">
-            <Bird className="w-10 h-10 text-gray-700" />
+          <h1 className="text-4xl font-bold text-blue-700 mb-4 flex items-center justify-center gap-3">
+            <Bird className="w-10 h-10 text-blue-600" />
             Birdz
           </h1>
           </Link>
          
-          <p className="text-gray-700 max-w-2xl mx-auto">
+          <p className="text-slate-800 max-w-2xl mx-auto">
             Bird Species Classification and Exploration
           </p>
         </header>
 
         {/* Location Search */}
-        <div className="max-w-4xl mx-auto mb-6 p-4 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg border border-gray-300">
+        <div className="max-w-4xl mx-auto mb-6 p-4 bg-white/80 backdrop-blur-md rounded-lg shadow-md border border-slate-200">
           <form onSubmit={handleSearchSubmit} className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-slate-800 mb-1">
               Search Location
             </label>
             <div className="flex items-center gap-2">
@@ -261,21 +256,21 @@ const Location = () => {
                   placeholder="City, State, Country"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-2 bg-white/70 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 text-gray-900 placeholder-gray-600"
+                  className="w-full px-4 py-2 bg-white/70 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-600 text-slate-800 placeholder-slate-400"
                 />
                 {searchLoading && (
-                  <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500 animate-spin" />
+                  <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400 animate-spin" />
                 )}
                 
                 {/* Search Results Dropdown */}
                 {searchResults.length > 0 && (
-                  <div className="absolute z-50 mt-1 w-full bg-white/90 backdrop-blur-sm rounded-md shadow-lg border border-gray-300 max-h-60 overflow-y-auto">
+                  <div className="absolute z-50 mt-1 w-full bg-white/95 backdrop-blur-md rounded-md shadow-md border border-slate-200 max-h-60 overflow-y-auto">
                     {searchResults.map((result, index) => (
                       <button
                         key={`${result.place_id}-${index}`}
                         type="button"
                         onClick={() => handleLocationSelect(result)}
-                        className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 last:border-0 text-gray-900"
+                        className="w-full text-left px-4 py-2 text-sm hover:bg-blue-50 border-b border-slate-100 last:border-0 text-slate-800"
                       >
                         {result.display_name}
                       </button>
@@ -285,7 +280,7 @@ const Location = () => {
               </div>
               <button
                 type="submit"
-                className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center"
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center shadow-sm"
               >
                 <Search className="w-5 h-5" />
               </button>
@@ -294,8 +289,8 @@ const Location = () => {
           
           {/* Location Display */}
           {selectedSearchResult && (
-            <div className="text-sm text-gray-700 bg-white/50 backdrop-blur-sm p-2 rounded-lg flex items-center gap-2 border border-gray-300">
-              <MapPin className="w-4 h-4 text-gray-600 flex-shrink-0" />
+            <div className="text-sm text-slate-800 bg-white/50 backdrop-blur-sm p-2 rounded-lg flex items-center gap-2 border border-slate-200">
+              <MapPin className="w-4 h-4 text-blue-600 flex-shrink-0" />
               <span className="truncate">Current: {selectedSearchResult}</span>
             </div>
           )}
@@ -303,7 +298,7 @@ const Location = () => {
           {/* Search Radius and Locate Me Section */}
           <div className="flex flex-col md:flex-row gap-4 items-center mt-4">
             <div className="w-full md:w-1/2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-slate-800 mb-1">
                 Search Radius (km)
               </label>
               <div className="flex items-center gap-2">
@@ -313,49 +308,52 @@ const Location = () => {
                   max="50"
                   value={searchRadius}
                   onChange={(e) => setSearchRadius(Number(e.target.value))}
-                  className="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer"
+                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"
                 />
-                <span className="text-gray-900 font-medium">
+                <span className="text-slate-800 font-medium">
                   {searchRadius}
                 </span>
               </div>
             </div>
 
             <button
-              className="w-full md:w-auto px-6 py-2.5 bg-gray-800 hover:bg-gray-700 font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
-             
+              className="w-full md:w-auto px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 shadow-sm"
+              onClick={handleLocateMe}
               type="button"
             >
               <MapPin className="w-5 h-5" />
-            <span className="text-blue-950"> Find Birds Near Me</span> 
+              <span>Find Birds Near Me</span> 
             </button>
            
           </div>
           
         </div>
 
-        <MapComponent 
-          center={center} 
-          zoom={zoom} 
-          searchRadius={searchRadius}
-        />
+        <div className="shadow-md rounded-lg overflow-hidden border border-slate-200">
+          <MapComponent 
+            center={center} 
+            zoom={zoom} 
+            searchRadius={searchRadius}
+          />
+        </div>
 
         {/* Loading and Error States */}
         {loading && (
-          <div className="flex items-center justify-center gap-2 text-gray-700 mb-8">
-            <Loader2 className="w-6 h-6 animate-spin" />
+          <div className="flex items-center justify-center gap-2 text-slate-800 my-8">
+            <Loader2 className="w-6 h-6 animate-spin text-blue-600" />
             <span>Searching for birds...</span>
           </div>
         )}
         {error && (
-          <div className="max-w-4xl mx-auto text-red-700 mb-8 p-4 bg-white/80 backdrop-blur-sm rounded-lg shadow-md border border-red-300">
+          <div className="max-w-4xl mx-auto text-red-600 my-8 p-4 bg-white/80 backdrop-blur-sm rounded-lg shadow-md border border-red-200">
             {error}
           </div>
         )}
 
         {/* Results Section */}
         {!loading && !error && (
-          <div className="rounded-xl bg-white/80 backdrop-blur-sm shadow-lg border border-gray-300 p-6">
+          <div className="mt-8 rounded-xl bg-white/80 backdrop-blur-sm shadow-md border border-slate-200 p-6">
+            <h2 className="text-2xl font-semibold text-blue-700 mb-6">Bird Observations</h2>
             <BirdObservationsDisplay
               hotspots={hotspots}
               observations={birdData}
@@ -363,10 +361,7 @@ const Location = () => {
           </div>
         )}
 
-        {/* Footer */}
-        <footer className="mt-16 text-center text-gray-600 text-sm relative z-10">
-          <p>© {new Date().getFullYear()} Birdz. All rights reserved.</p>
-        </footer>
+      <Footer/>
       </div>
     </div>
   
