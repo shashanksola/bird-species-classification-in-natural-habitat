@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 const BACKEND_URL = "https://mytownly.in";
 //const BACKEND_URL = "https://localhost:443";
 
+// eslint-disable-next-line react/prop-types
 const Dropzone = ({ onDropZoneInputChange }) => {
     const [filePreview, setFilePreview] = useState(""); // Preview of the file
     const [uploading, setUploading] = useState(false); // Upload state
