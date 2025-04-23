@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
@@ -14,12 +14,18 @@ export default function Footer() {
                     <div className="col-span-1 md:col-span-2">
                         <h2 className="text-2xl font-bold mb-4 text-blue-700">{t('footer.title')}</h2>
                         <div className="flex flex-col items-start mb-4">
+<<<<<<< HEAD
                             <span className="uppercase text-sm mb-2 text-slate-800">{t('footer.description')}</span>
+=======
+                            <span className="uppercase text-sm mb-2">{t('footer.description')}</span>
+                         
+>>>>>>> eb229a5f6a71c3f25b51cb767bb201c61cee0bbe
                         </div>
                     </div>
                     <div>
                         <h3 className="font-semibold mb-2 text-blue-600">{t('footer.social')}</h3>
                         <ul className="space-y-2 text-sm">
+<<<<<<< HEAD
                             <li>
                                 <a href="https://www.instagram.com/shashank_sola/" className="hover:text-blue-600 transition duration-300">
                                     Instagram
@@ -35,6 +41,11 @@ export default function Footer() {
                                     LinkedIn
                                 </a>
                             </li>
+=======
+                            <li><a href="https://www.instagram.com/shashank_sola/">{t('footer.instagram')}</a></li>
+                            <li><a href="https://github.com/shashanksola">{t('footer.github')}</a></li>
+                            <li><a href="https://www.linkedin.com/in/shashank-sola/">{t('footer.linkedin')}</a></li>
+>>>>>>> eb229a5f6a71c3f25b51cb767bb201c61cee0bbe
                         </ul>
                     </div>
                     <div>

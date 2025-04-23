@@ -15,18 +15,22 @@ export default {
         subtitle: "Validate & Classify"
     },
     footer: {
-        title: "Birdz",
-        description: "Bird species classification",
-        social: "Social",
-        support: "Support",
-        contact: "Contact",
-        dataset: "Checkout our Dataset",
-        contribute: "Contribute to Dataset",
-        copyright: "© 2024 Birdz",
-        terms: "Creator Terms",
-        privacy: "Privacy Policy",
-        cookies: "Cookies Policy"
-    },
+      title: "Birdz",
+      description: "Bird species classification",
+      social: "Social",
+      instagram: "Instagram",
+      github: "Github",
+      linkedin: "LinkedIn",
+      support: "Support",
+      contact: "Contact",
+      dataset: "Checkout our Dataset",
+      contribute: "Contribute to Dataset",
+      copyright: "© 2024 Birdz",
+      terms: "Creator Terms",
+      privacy: "Privacy Policy",
+      cookies: "Cookies Policy"
+  }
+  ,
     drop:{
         input:"Drag 'n' drop an image here, or click to select an image"
     },
@@ -40,7 +44,9 @@ export default {
         classesInImage: "Classes In Image",
         errorPrefix: "Error:",
         loadingMessage: "Processing...",
-        ValidationResult:"Validation Result:"
+        ValidationResult:"Validation Result:",
+        BotHeader:"Upload via Telegram Bot",
+        BotPara:"Classify dozens of bird photos in seconds!"
     },
     birds: {
         littleCormorant: {

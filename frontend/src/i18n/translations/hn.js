@@ -15,33 +15,40 @@ export default {
         subtitle: "सत्यापित और वर्गीकृत करें"
     },
     footer: {
-        title: "बर्ड्ज़",
-        description: "पक्षी प्रजातियों का वर्गीकरण",
-        social: "सोशल",
-        support: "सहायता",
-        contact: "संपर्क",
-        dataset: "हमारा डेटासेट देखें",
-        contribute: "डेटासेट में योगदान दें",
-        copyright: "© 2024 बर्ड्ज़",
-        terms: "निर्माता शर्तें",
-        privacy: "गोपनीयता नीति",
-        cookies: "कुकीज़ नीति"
-    },
+      title: "Birdz",
+      description: "పక్షుల జాతుల వర్గీకరణ",
+      social: "సామాజిక మాధ్యమం",
+      instagram: "ఇన్‌స్టాగ్రామ్",
+      github: "గిట్‌హబ్",
+      linkedin: "లింక్డ్ఇన్",
+      support: "మద్దతు",
+      contact: "సంప్రదించండి",
+      dataset: "మా డేటాసెట్‌ను చూడండి",
+      contribute: "డేటాసెట్‌కి తోడ్పాటును ఇవ్వండి",
+      copyright: "© 2024 Birdz",
+      terms: "క్రియేటర్ నిబంధనలు",
+      privacy: "గోప్యతా విధానం",
+      cookies: "కుకీస్ విధానం"
+  }
+  ,
     drop:{
         input: "यहां छवि को खींचें और छोड़ें, या छवि चुनने के लिए क्लिक करें"
     },
     birdAction: {
-        validateButton: "सत्यापित करें",
-        classifyButton: "वर्गीकृत करें",
-        resultPlaceholder: "परिणाम यहां प्रदर्शित होंगे",
-        validationSuccess: "पक्षी शामिल है",
-        validationFailure: "कोई पक्षी शामिल नहीं है",
-        classificationResult: "वर्गीकरण परिणाम",
-        classesInImage: "छवि में श्रेणियां",
-        errorPrefix: "त्रुटि:",
-        loadingMessage: "प्रोसेसिंग...",
-        ValidationResult: "सत्यापन परिणाम:"
-    },
+      validateButton: "सत्यापित करें",
+      classifyButton: "वर्गीकृत करें",
+      resultPlaceholder: "परिणाम यहाँ दिखाया जाएगा",
+      validationSuccess: "पक्षी मौजूद है",
+      validationFailure: "कोई पक्षी नहीं पाया गया",
+      classificationResult: "वर्गीकरण परिणाम",
+      classesInImage: "छवि में वर्ग",
+      errorPrefix: "त्रुटि:",
+      loadingMessage: "प्रसंस्करण हो रहा है...",
+      ValidationResult: "सत्यापन परिणाम:",
+      BotHeader: "टेलीग्राम बॉट के माध्यम से अपलोड करें",
+      BotPara: "सैकड़ों पक्षी फ़ोटो को सेकंडों में वर्गीकृत करें!"
+  }
+  ,
     birds: {
         littleCormorant: {
           name: "छोटा जलकौआ",

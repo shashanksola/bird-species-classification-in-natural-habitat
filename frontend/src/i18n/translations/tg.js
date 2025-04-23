@@ -15,33 +15,40 @@ export default {
         subtitle: "ధృవీకరించండి & వర్గీకరించండి"
     },
     footer: {
-        title: "బర్డ్జ్",
-        description: "పక్షి జాతుల వర్గీకరణ",
-        social: "సోషల్",
-        support: "మద్దతు",
-        contact: "సంప్రదించండి",
-        dataset: "మా డేటాసెట్‌ను చూడండి",
-        contribute: "డేటాసెట్‌కు దోహదం చేయండి",
-        copyright: "© 2024 బర్డ్జ్",
-        terms: "క్రియేటర్ నిబంధనలు",
-        privacy: "గోప్యతా విధానం",
-        cookies: "కుకీలు విధానం"
-    },
+      title: "Birdz",
+      description: "పక్షుల జాతుల వర్గీకరణ",
+      social: "సామాజిక మాధ్యమం",
+      instagram: "ఇన్‌స్టాగ్రామ్",
+      github: "గిట్‌హబ్",
+      linkedin: "లింక్డ్ఇన్",
+      support: "మద్దతు",
+      contact: "సంప్రదించండి",
+      dataset: "మా డేటాసెట్‌ను చూడండి",
+      contribute: "డేటాసెట్‌కి తోడ్పాటును ఇవ్వండి",
+      copyright: "© 2024 Birdz",
+      terms: "క్రియేటర్ నిబంధనలు",
+      privacy: "గోప్యతా విధానం",
+      cookies: "కుకీస్ విధానం"
+  }
+  ,
     drop:{
         input: "ఇక్కడ చిత్రాన్ని డ్రాగ్ చేసి డ్రాప్ చేయండి, లేదా చిత్రాన్ని ఎంచుకోవడానికి క్లిక్ చేయండి"
     },
     birdAction: {
-        validateButton: "ధృవీకరించు",
-        classifyButton: "వర్గీకరించు",
-        resultPlaceholder: "ఫలితం ఇక్కడ ప్రదర్శించబడుతుంది",
-        validationSuccess: "పక్షిని కలిగి ఉంది",
-        validationFailure: "ఏ పక్షిని కలిగి లేదు",
-        classificationResult: "వర్గీకరణ ఫలితం",
-        classesInImage: "చిత్రంలో తరగతులు",
-        errorPrefix: "లోపం:",
-        loadingMessage: "ప్రాసెసింగ్...",
-        ValidationResult: "ధృవీకరణ ఫలితం:"
-    }, birds: {
+      validateButton: "ధృవీకరించు",
+      classifyButton: "వర్గీకరించు",
+      resultPlaceholder: "ఫలితం ఇక్కడ చూపించబడుతుంది",
+      validationSuccess: "పక్షి ఉంది",
+      validationFailure: "పక్షి లేదు",
+      classificationResult: "వర్గీకరణ ఫలితం",
+      classesInImage: "చిత్రంలోని వర్గాలు",
+      errorPrefix: "లోపం:",
+      loadingMessage: "ప్రాసెస్ అవుతోంది...",
+      ValidationResult: "ధృవీకరణ ఫలితం:",
+      BotHeader: "టెలిగ్రామ్ బాట్ ద్వారా అప్లోడ్ చేయండి",
+      BotPara: "కొన్ని సెకన్లలోనే పక్షుల ఫోటోలను వర్గీకరించండి!"
+  }
+  , birds: {
         littleCormorant: {
           name: "చిన్న కార్మొరంట్",
           description: "ప్రత్యేకమైన తెల్ల గొంతు ప్యాచ్‌తో ఉండే చిన్న కార్మొరంట్. ఇది నైపుణ్యంతో కూడిన డైవర్ మరియు చేపలను పట్టేవాడు, తరచుగా చేపల కోసం లోతు లేని నీటిలో డైవింగ్ చేస్తూ కనిపిస్తుంది."

@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Papa from "papaparse";
-import {
-  MapPin,
-  Bird,
-  Loader2,
-  Search,
-} from "lucide-react";
+import { MapPin, Bird, Loader2, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import PropTypes from "prop-types";
 import MapComponent from "./MapComponent";
 import BirdObservationsDisplay from "./BirdObservationsDisplay";
+<<<<<<< HEAD
 import Navbar from "../Navbar";
 import Footer from "../Footer";
+=======
+import Footer from "../Footer";
+import EnhancedBirdLink from "../SubmitBird";
+>>>>>>> eb229a5f6a71c3f25b51cb767bb201c61cee0bbe
 
 const DEFAULT_LOCATION = { lat: 16.4971, lng: 80.4992 };
 
@@ -31,9 +30,11 @@ const Location = () => {
   const [selectedSearchResult, setSelectedSearchResult] = useState(null);
   const [locationName, setLocationName] = useState("");
 
-  // Function to fetch location data from OpenStreetMap
   const searchLocation = async (query) => {
-    if (!query.trim()) return;
+    if (!query.trim()) {
+      setSearchResults([]);
+      return;
+    }
     
     setSearchLoading(true);
     try {
@@ -50,10 +51,24 @@ const Location = () => {
     } catch (error) {
       console.error("Error searching for location:", error);
       setError("Location search failed. Please try again.");
+      setSearchResults([]);
     } finally {
       setSearchLoading(false);
     }
   };
+
+  // Debounced search effect
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (searchQuery.trim().length > 2) {
+        searchLocation(searchQuery);
+      } else {
+        setSearchResults([]);
+      }
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchQuery]);
 
   // Function to get location name from coordinates
   const getLocationNameFromCoordinates = async (lat, lng) => {
@@ -166,18 +181,13 @@ const Location = () => {
             setCenter(userLocation);
             setLocationInitialized(true);
             
-            // Get location name from coordinates
             getLocationNameFromCoordinates(userLocation.lat, userLocation.lng);
-            
             fetchBirdData(userLocation.lat, userLocation.lng, searchRadius);
           },
-          // Error handler for geolocation
           (error) => {
             console.warn("Geolocation Permission Denied:", error);
             setLocationInitialized(true);
-            // Use default location
             fetchBirdData(DEFAULT_LOCATION.lat, DEFAULT_LOCATION.lng, searchRadius);
-            // Try to get location name for the default location
             getLocationNameFromCoordinates(DEFAULT_LOCATION.lat, DEFAULT_LOCATION.lng);
           }
         );
@@ -185,7 +195,6 @@ const Location = () => {
         console.warn("Geolocation Not Supported");
         setLocationInitialized(true);
         fetchBirdData(DEFAULT_LOCATION.lat, DEFAULT_LOCATION.lng, searchRadius);
-        // Try to get location name for the default location
         getLocationNameFromCoordinates(DEFAULT_LOCATION.lat, DEFAULT_LOCATION.lng);
       }
     }
@@ -208,7 +217,6 @@ const Location = () => {
           };
           setCenter(newLocation);
           setZoom(10);
-          // Get location name when using "Find Birds Near Me"
           getLocationNameFromCoordinates(newLocation.lat, newLocation.lng);
           fetchBirdData(newLocation.lat, newLocation.lng, searchRadius);
         },
@@ -220,18 +228,25 @@ const Location = () => {
     }
   };
   
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    searchLocation(searchQuery);
-  };
-  
   return (
+<<<<<<< HEAD
    <div 
       className="min-h-screen text-slate-800 relative bg-gradient-to-b from-blue-50 to-slate-100" 
+=======
+    <div 
+      className="min-h-screen text-gray-900 relative bg-cover bg-center bg-no-repeat" 
+      style={{ 
+        backgroundImage: "url('https://bird-species.s3.ap-south-1.amazonaws.com/_website_images/classify-bg.svg')",
+        backgroundSize: 'cover',
+        backgroundColor: 'rgba(255,255,255,0.8)',
+        backgroundBlendMode: 'lighten'
+      }}
+>>>>>>> eb229a5f6a71c3f25b51cb767bb201c61cee0bbe
     >
       <div className="container mx-auto py-8 px-4 relative z-10">
         <header className="text-center mb-10">
           <Link to="/">
+<<<<<<< HEAD
           <h1 className="text-4xl font-bold text-blue-700 mb-4 flex items-center justify-center gap-3">
             <Bird className="w-10 h-10 text-blue-600" />
             Birdz
@@ -239,14 +254,28 @@ const Location = () => {
           </Link>
          
           <p className="text-slate-800 max-w-2xl mx-auto">
+=======
+            <h1 className="text-4xl font-bold text-gray-800 mb-4 flex items-center justify-center gap-3">
+              <Bird className="w-10 h-10 text-gray-700" />
+              Birdz
+            </h1>
+          </Link>
+          <p className="text-gray-700 max-w-2xl mx-auto">
+>>>>>>> eb229a5f6a71c3f25b51cb767bb201c61cee0bbe
             Bird Species Classification and Exploration
           </p>
         </header>
 
         {/* Location Search */}
+<<<<<<< HEAD
         <div className="max-w-4xl mx-auto mb-6 p-4 bg-white/80 backdrop-blur-md rounded-lg shadow-md border border-slate-200">
           <form onSubmit={handleSearchSubmit} className="mb-4">
             <label className="block text-sm font-medium text-slate-800 mb-1">
+=======
+        <div className="max-w-4xl mx-auto mb-6 p-4 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg border border-gray-300">
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+>>>>>>> eb229a5f6a71c3f25b51cb767bb201c61cee0bbe
               Search Location
             </label>
             <div className="flex items-center gap-2">
@@ -261,31 +290,51 @@ const Location = () => {
                 {searchLoading && (
                   <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400 animate-spin" />
                 )}
-                
-                {/* Search Results Dropdown */}
                 {searchResults.length > 0 && (
+<<<<<<< HEAD
                   <div className="absolute z-50 mt-1 w-full bg-white/95 backdrop-blur-md rounded-md shadow-md border border-slate-200 max-h-60 overflow-y-auto">
+=======
+                  <div className="absolute z-50 mt-1 w-full bg-white rounded-md shadow-lg border border-gray-300 max-h-60 overflow-y-auto">
+>>>>>>> eb229a5f6a71c3f25b51cb767bb201c61cee0bbe
                     {searchResults.map((result, index) => (
                       <button
                         key={`${result.place_id}-${index}`}
                         type="button"
                         onClick={() => handleLocationSelect(result)}
+<<<<<<< HEAD
                         className="w-full text-left px-4 py-2 text-sm hover:bg-blue-50 border-b border-slate-100 last:border-0 text-slate-800"
+=======
+                        className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 last:border-0 text-gray-900 flex items-center"
+>>>>>>> eb229a5f6a71c3f25b51cb767bb201c61cee0bbe
                       >
-                        {result.display_name}
+                        <div className="mr-2">
+                          <MapPin size={14} className="text-gray-500" />
+                        </div>
+                        <div className="truncate">{result.display_name}</div>
                       </button>
                     ))}
                   </div>
                 )}
+                {searchResults.length === 0 && searchQuery.length > 2 && !searchLoading && (
+                  <div className="absolute z-50 mt-1 w-full bg-white rounded-md shadow-lg border border-gray-300 p-2 text-sm text-gray-500">
+                    No locations found
+                  </div>
+                )}
               </div>
               <button
+<<<<<<< HEAD
                 type="submit"
                 className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center shadow-sm"
+=======
+                type="button"
+                onClick={() => searchLocation(searchQuery)}
+                className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center"
+>>>>>>> eb229a5f6a71c3f25b51cb767bb201c61cee0bbe
               >
                 <Search className="w-5 h-5" />
               </button>
             </div>
-          </form>
+          </div>
           
           {/* Location Display */}
           {selectedSearchResult && (
@@ -296,7 +345,7 @@ const Location = () => {
           )}
 
           {/* Search Radius and Locate Me Section */}
-          <div className="flex flex-col md:flex-row gap-4 items-center mt-4">
+          <div className="flex flex-col md:flex-row gap-4 items-center mt-4 mb-5">
             <div className="w-full md:w-1/2">
               <label className="block text-sm font-medium text-slate-800 mb-1">
                 Search Radius (km)
@@ -317,16 +366,25 @@ const Location = () => {
             </div>
 
             <button
+<<<<<<< HEAD
               className="w-full md:w-auto px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 shadow-sm"
               onClick={handleLocateMe}
               type="button"
             >
               <MapPin className="w-5 h-5" />
               <span>Find Birds Near Me</span> 
+=======
+              onClick={handleLocateMe}
+              className="w-full md:w-auto px-6 py-2.5 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+              type="button"
+            >
+              <MapPin className="w-5 h-5" />
+              <span className="text-white">Find Birds Near Me</span> 
+>>>>>>> eb229a5f6a71c3f25b51cb767bb201c61cee0bbe
             </button>
-           
           </div>
           
+          <EnhancedBirdLink/>
         </div>
 
         <div className="shadow-md rounded-lg overflow-hidden border border-slate-200">
@@ -360,11 +418,14 @@ const Location = () => {
             />
           </div>
         )}
+<<<<<<< HEAD
 
       <Footer/>
+=======
+>>>>>>> eb229a5f6a71c3f25b51cb767bb201c61cee0bbe
       </div>
+      <Footer/>
     </div>
-  
   );
 };
 

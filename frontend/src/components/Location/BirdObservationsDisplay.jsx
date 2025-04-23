@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { MapPin, Bird, Calendar, Hash, Eye, Info, ChevronLeft, ChevronRight } from "lucide-react";
-import PropTypes from "prop-types";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
+import { MapPin, Bird, Calendar, Eye, Info, ChevronLeft, ChevronRight } from "lucide-react";
+
 
 const BirdObservationsDisplay = ({ hotspots, observations }) => {
   const [selectedTab, setSelectedTab] = useState("observations");
@@ -222,27 +223,6 @@ const BirdObservationsDisplay = ({ hotspots, observations }) => {
   );
 };
 
-BirdObservationsDisplay.propTypes = {
-  hotspots: PropTypes.arrayOf(
-    PropTypes.shape({
-      locId: PropTypes.string.isRequired,
-      locName: PropTypes.string.isRequired,
-      lat: PropTypes.number.isRequired,
-      lng: PropTypes.number.isRequired,
-      date: PropTypes.string.isRequired,
-      count: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-    })
-  ).isRequired,
-  observations: PropTypes.arrayOf(
-    PropTypes.shape({
-      subId: PropTypes.string,
-      obsDt: PropTypes.string.isRequired,
-      comName: PropTypes.string.isRequired,
-      sciName: PropTypes.string.isRequired,
-      howMany: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      locName: PropTypes.string.isRequired
-    })
-  ).isRequired
-};
+
 
 export default BirdObservationsDisplay;
