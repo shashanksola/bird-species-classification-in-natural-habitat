@@ -138,7 +138,7 @@ const ImageGrid = ({
   };
 
   return (
-    <div className="w-full p-6 max-w-3xl mx-auto bg-indigo-900 rounded-xl shadow-2xl border border-indigo-700 backdrop-blur-lg text-white">
+    <div className="w-full p-6 max-w-3xl mx-auto bg-indigo-900 rounded-xl border border-indigo-700 backdrop-blur-lg text-white">
       <h3 className="text-2xl font-bold mb-5 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-indigo-400">
         Select 3 similar images{" "}
         <span className="text-indigo-400">({selectedImages.length}/3)</span>
@@ -337,66 +337,57 @@ const ImageGrid = ({
           style={{ width: `${(selectedImages.length / 3) * 100}%` }}
         />
       </div>
-      // Replace the buttons section in your ImageGrid component with this
-      improved version
-      <div className="flex flex-row items-center justify-center gap-4 sm:gap-5">
-        <button
-          className={`px-6 sm:px-8 py-3 rounded-xl font-bold text-white transition-all duration-300 ${
-            selectedImages.length === 3
-              ? "bg-gradient-to-r from-indigo-600 to-purple-600 hover:shadow-lg hover:shadow-indigo-500/20 transform hover:-translate-y-1"
-              : "bg-indigo-500/70 cursor-not-allowed"
-          }`}
-          onClick={onSubmitSelections}
-          disabled={selectedImages.length !== 3}
+    
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
+  <button
+    className={`px-6 sm:px-8 py-3 rounded-lg font-medium transition-all duration-300 relative overflow-hidden ${
+      selectedImages.length === 3
+        ? "bg-blue-50 text-blue-600 hover:bg-blue-100"
+        : "bg-blue-50/50 text-blue-400 cursor-not-allowed"
+    }`}
+    onClick={onSubmitSelections}
+    disabled={selectedImages.length !== 3}
+  >
+    <span className="relative flex items-center">
+      {selectedImages.length === 3 && (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5 mr-2"
+          viewBox="0 0 20 20"
+          fill="currentColor"
         >
-          {selectedImages.length === 3 && (
-            <span className="absolute inset-0 overflow-hidden rounded-xl">
-              <span className="absolute inset-0 -translate-x-full animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/10 to-transparent"></span>
-            </span>
-          )}
-          <span className="flex items-center">
-            {selectedImages.length === 3 && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 mr-2"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            )}
-            Confirm Selection
-          </span>
-        </button>
-
-        <button
-          className="px-6 sm:px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-xl font-bold transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/20 transform hover:-translate-y-1"
-          onClick={onNoneSelection}
-        >
-          <span className="absolute inset-0 overflow-hidden rounded-xl">
-            <span className="absolute inset-0 -translate-x-full animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/10 to-transparent"></span>
-          </span>
-          <span className="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-            None of These
-          </span>
-        </button>
-      </div>
+          <path
+            fillRule="evenodd"
+            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+            clipRule="evenodd"
+          />
+        </svg>
+      )}
+      Confirm Selection
+    </span>
+  </button>
+  
+  <button
+    className="px-6 sm:px-8 py-3 bg-blue-50 text-blue-600 rounded-lg font-medium transition-all duration-300 hover:bg-blue-100 relative overflow-hidden"
+    onClick={onNoneSelection}
+  >
+    <span className="relative flex items-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-5 w-5 mr-2"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fillRule="evenodd"
+          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+          clipRule="evenodd"
+        />
+      </svg>
+      None of These
+    </span>
+  </button>
+</div>
       {/* Add this to your styling section */}
       <style jsx>{`
         @keyframes shimmer {
@@ -565,27 +556,28 @@ const BirdAction = () => {
     borderRadius: "0.75rem",
     minWidth: "200px",
     transition: "all 0.3s ease",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
   };
 
   const validateButtonStyle = {
     ...buttonBaseStyle,
-    background: "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
-    border: "1px solid rgba(59, 130, 246, 0.5)",
+    background: "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)", // Darker blue
+    border: "1px solid rgba(37, 99, 235, 0.7)",
     color: "white",
   };
 
   const classifyButtonStyle = {
     ...buttonBaseStyle,
-    background: "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)",
-    border: "1px solid rgba(37, 99, 235, 0.5)",
+    background: "linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%)", // Even darker blue
+    border: "1px solid rgba(30, 64, 175, 0.7)",
     color: "white",
   };
 
   const buttonHoverStyle = {
     transform: "translateY(-2px) scale(1.03)",
-    boxShadow: "0 6px 15px rgba(37, 99, 235, 0.2)",
+    boxShadow: "0 8px 15px rgba(29, 78, 216, 0.3)",
   };
+
 
   return (
     <div
@@ -593,7 +585,7 @@ const BirdAction = () => {
       id="process"
     >
       <div className="container mx-auto px-4">
-        <div className="rounded-xl p-8 md:flex items-center w-full md:flex-row justify-around bg-white shadow-lg border border-slate-200">
+        <div className="rounded-xl p-8 md:flex items-center w-full md:flex-row justify-around bg-white ">
           <Dropzone onDropZoneInputChange={onDropZoneInputChange} />
 
           <div className="max-md:w-full max-md:mt-8 md:ml-8 w-full md:w-3/5 rounded-xl flex justify-center items-center h-fit border border-slate-200 bg-white p-6 text-slate-800 font-medium shadow-md transition-all duration-300 hover:border-blue-300 overflow-auto">
@@ -872,37 +864,38 @@ const BirdAction = () => {
                   {t("birdAction.classifyButton")}
                 </button>
               </div>
-
               <div className="mt-10 mb-8 flex justify-center">
-                <a
-                  href="https://t.me/BirdzClassification_Bot"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-lg font-bold text-white bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl shadow-md hover:shadow-blue-400/30 transition-all duration-300 hover:scale-105 border-2 border-blue-300/30 overflow-hidden group"
-                >
-                  <span className="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></span>
+  
+  <a  href="https://t.me/BirdzClassification_Bot"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="relative inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 overflow-hidden rounded-xl bg-blue-600 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-blue-500/50 group"
+  >
+    <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-700"></span>
+    <span className="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></span>
+    <span className="absolute -inset-1 bg-blue-400/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+    
+    <svg
+      className="relative w-6 h-6 sm:w-7 sm:h-7 mr-3 sm:mr-4 transition-transform duration-300 group-hover:scale-110"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.57-1.38-.93-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.03-.09.06-.42-.08-.59-.14-.17-.42-.12-.6-.07-.26.08-4.39 2.79-6.21 3.92-.59.37-1.13.56-1.62.54-.52-.01-1.52-.3-2.26-.54-.92-.3-1.66-.46-1.59-.97.03-.28.4-.56 1.1-.85 4.43-1.98 7.37-3.39 11.2-5.18.53-.25 1.01-.37 1.44-.38.45-.01 1.38.09 1.99.35.76.33.76.98.72 1.38z" />
+    </svg>
+    
+    <span className="relative flex flex-col">
+      <span className="block text-base sm:text-xl font-bold">
+        {t("birdAction.BotHeader")}
+      </span>
+      <span className="block text-xs sm:text-base font-medium text-blue-100">
+        {t("birdAction.BotPara")}
+      </span>
+    </span>
+  </a>
+</div>
 
-                  <svg
-                    className="w-6 h-6 sm:w-7 sm:h-7 mr-3 sm:mr-4 transition-transform duration-300 group-hover:scale-110"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.57-1.38-.93-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.03-.09.06-.42-.08-.59-.14-.17-.42-.12-.6-.07-.26.08-4.39 2.79-6.21 3.92-.59.37-1.13.56-1.62.54-.52-.01-1.52-.3-2.26-.54-.92-.3-1.66-.46-1.59-.97.03-.28.4-.56 1.1-.85 4.43-1.98 7.37-3.39 11.2-5.18.53-.25 1.01-.37 1.44-.38.45-.01 1.38.09 1.99.35.76.33.76.98.72 1.38z" />
-                  </svg>
-
-                  <span className="relative flex flex-col">
-                    <span className="block text-base sm:text-xl font-bold">
-                      {t("birdAction.BotHeader")}
-                    </span>
-                    <span className="block text-xs sm:text-base font-medium text-blue-100">
-                      {t("birdAction.BotPara")}
-                    </span>
-                  </span>
-
-                  <span className="absolute -inset-1 bg-blue-400/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-                </a>
-              </div>
+            
             </div>
           )}
         </div>
