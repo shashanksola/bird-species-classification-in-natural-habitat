@@ -14,21 +14,21 @@ export default {
         title: "अपना पक्षी खोजें",
         subtitle: "सत्यापित और वर्गीकृत करें"
     },
-    footer: {
-      title: "Birdz",
-      description: "పక్షుల జాతుల వర్గీకరణ",
-      social: "సామాజిక మాధ్యమం",
-      instagram: "ఇన్‌స్టాగ్రామ్",
-      github: "గిట్‌హబ్",
-      linkedin: "లింక్డ్ఇన్",
-      support: "మద్దతు",
-      contact: "సంప్రదించండి",
-      dataset: "మా డేటాసెట్‌ను చూడండి",
-      contribute: "డేటాసెట్‌కి తోడ్పాటును ఇవ్వండి",
-      copyright: "© 2024 Birdz",
-      terms: "క్రియేటర్ నిబంధనలు",
-      privacy: "గోప్యతా విధానం",
-      cookies: "కుకీస్ విధానం"
+   footer: {
+      title: "बर्ड्ज़",
+      description: "पक्षियों की प्रजातियों का वर्गीकरण",
+      social: "सोशल मीडिया",
+      instagram: "इंस्टाग्राम",
+      github: "गिटहब",
+      linkedin: "लिंक्डइन",
+      support: "सहायता",
+      contact: "संपर्क करें",
+      dataset: "हमारा डेटासेट देखें",
+      contribute: "डेटासेट में योगदान दें",
+      copyright: "© 2024 बर्ड्ज़",
+      terms: "निर्माता की शर्तें",
+      privacy: "गोप्यता नीति",
+      cookies: "कुकीज़ नीति"
   }
   ,
     drop:{
