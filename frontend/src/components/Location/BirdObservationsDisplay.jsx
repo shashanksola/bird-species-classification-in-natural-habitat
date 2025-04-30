@@ -59,168 +59,177 @@ const BirdObservationsDisplay = ({ hotspots, observations }) => {
   );
 
   return (
-    <div className="w-full max-w-4xl mx-auto rounded-xl overflow-hidden mb-8 bg-white shadow-md border border-slate-200">
-      {/* Tab Navigation */}
-      <div className="flex bg-white shadow-sm border-b border-slate-200">
-        <button
-          onClick={() => {
-            setSelectedTab("observations");
-            setObservationsPage(1);
-          }}
-          className={`px-6 py-3 font-medium flex items-center gap-2 transition-all duration-300 ${
-            selectedTab === "observations"
-              ? "bg-blue-50 text-blue-700 border-b-2 border-blue-600"
-              : "text-slate-600 hover:bg-blue-50/50 hover:text-blue-600"
-          }`}
-        >
-          <Bird className="w-5 h-5" />
-          Recent Sightings
-        </button>
-        <button
-          onClick={() => {
-            setSelectedTab("hotspots");
-            setHotspotPage(1);
-          }}
-          className={`px-6 py-3 font-medium flex items-center gap-2 transition-all duration-300 ${
-            selectedTab === "hotspots"
-              ? "bg-blue-50 text-blue-700 border-b-2 border-blue-600"
-              : "text-slate-600 hover:bg-blue-50/50 hover:text-blue-600"
-          }`}
-        >
-          <MapPin className="w-5 h-5" />
-          Birding Hotspots
-        </button>
-      </div>
+    <>
+      <div className="w-full max-w-4xl mx-auto rounded-xl overflow-hidden mb-8 bg-white shadow-md border border-slate-200">
+        {/* Tab Navigation */}
+        <div className="flex bg-white shadow-sm border-b border-slate-200">
+          <button
+            onClick={() => {
+              setSelectedTab("observations");
+              setObservationsPage(1);
+            }}
+            className={`px-6 py-3 font-medium flex items-center gap-2 transition-all duration-300 ${
+              selectedTab === "observations"
+                ? "bg-blue-50 text-blue-700 border-b-2 border-blue-600"
+                : "text-slate-600 hover:bg-blue-50/50 hover:text-blue-600"
+            }`}
+          >
+            <Bird className="w-5 h-5" />
+            Recent Sightings
+          </button>
+          <button
+            onClick={() => {
+              setSelectedTab("hotspots");
+              setHotspotPage(1);
+            }}
+            className={`px-6 py-3 font-medium flex items-center gap-2 transition-all duration-300 ${
+              selectedTab === "hotspots"
+                ? "bg-blue-50 text-blue-700 border-b-2 border-blue-600"
+                : "text-slate-600 hover:bg-blue-50/50 hover:text-blue-600"
+            }`}
+          >
+            <MapPin className="w-5 h-5" />
+            Birding Hotspots
+          </button>
+        </div>
 
-      {/* Content Container */}
-      <div className="p-6 text-slate-800 relative z-10">
-        {selectedTab === "observations" && (
-          <section>
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 border-b pb-2 border-slate-200 text-blue-700">
-              <Bird className="w-6 h-6 text-blue-600" />
-              Recent Bird Sightings
-            </h2>
-            {observations.length > 0 ? (
-              <>
-                <div className="grid md:grid-cols-2 gap-6">
-                  {paginatedObservations.map((obs) => (
-                    <div
-                      key={createUniqueKey(obs)}
-                      className="bg-white shadow-md rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow group"
-                    >
-                      <div className="p-6 space-y-3 group-hover:bg-white/60 backdrop-blur-md">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="text-lg font-bold text-blue-700">
-                              {obs.comName}
-                            </h3>
-                            <p className="text-sm text-slate-600 italic">
-                              {obs.sciName}
+        {/* Content Container */}
+        <div className="p-6 text-slate-800 relative z-10">
+          {selectedTab === "observations" && (
+            <section>
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 border-b pb-2 border-slate-200 text-blue-700">
+                <Bird className="w-6 h-6 text-blue-600" />
+                Recent Bird Sightings
+              </h2>
+              {observations.length > 0 ? (
+                <>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {paginatedObservations.map((obs) => (
+                      <div
+                        key={createUniqueKey(obs)}
+                        className="bg-white shadow-md rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow group"
+                      >
+                        <div className="p-6 space-y-3 group-hover:bg-white/60 backdrop-blur-md">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <h3 className="text-lg font-bold text-blue-700">
+                                {obs.comName}
+                              </h3>
+                              <p className="text-sm text-slate-600 italic">
+                                {obs.sciName}
+                              </p>
+                            </div>
+                            <Bird className="w-10 h-10 text-blue-600 opacity-70" />
+                          </div>
+                          <div className="text-sm text-slate-800 space-y-2">
+                            <p className="flex items-center gap-2">
+                              <Calendar className="w-4 h-4 text-slate-600" />
+                              {new Date(obs.obsDt).toLocaleDateString("en-US", {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                              })}
+                            </p>
+                            <p className="flex items-center gap-2">
+                              <Eye className="w-4 h-4 text-slate-600" />
+                              Count: {obs.howMany || "Not specified"}
+                            </p>
+                            <p className="flex items-center gap-2">
+                              <MapPin className="w-4 h-4 text-slate-600" />
+                              {obs.locName}
                             </p>
                           </div>
-                          <Bird className="w-10 h-10 text-blue-600 opacity-70" />
-                        </div>
-                        <div className="text-sm text-slate-800 space-y-2">
-                          <p className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4 text-slate-600" />
-                            {new Date(obs.obsDt).toLocaleDateString("en-US", {
-                              year: "numeric",
-                              month: "long",
-                              day: "numeric",
-                            })}
-                          </p>
-                          <p className="flex items-center gap-2">
-                            <Eye className="w-4 h-4 text-slate-600" />
-                            Count: {obs.howMany || "Not specified"}
-                          </p>
-                          <p className="flex items-center gap-2">
-                            <MapPin className="w-4 h-4 text-slate-600" />
-                            {obs.locName}
-                          </p>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                  <PaginationControls
+                    currentPage={observationsPage}
+                    totalPages={getTotalPages(observations, itemsPerPage)}
+                    onPageChange={setObservationsPage}
+                  />
+                </>
+              ) : (
+                <div className="bg-white p-8 rounded-xl shadow-md border border-slate-200 text-center">
+                  <p className="text-slate-800 text-lg">
+                    No bird sightings found. Adjust search parameters.
+                  </p>
                 </div>
-                <PaginationControls 
-                  currentPage={observationsPage} 
-                  totalPages={getTotalPages(observations, itemsPerPage)}
-                  onPageChange={setObservationsPage}
-                />
-              </>
-            ) : (
-              <div className="bg-white p-8 rounded-xl shadow-md border border-slate-200 text-center">
-                <p className="text-slate-800 text-lg">
-                  No bird sightings found. Adjust search parameters.
-                </p>
-              </div>
-            )}
-          </section>
-        )}
+              )}
+            </section>
+          )}
 
-        {/* Hotspots Section with Pagination */}
-        {selectedTab === "hotspots" && (
-          <section>
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 border-b pb-2 border-slate-200 text-blue-700">
-              <MapPin className="w-6 h-6 text-blue-600" />
-              Birding Hotspots
-            </h2>
-            {hotspots.length > 0 ? (
-              <>
-                <div className="grid md:grid-cols-2 gap-6">
-                  {paginatedHotspots.map((hotspot, index) => (
-                    <div
-                      key={`${hotspot.locId}-${index}`}
-                      className="bg-white shadow-md rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow group"
-                    >
-                      <div className="p-6 space-y-3 group-hover:bg-white/60 backdrop-blur-md">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="text-lg font-bold text-blue-700">
-                              {hotspot.locName}
-                            </h3>
+          {/* Hotspots Section with Pagination */}
+          {selectedTab === "hotspots" && (
+            <section>
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 border-b pb-2 border-slate-200 text-blue-700">
+                <MapPin className="w-6 h-6 text-blue-600" />
+                Birding Hotspots
+              </h2>
+              {hotspots.length > 0 ? (
+                <>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {paginatedHotspots.map((hotspot, index) => (
+                      <div
+                        key={`${hotspot.locId}-${index}`}
+                        className="bg-white shadow-md rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow group"
+                      >
+                        <div className="p-6 space-y-3 group-hover:bg-white/60 backdrop-blur-md">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <h3 className="text-lg font-bold text-blue-700">
+                                {hotspot.locName}
+                              </h3>
+                            </div>
+                            <MapPin className="w-10 h-10 text-blue-600 opacity-70" />
                           </div>
-                          <MapPin className="w-10 h-10 text-blue-600 opacity-70" />
-                        </div>
-                        <div className="text-sm text-slate-800 space-y-2">
-                          <p className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4 text-slate-600" />
-                            {new Date(hotspot.date).toLocaleDateString("en-US", {
-                              year: "numeric",
-                              month: "long",
-                              day: "numeric",
-                            })}
-                          </p>
-                          <p className="flex items-center gap-2">
-                            <Info className="w-4 h-4 text-slate-600" />
-                            {hotspot.count} species observed
-                          </p>
-                          <p className="flex items-center gap-2">
-                            <MapPin className="w-4 h-4 text-slate-600" />
-                            {hotspot.lat.toFixed(4)}, {hotspot.lng.toFixed(4)}
-                          </p>
+                          <div className="text-sm text-slate-800 space-y-2">
+                            <p className="flex items-center gap-2">
+                              <Calendar className="w-4 h-4 text-slate-600" />
+                              {new Date(hotspot.date).toLocaleDateString(
+                                "en-US",
+                                {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                                }
+                              )}
+                            </p>
+                            <p className="flex items-center gap-2">
+                              <Info className="w-4 h-4 text-slate-600" />
+                              {hotspot.count} species observed
+                            </p>
+                            <p className="flex items-center gap-2">
+                              <MapPin className="w-4 h-4 text-slate-600" />
+                              {hotspot.lat.toFixed(4)}, {hotspot.lng.toFixed(4)}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                  <PaginationControls
+                    currentPage={hotspotPage}
+                    totalPages={getTotalPages(hotspots, itemsPerPage)}
+                    onPageChange={setHotspotPage}
+                  />
+                </>
+              ) : (
+                <div className="bg-white p-8 rounded-xl shadow-md border border-slate-200 text-center">
+                  <p className="text-slate-800 text-lg">
+                    No birding hotspots found. Adjust search parameters.
+                  </p>
                 </div>
-                <PaginationControls 
-                  currentPage={hotspotPage} 
-                  totalPages={getTotalPages(hotspots, itemsPerPage)}
-                  onPageChange={setHotspotPage}
-                />
-              </>
-            ) : (
-              <div className="bg-white p-8 rounded-xl shadow-md border border-slate-200 text-center">
-                <p className="text-slate-800 text-lg">
-                  No birding hotspots found. Adjust search parameters.
-                </p>
-              </div>
-            )}
-          </section>
-        )}
+              )}
+            </section>
+          )}
+        </div>
       </div>
-    </div>
+      <div className="text-center w-full">
+        &copy; Data accessed through the eBird API 2.0 (Cornell Lab of
+        Ornithology)
+      </div>
+    </>
   );
 };
 

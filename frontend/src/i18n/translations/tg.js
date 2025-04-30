@@ -25,7 +25,7 @@ export default {
     contact: "సంప్రదించండి",
     dataset: "మా డేటాసెట్‌ను చూడండి",
     contribute: "డేటాసెట్‌కి తోడ్పాటును ఇవ్వండి",
-    copyright: "© 2024 Birdz",
+    copyright: "© 2025 Birdz",
     terms: "క్రియేటర్ నిబంధనలు",
     privacy: "గోప్యతా విధానం",
     cookies: "కుకీస్ విధానం",

@@ -25,7 +25,7 @@ export default {
     contact: "संपर्क करें",
     dataset: "हमारा डेटासेट देखें",
     contribute: "डेटासेट में योगदान दें",
-    copyright: "© 2024 पक्षी",
+    copyright: "© 2025 पक्षी",
     terms: "निर्माता शर्तें",
     privacy: "गोपनीयता नीति",
     cookies: "कुकीज़ नीति",

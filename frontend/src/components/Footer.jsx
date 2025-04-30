@@ -56,7 +56,7 @@ export default function Footer() {
                 </div>
                 <div className="border-t border-slate-200 pt-4 flex flex-col md:flex-row justify-between items-center text-sm">
                     <p className="text-slate-800">
-                        &copy; 2024 <a href="https://github.com/shashanksola/bird-species-classification-in-natural-habitat?tab=MIT-1-ov-file#readme" target="_blank" className="hover:text-blue-600 transition duration-300">
+                        &copy; 2025 <a href="https://github.com/shashanksola/bird-species-classification-in-natural-habitat?tab=MIT-1-ov-file#readme" target="_blank" className="hover:text-blue-600 transition duration-300">
                             {t('footer.copyright')}
                         </a>
                     </p>
