@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import  { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
@@ -40,7 +41,6 @@ const Dropzone = ({ onDropZoneInputChange }) => {
 
         try {
             // Call the backend API to upload the file to S3
-
             const response = await axios.post(`${BACKEND_URL}/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -58,24 +58,26 @@ const Dropzone = ({ onDropZoneInputChange }) => {
             setUploading(false);
         }
     };
-const {t }=useTranslation()
+    
+    const {t} = useTranslation();
+    
     return (
         <section className='flex justify-center flex-col'>
             <div
                 {...getRootProps({
-                    className: 'rounded-md bg-black bg-opacity-30 border border-slate-100 h-48 p-16 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100',
+                    className: 'rounded-md bg-indigo-900 bg-opacity-40 border border-indigo-300 h-48 p-16 text-indigo-50 font-bold hover:backdrop-blur-md transition delay-100 shadow-md hover:shadow-indigo-300/30',
                 })}
             >
                 <input {...getInputProps()} />
                 <p>{t('drop.input')}</p>
             </div>
 
-            <aside className="h-[30vh] rounded-md mt-4 flex justify-center min-h-28 border bg-black bg-opacity-30 border-slate-100 p-2 text-slate-50 font-bold hover:backdrop-blur-md transition delay-100">
+            <aside className="h-[30vh] rounded-md mt-4 flex justify-center min-h-28 border bg-indigo-900 bg-opacity-40 border-indigo-300 p-2 text-indigo-50 font-bold hover:backdrop-blur-md transition delay-100 shadow-lg">
                 {filePreview && (
                     <div style={{
                         display: 'inline-flex',
                         borderRadius: 2,
-                        border: '1px solid #eaeaea',
+                        border: '1px solid #c7d2fe',
                         marginBottom: 8,
                         marginRight: 8,
                         width: 'auto',
