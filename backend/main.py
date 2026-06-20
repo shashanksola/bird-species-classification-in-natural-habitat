@@ -19,7 +19,8 @@ app = FastAPI()
 yolo_model = YOLO('yolov8x.pt')
 
 # Load your custom bird species classification model
-classification_model = tf.keras.models.load_model("Model_V3_7525.h5")
+classification_model = tf.keras.models.load_model(
+    "Model_V3_7525.h5", compile=False)
 
 # Define the class names corresponding to your classification model
 class_names = ['Ashy crowned sparrow lark', 'Asian Openbill', 'Black-headed ibis', 'Crow', 'Eurasian Coot',

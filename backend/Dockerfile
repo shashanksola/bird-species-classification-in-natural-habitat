@@ -15,9 +15,7 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | b
     npm install
 
 COPY req.txt req.txt
-RUN pip install uvicorn
 RUN pip install -r req.txt
-RUN pip install tensorflow
 RUN apt-get update && apt-get install -y libgl1
 
 COPY main.py main.py
@@ -31,4 +29,4 @@ RUN chmod 600 ssl/*
 
 EXPOSE 443
 
-CMD . "$NVM_DIR/nvm.sh" && pm2-runtime start index.js & uvicorn main:app --reload --host 0.0.0.0 --port 8000
+CMD . "$NVM_DIR/nvm.sh" && pm2-runtime start index.js & uvicorn main:app --host 0.0.0.0 --port 8000
